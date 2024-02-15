@@ -57,6 +57,26 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   Después del _feedback_ de la tutora, se van a implementar sensores de sonido para obtener más valores para tratar y mostrar datos.
 
+- **29/08/2023**
+
+  Se ha encontrado la herramienta _Sweet Home 3D_ para recrear la vivienda y, después, exportarla a un **.obj** utilizable en _unity_.
+
+  A continuación se muestra el domicilio modelado en el programa para su apreciación, para esto se han obtenido medida reales de la vivienda y representado:
+
+  ![Plano de la vivienda](/images/Plano_Vivienda.png "Plano de la vivienda")
+
+  Por otro lado, después de realizar este plano de la vivienda, se muestran dos imagenes don diferentes vistas de la vivienda desde una vista exterior superior:
+
+  ![Vista 1](/images/Vista1_Vivienda.png "Vista 1")
+
+  ![Vista 2](/images/Vista2_Vivienda.png "Vista 2")
+
+  Como se puede apreciar, es una vivienda que es parecida a la mayoría, por tanto nos permitirá realizar un estudio que puede resultar interensate en base a la persona que viva en el domicilio. Estos estudios pueden ser el de comparar entre si son pareja, conviven de manera individual o entre hombres y mujeres.
+
+- **30/08/2023**
+
+  Se han incorporado los ficheros de código fuente para mover al usuario con las teclas de control _wasd_.
+
 - **31/08/2023**
 
   En esta parte, se han implementado diferentes objetos que actuan como un sensor de movimiento, donde cuando el objeto (que tiene tag de _player_) se acerca a su radio de control se muestran los datos en pantalla.
@@ -81,9 +101,9 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   - Opción de caídas, y así comprobar diferentes sensores aplicados a estos casos.
 
-![Primera versión sensor de puertas cuando se pasa de la terraza al salón](/images/primera_idea_sensor_puerta.png "primera idea sensor puerta")
+  ![Primera versión sensor de puertas cuando se pasa de la terraza al salón](/images/primera_idea_sensor_puerta.png "primera idea sensor puerta")
 
-- **24/20/2023**
+- **24/10/2023**
 
   Se han implementado los sensores de 'puertas' que nos indican cuando algún individuo pasa por ella. Estos valores se envían información a una cola de recepción (se ha implementado para n sensores, es decir, que habrá una cola para cada sensor). Actualmente solo tendremos 5 sensores para implementar, de los cuales se ha implementado el de puertas.
 
@@ -175,6 +195,8 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
   También se ha añadido el consumo general del suministro en base al mes actual, cosa que se irá actualizando en base a la factura y la compañía contratada.
 
   Finalmente, para obtener más datos, se ha implementado una tablas extras en las que podemos tener valores por diferentes tiempos, como puede ser mensual, bimensual, trimestras, semestral o anual, junto al consumo por horas que también se verá reflejado.
+
+  Respecto a _unity_, se han incorporado los diferentes ficheros de código fuente que se han elaborado para probar las diferentes funcionalidades, como puede ser el movimiento del jugador (día **30/08/2023**) o interacción con diferentes sensores (día **25/10/2023**).
 
 **Avances futuros:**
 
