@@ -1,0 +1,76 @@
+15/02/2024:
+Table users {
+  id integer [pk]
+  username varchar
+  password varchar // Contraseña del usuario
+  address varchar
+  region varchar
+  zip_code integer
+  water_supply integer
+  gas_supply intenger
+  light_supply intenger
+}
+
+Table sensor_readings {
+  id integer [pk]
+  user_id integer
+  sensor_type varchar [note: 'movement, doors, humity, temperature, luminosity, sound']
+  value float // Valor obtenido del sensor
+  room varchar [note: 'lounge, receiver, kitchen, pantry, room_1, room_2, room_3, room_4, office, bathroom_1, bathroom_2']
+  hour timestamp
+  Indexes {
+    (user_id, sensor_type, room, hour) [unique]
+  }
+}
+
+Table supplies {
+  id integer [pk]
+  name varchar [note: 'water, light, gas']
+  unit varchar [note: 'm3, kWh']
+  cost_unit float
+  type varchar [note: 'fix, variable']
+}
+
+Table consumption {
+  id integer [pk]
+  date timestamp
+  supply_id intenger
+  value float [note: 'consumption of mesuarement unity']
+  cost float
+}
+
+Table daily_consumption {
+  id intenger [pk]
+  date timestamp
+  supply_id integer
+  value float [note: 'daily consumption of mesuarement unity']
+  cost float
+}
+
+Table period {
+  id intenger [pk]
+  name varchar [note: 'month, bimonthly, quarter, semester, annual']
+  initial_date timestamp
+  final_date timestamp
+}
+
+Table period_consumption {
+  id intenger [pk]
+  period_id integer
+  supply_id integer
+  total_value float
+  total_cost float
+}
+// Relaciones
+Ref: users.id - sensor_readings.user_id
+Ref: consumption.supply_id - supplies.id
+Ref: daily_consumption.supply_id - supplies.id
+Ref: period_consumption.supply_id - supplies.id
+Ref: period_consumption.period_id - period.id
+Ref: users.gas_supply - supplies.id
+Ref: users.light_supply - supplies.id
+Ref: users.water_supply - supplies.id
+/*
+Los valores para las representaciones gráficas serán las fechas, suminitros, 
+  valor, coste y periodo
+*/
