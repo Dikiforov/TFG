@@ -198,8 +198,57 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   Respecto a _unity_, se han incorporado los diferentes ficheros de código fuente que se han elaborado para probar las diferentes funcionalidades, como puede ser el movimiento del jugador (día **30/08/2023**) o interacción con diferentes sensores (día **25/10/2023**).
 
+  Se ha decidido que no se puede coger sensores ya implementados en el mercado ya que el coste de la instalación en un domicilio particular sería muy elevado, por tanto creo que la mejor opción es la compra se sensores para placas, como _arduino_ o _raspberry_, para conectarlos los diferentes sensores compatibles y, de esta manera, tener un coste menor.
+
+  Se ha pensando en que cada habitación tenga una placa de tamaño reducido (serie nano) para que tenga una ocupación de espacio menor, donde cada sensor enviará información a este dispositivo. Para enviar información a la placa base general, se ha pensado en que cada placa tenga un módulo de comunicación que permita transmitir los datos tratados a una placa general que permita observar los diferentes valores de cada estancia (placa base tipo GIGA display).
+
+  Un enlace, porque se ha optado ahora mismo el trabajar con arduino, para observar una gran variedad de sensores y su funcionalidad: https://www.electrogeekshop.com/tutoriales-de-sensores-con-arduino.
+
+  Listado de placas: https://www.arduino.cc/en/hardware.
+
+  Listado de sensores aptos para su uso con arduino:
+
+  - **Luminosidad:** Luxometro BH1750, para comprobar la cantidad de luz en cada una de las estancias.
+  - **Temperatura y humedad:** DHT22, para obtener los valores de temperatura y humedad. Para la temperatura también se puede utilizar el LM35DZ.
+  - **Sonido:** KY-037, sensor para comprobar y discrimar valores. Así se puede obtener una medición de si se reciben visitas o no.
+  - **Movimiento:** HC-SR05 y HC-SR501, mediante ultrasonidos podemos situar al usuario y situarlo con más precisión gracias al sensor de movimiento.
+  - **Presión:** TTP223B permitiría saber si el usuario se ha sentando en algún lado o no.
+  - **Presión atmosférica:** BMP280
+  - **Humo, CO2 y calidad de aire:** CCS811, permite recopilar todos estos datos.
+  - **Inundaciones:** sensor para comprobar si se produce algún tipo de inundación en alguna de las estancias.
+  - **Gas:** MQ-9 para comprobar si hay fugas de gas en el domicilio.
+  - **Caudalimetro:** servirá para medir la cantidad de agua gastada en toda la estancia.
+  - **Comunicación:** RF 433 Mhz, para poder comunicarnos entre las diferentes placas mediante radiofrecuencia. Otra opción es un módulo Wi-Fi(ESP8266) o Bluetooth(HC05) para la transmisión de datos.
+
+  Coste global:
+
+  - **Placa base para los sensores:** 20€
+  - **Placa base general:** 60€
+  - **Caudalímetro:** 6.5€
+    Cada uno de los sensores se compartirá para cada placa por igual, es decir, este es el precio por 1 placa y no en total:
+  - **Sensor de luminosidad:** 0.85€
+  - **Sensor de temperatura y humedad:** 2.40€
+  - **Sensor de sonido:** 2€
+  - **Sensor de movimiento:** 4.31€ + 2.24€ = 6.55 €
+  - **Sensor de presión:** 1.57€
+  - **Sensor de presión atmosférica:** 2.40€
+  - **Sensor de humo, CO2 y calidad de aire:** 5€
+  - **Sensor de inundaciones:** 1.49€
+  - **Sensor de fuga de gas:** 2.89€
+  - **Sensor de comunicación:** 8€
+
+  Estos son los precios de cada elemento. Por tanto, si tenemos en cuenta una media de 10 estancias por vivienda debemos de considerar lo siguiente:
+
+  n_placas \* (0.85 + 2.40 + 2.00 + 6.55 + 1.57 + 2.40 + 5.00 + 1.49 + 2.89 + 8) = n_placas\*33.15 + 60.00 = 10\*33.15 + 60 = 391.50€ + 6.50\*3 (lavabo, cocina y galeria) = 411€.
+
+  Podemos considerar que la instalación de 10 placas con su respectivo controlador principal ocasionarian unos gastos aproximados de 450€ sin tener en cuenta el cableado, mano de obra ni posibles complicaciones.
+
 **Avances futuros:**
 
-Implementar código de la API para la base de datos, tanto su creación como modificación. Por otro lado, se quiere subir diferentes imagenes al README.md para mostrar diferentes aspectos de la evolución del proyecto.
+- Implementar código de la API para la base de datos, tanto su creación como modificación.
+- Creación de un esquema de los componentes electrónicos en base al plano de la vivienda para ver como situar cada uno de ellos.
+- También se quiere estudiar la forma de implementar un ciclo de día y noche, para simular la temperatura, humedad y presión atmosférica.
+- Desarrollo del proyecto general para la incorporación completa de puertas en todas las estancias.
+- Mejorar gráficamente el escenario.
 
 **Este proyecto se encuentra en desarrollo y se irán actualizando los avances en este archivo README.md.**

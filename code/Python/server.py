@@ -33,7 +33,7 @@ def print_table():
 
 def server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(("0.0.0.0", 8052))
+    server_socket.bind(("127.0.0.1", 8052))
     server_socket.listen(5)
     print("El servidor está escuchando en el puerto 8052")
 
