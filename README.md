@@ -25,9 +25,9 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
 - **30/06/2023**
 
-Después de realizar diferentes búsquedas sobre los sensores se ha decidido lo siguiente:
+  Después de realizar diferentes búsquedas sobre los sensores se ha decidido lo siguiente:
 
-Utilizar algún tipo de herramienta digital para crear un pequeño circuito y obtener valores (simulación), una de estas herramientas podría ser Unity o Unreal Engine para realizar un modelado de una vivienda junto a sus respectivos sensores.
+  Utilizar algún tipo de herramienta digital para crear un pequeño circuito y obtener valores (simulación), una de estas herramientas podría ser Unity o Unreal Engine para realizar un modelado de una vivienda junto a sus respectivos sensores.
 
 - **03/07/2023**
 
@@ -81,6 +81,8 @@ Utilizar algún tipo de herramienta digital para crear un pequeño circuito y ob
 
   - Opción de caídas, y así comprobar diferentes sensores aplicados a estos casos.
 
+![Primera versión sensor de puertas cuando se pasa de la terraza al salón](/images/primera_idea_sensor_puerta.png "primera idea sensor puerta")
+
 - **24/20/2023**
 
   Se han implementado los sensores de 'puertas' que nos indican cuando algún individuo pasa por ella. Estos valores se envían información a una cola de recepción (se ha implementado para n sensores, es decir, que habrá una cola para cada sensor). Actualmente solo tendremos 5 sensores para implementar, de los cuales se ha implementado el de puertas.
@@ -88,6 +90,20 @@ Utilizar algún tipo de herramienta digital para crear un pequeño circuito y ob
   Por otro lado, se han solucionado algunos errores y eliminando diferentes obstaculos que daban errores en colisiones.
 
   Finalmente, los sensores (el de puertas) envía información únicamente cuando el receptor esta disponible para recibir los datos.
+
+  A continuación se puede observar cuando el usuario no esta en movimiento y pasa a diferentes estancias:
+
+  ![Usuario sin movimiento en el salón](/images/version1_sensorMovimientoPuertas_nada.png "Usuario sin movimiento en el salón")
+
+  ![Usuario con movimiento en el salón](/images/version1_sensorMovimientoPuertas_salon.png "Usuario con movimiento en el salón")
+
+  ![Usuario en el pasillo después de cruzar el salón](/images/version1_sensorMovimientoPuertas_salonPasillo.png "Usuario en el pasillo después de cruzar el salón")
+
+  Finalmente, esta es la información que recibe el receptor de datos, que deberá de normalizar para enviar al servidor y que se almacene en la base de datos:
+
+  ![Información respecto a lo que recibe el receptor del sensor](/images/version2_sensorPuertasReceptor_recibidorCocina.png "Información respecto a lo que recibe el receptor del sensor")
+
+  ![Información respecto a lo que recibe el receptor del sensor](/images/version2_sensorPuertasReceptor_salonRecibidor.png "Información respecto a lo que recibe el receptor del sensor")
 
 - **25/10/2023**
 
@@ -118,7 +134,11 @@ Utilizar algún tipo de herramienta digital para crear un pequeño circuito y ob
   Se ha implementado una primera versión de la base de datos a implementar, ya que se quiere que el servidor cuando reciba los datos desde el receptor se encargue de almacenar los valores en cada una de las filas en base a la hora que se ha conseguido la información. Esta se irá añadiendo a la base de datos cuando haya algún tipo de modificación en los últimos 5 minutos o cuando un sensor haya enviado un dato (valor actual diferente al anterior principalmente).
 
   Es decir, el receptor irá obteniendo valores y los irá normalizando porque recibiremos estos valores en formato tipoSensor_lugar_dato_idUsuario_fechaHora y tendremos que enviar estos datos de manera individual en un vector o algo parecido para que el servidor únicamente compruebe si el dato es diferente y/o la fecha es mayor a 5 minutos, entonces se almacenará. De esta manera, cuando queramos llamar para consultar datos y/o gráficas podemos filtrar estos datos en base al filtro de la página web.
-  He pensando que en los usuarios podríamos tener una sección de consumo donde habrá una tabla para el consumo de agua, luz y gas, que contendrá los valores que irán registrando los sensores y estarán enlazados con el consumo actual de la empresa suministradora para tener una gráfica y un consumo actual, para poder ver el consumo durante unas fechas, etc. Versión: bd_070224_1.txt/pdf
+  He pensando que en los usuarios podríamos tener una sección de consumo donde habrá una tabla para el consumo de agua, luz y gas, que contendrá los valores que irán registrando los sensores y estarán enlazados con el consumo actual de la empresa suministradora para tener una gráfica y un consumo actual, para poder ver el consumo durante unas fechas, etc.
+
+  A continuación se muestra como sería el diagrama de la base de datos en su primera versión:
+
+  ![Base de datos en su primera versión](/images/baseDeDatos_primeraVersion.png "Base de datos en su primera versión")
 
 - **08/02/2024**
 
@@ -131,11 +151,30 @@ Utilizar algún tipo de herramienta digital para crear un pequeño circuito y ob
 
   Por otro lado, se ha buscado una forma de implementar una base de datos relacionada con el usuario y los suministros que tenga contratados con diferentes compañias.
 
-  Esta información se representará en base a 5 tablas (150224_v1), donde podremos encontrar diferentes valores para guardar esta información en su
+  Esta información se representará en base a 5 tablas, donde podremos encontrar diferentes valores para guardar esta información en su
   respectiva tabla. De esta manera conseguiremos en un futuro poder representar gráficamente los valores.
   Segunda versión implementada de la base de datos.
   Se ha creado un código en python que permite modificar las diferentes tablas únicamente con dos valores pasado por parámetro de cada función.
   Se han implementado diferentes funciones para la API de la base de datos
+
+  A continuación se muestra la 2a versión de la base de datos diseñada:
+
+  ![Base de datos en su segunda versión](/images/baseDeDatos_2aVersion.png "Base de datos en su segunda versión")
+
+  Se puede apreciar como se han unificado la tabla de sensores, de tal manera que en _sensor_reading.sensor_type_ nos encotraremos con estos posibles sensores:
+
+  - movimiento
+  - puertas
+  - humedad
+  - temperatura
+  - luminosidad
+  - sonido
+
+  Por otro lado, en la tabla de _supplies_ nos encontramos con diferentes valores que irán entre el nombre del suministro (gas, luz o agua), la unidad con la que se mide este suministro, el tipo de contrato con el suministros (fijo o variable).
+
+  También se ha añadido el consumo general del suministro en base al mes actual, cosa que se irá actualizando en base a la factura y la compañía contratada.
+
+  Finalmente, para obtener más datos, se ha implementado una tablas extras en las que podemos tener valores por diferentes tiempos, como puede ser mensual, bimensual, trimestras, semestral o anual, junto al consumo por horas que también se verá reflejado.
 
 **Avances futuros:**
 
