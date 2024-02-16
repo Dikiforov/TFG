@@ -1,10 +1,8 @@
-## README.md
+# Vivienda Inteligente - Proyecto en Unity y Arduino
 
-**Vivienda Inteligente - Proyecto en Unity**
+Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propia vivienda, con una serie de sensores para monitorizar diferentes aspectos del hogar.
 
-Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propia vivienda, con una serie de sensores para monitorizar diferentes aspectos del hogar.
-
-**Sensores:**
+## Sensores
 
 - **Movimiento:** Detección de movimiento dentro de la vivienda.
 - **Puertas:** Monitorización del estado de las puertas (abiertas/cerradas).
@@ -12,8 +10,11 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 - **Temperatura:** Control de la temperatura ambiente.
 - **Luminosidad:** Detección del nivel de luz en la vivienda.
 - **Sonido:** Captura de eventos sonoros.
+- **Presión atmosférica:** Obtendrá valores para comparar y para su uso médico.
+- **Humo, CO2 y calidad de aire:** Valores necesarios para las seguridad y tratado de datos.
+- **Inudaciones:** Permitirá saber si se produce una inundación o fuga de agua, lo que nos permitirá controlar su flujo.
 
-**Flujo de datos:**
+## Flujo de datos
 
 1. Los sensores envían información a través de un puerto local del ordenador.
 2. Un receptor de datos normaliza la información y la envía al servidor.
@@ -21,7 +22,9 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 4. Una página web con un backend realiza peticiones a la API para visualizar la información.
 5. Los usuarios pueden iniciar sesión y ver diferentes datos del sistema.
 
-**Fecha de avance:**
+## Progresión temporal
+
+---
 
 - **30/06/2023**
 
@@ -29,33 +32,41 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   Utilizar algún tipo de herramienta digital para crear un pequeño circuito y obtener valores (simulación), una de estas herramientas podría ser Unity o Unreal Engine para realizar un modelado de una vivienda junto a sus respectivos sensores.
 
+---
+
 - **03/07/2023**
 
-  - **Busqueda de sensores:** esto permitirá hacer una simulación de cada uno de estos en base a su precio y características.
-  - **Uso de los sensores:** principalmente servirá para saber como conectarlos y recopilar los datos.
-  - **Creación de la base de datos:** servirá para recopilar en un mismo lugar todos los datos obtenidos por los sensores en unity y, posteriormente, mostrar los resultados en una futura página web.
-  - **Programa Sensor-BD:** programa que irá recopilando los datos de los sensores y normalizandolos.
+  - **Busqueda de sensores:** Esto permitirá hacer una simulación de cada uno de estos en base a su precio y características.
+  - **Uso de los sensores:** Principalmente servirá para saber como conectarlos y recopilar los datos.
+  - **Creación de la base de datos:** Servirá para recopilar en un mismo lugar todos los datos obtenidos por los sensores en unity y, posteriormente, mostrar los resultados en una futura página web.
+  - **Programa Sensor-BD:** Programa que irá recopilando los datos de los sensores y normalizandolos.
   - **BD API:** programa que permitirá acceder a diferentes valores de la base de datos mediante operaciones genéricas.
-  - **Estudio de la simulación:** se deberán de aprender los principio básicos de la programación y desarrollo con Unity.
+  - **Estudio de la simulación:** Se deberán de aprender los principio básicos de la programación y desarrollo con Unity.
+
+---
 
 - **04/07/2024**
 
   Se han estudiado los diferentes tipos de sensores que se podrían implementar:
 
-  - **Sensor de movimiento:** dispositivo que permite monitorear la actividad del residente en su hogar, proporcionando información valiosa sobre sus patrones de movimiento y actividad diaria.
+  - **Sensor de movimiento:** Dispositivo que permite monitorear la actividad del residente en su hogar, proporcionando información valiosa sobre sus patrones de movimiento y actividad diaria.
   - **Sensores de caídas:** Estos sensores son vitales para detectar inmediatamente cualquier caída, permitiendo el envío rápido de asistencia.
-  - **Sensores de temperatura:** estos dispositivos permiten monitorizar las fluctuaciones de temperatura en el hogar, lo que puede ser útil para garantizar un ambiente confortable y seguro. Si la temperatura se desvía de lo normal, se pueden tomar medidas para corregirla rápidamente.
-  - **Sensores de apertura:** instalados en puertas y ventanas, estos sensores pueden ayudar a determinar la ubicación del residente de la casa. Además, pueden emitir alertas si la puerta principal se deja abierta, mejorando así la seguridad del hogar.
-  - **Sensores de humo:** en caso de incendio, estos sensores pueden alertar rápidamente al residente y a sus contactos de emergencia, así como a los servicios de bomberos.
-  - **Sensores de CO2:** estos sensores complementan a los de humo, ayudando a detectar niveles peligrosos de dióxido de carbono en el aire, lo que puede ser especialmente útil en viviendas con sistemas de calefacción a gas.
-  - **Sensores de agua:** estos dispositivos pueden detectar inundaciones o fugas de agua, permitiendo una intervención rápida para prevenir daños y controlar el consumo de agua.
-  - **Sensores de luz:** nos permitiría monitorizar la iluminación en cada habitación, proporcionando información sobre los patrones de actividad del residente y ayudando a garantizar una iluminación adecuada.
-  - **Sensores de calidad de aire:** estos sensores pueden detectar la presencia de contaminantes externos que podrían ser perjudiciales para la salud del residente.
-  - **Sensores de presión:** se pueden colocar en diferentes puntos, como la cama, sofá o sillas. Esto permitiría monitorear la presión ejercida sobre estos objetos y obtener más información de patrones de comportamiento.
+  - **Sensores de temperatura:** Estos dispositivos permiten monitorizar las fluctuaciones de temperatura en el hogar, lo que puede ser útil para garantizar un ambiente confortable y seguro. Si la temperatura se desvía de lo normal, se pueden tomar medidas para corregirla rápidamente.
+  - **Sensores de apertura:** Instalados en puertas y ventanas, estos sensores pueden ayudar a determinar la ubicación del residente de la casa. Además, pueden emitir alertas si la puerta principal se deja abierta, mejorando así la seguridad del hogar.
+  - **Sensores de humo:** En caso de incendio, estos sensores pueden alertar rápidamente al residente y a sus contactos de emergencia, así como a los servicios de bomberos.
+  - **Sensores de CO2:** Estos sensores complementan a los de humo, ayudando a detectar niveles peligrosos de dióxido de carbono en el aire, lo que puede ser especialmente útil en viviendas con sistemas de calefacción a gas.
+  - **Sensores de agua:** Estos dispositivos pueden detectar inundaciones o fugas de agua, permitiendo una intervención rápida para prevenir daños y controlar el consumo de agua.
+  - **Sensores de luz:** Nos permitiría monitorizar la iluminación en cada habitación, proporcionando información sobre los patrones de actividad del residente y ayudando a garantizar una iluminación adecuada.
+  - **Sensores de calidad de aire:** Estos sensores pueden detectar la presencia de contaminantes externos que podrían ser perjudiciales para la salud del residente.
+  - **Sensores de presión:** Se pueden colocar en diferentes puntos, como la cama, sofá o sillas. Esto permitiría monitorear la presión ejercida sobre estos objetos y obtener más información de patrones de comportamiento.
+
+---
 
 - **05/07/2023**
 
   Después del _feedback_ de la tutora, se van a implementar sensores de sonido para obtener más valores para tratar y mostrar datos.
+
+---
 
 - **29/08/2023**
 
@@ -73,9 +84,13 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   Como se puede apreciar, es una vivienda que es parecida a la mayoría, por tanto nos permitirá realizar un estudio que puede resultar interensate en base a la persona que viva en el domicilio. Estos estudios pueden ser el de comparar entre si son pareja, conviven de manera individual o entre hombres y mujeres.
 
+---
+
 - **30/08/2023**
 
   Se han incorporado los ficheros de código fuente para mover al usuario con las teclas de control _wasd_.
+
+---
 
 - **31/08/2023**
 
@@ -103,6 +118,8 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   ![Primera versión sensor de puertas cuando se pasa de la terraza al salón](/images/primera_idea_sensor_puerta.png "primera idea sensor puerta")
 
+---
+
 - **24/10/2023**
 
   Se han implementado los sensores de 'puertas' que nos indican cuando algún individuo pasa por ella. Estos valores se envían información a una cola de recepción (se ha implementado para n sensores, es decir, que habrá una cola para cada sensor). Actualmente solo tendremos 5 sensores para implementar, de los cuales se ha implementado el de puertas.
@@ -125,6 +142,8 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   ![Información respecto a lo que recibe el receptor del sensor](/images/version2_sensorPuertasReceptor_salonRecibidor.png "Información respecto a lo que recibe el receptor del sensor")
 
+---
+
 - **25/10/2023**
 
   Se ha implementado una nueva versión para los sensores de puertas, donde se ha recreado la interacción del usuario con una puerta para cerrar o abrir.
@@ -135,11 +154,11 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   También se han trabajado varios elementos relacionados con la implementación de un sistema que incluye un sensor de movimiento para as puertas y hacerla interactuable:
 
-  - **Puerta:** se ha diseñado un script que permita al jugador abrir o cerrar la puerta con una animación (duración estimada de 2 segundos), donde tiene un estado de abierta o cerrada.
+  - **Puerta:** Se ha diseñado un script que permita al jugador abrir o cerrar la puerta con una animación (duración estimada de 2 segundos), donde tiene un estado de abierta o cerrada.
 
-  - **Receptor:** se ha modificado para que muestre el estado de la puerta en el momento que haya alguna interacción con esta.
+  - **Receptor:** Se ha modificado para que muestre el estado de la puerta en el momento que haya alguna interacción con esta.
 
-  - **Interacción:** se ha añadido un texto que sale en pantalla cuando te acercas a la puerta para interacturas con ella.
+  - **Interacción:** Se ha añadido un texto que sale en pantalla cuando te acercas a la puerta para interacturas con ella.
 
   Estos son los problemas que he encontrado durante este proceso:
 
@@ -148,6 +167,10 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
   - La modificación para el uso de _Quaternion.Lerp_ en vez de _Math.LerpAngle_ para resolver la animación de la puerta.
 
   En general, se ha diseñado e implementado un sistema en _Unity_ y _Python_ para detectar y enviar datos de movimiento y estado de la puerta al receptor. Se han resuelto varios problemas como puede ser la animación de la puerta y, finalmente, se ha añadido una indicación **UI** para informar al jugador cuando puede interactuar con la puerta.
+
+  **FOTO CON LA INTERACCIÓN**
+
+---
 
 - **07/02/2024**
 
@@ -160,10 +183,14 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   ![Base de datos en su primera versión](/images/baseDeDatos_primeraVersion.png "Base de datos en su primera versión")
 
+---
+
 - **08/02/2024**
 
   Se ha optimizado la estructura de las tablas:
   Unificación de las tablas de sensores: Las tablas movement_sensor, door_sensors, humity_sensor, temperature_sensor, luminosity_sensor, sound_sensor se han fusionado en una única tabla sensor_readings. Esto reduce la redundancia y facilita las consultas y la inserción de nuevos tipos de sensores en el futuro.
+
+---
 
 - **15/02/2024**
 
@@ -215,9 +242,9 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
   - **Presión:** TTP223B permitiría saber si el usuario se ha sentando en algún lado o no.
   - **Presión atmosférica:** BMP280
   - **Humo, CO2 y calidad de aire:** CCS811, permite recopilar todos estos datos.
-  - **Inundaciones:** sensor para comprobar si se produce algún tipo de inundación en alguna de las estancias.
+  - **Inundaciones:** Sensor para comprobar si se produce algún tipo de inundación en alguna de las estancias.
   - **Gas:** MQ-9 para comprobar si hay fugas de gas en el domicilio.
-  - **Caudalimetro:** servirá para medir la cantidad de agua gastada en toda la estancia.
+  - **Caudalimetro:** Servirá para medir la cantidad de agua gastada en toda la estancia.
   - **Comunicación:** RF 433 Mhz, para poder comunicarnos entre las diferentes placas mediante radiofrecuencia. Otra opción es un módulo Wi-Fi(ESP8266) o Bluetooth(HC05) para la transmisión de datos.
 
   Coste global:
@@ -225,7 +252,9 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
   - **Placa base para los sensores:** 20€
   - **Placa base general:** 60€
   - **Caudalímetro:** 6.5€
-    Cada uno de los sensores se compartirá para cada placa por igual, es decir, este es el precio por 1 placa y no en total:
+
+  Cada uno de los sensores se compartirá para cada placa por igual, es decir, este es el precio por 1 placa y no en total:
+
   - **Sensor de luminosidad:** 0.85€
   - **Sensor de temperatura y humedad:** 2.40€
   - **Sensor de sonido:** 2€
@@ -239,9 +268,45 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en su propi
 
   Estos son los precios de cada elemento. Por tanto, si tenemos en cuenta una media de 10 estancias por vivienda debemos de considerar lo siguiente:
 
+  **PONER UNA MEJOR FÓRMULA**
+
   n_placas \* (0.85 + 2.40 + 2.00 + 6.55 + 1.57 + 2.40 + 5.00 + 1.49 + 2.89 + 8) = n_placas\*33.15 + 60.00 = 10\*33.15 + 60 = 391.50€ + 6.50\*3 (lavabo, cocina y galeria) = 411€.
 
   Podemos considerar que la instalación de 10 placas con su respectivo controlador principal ocasionarian unos gastos aproximados de 450€ sin tener en cuenta el cableado, mano de obra ni posibles complicaciones.
+
+---
+
+- **16/02/2024**
+
+  Se ha buscado alguna herramienta con la que podamos conectar todos los elementos necesarios por cada placa y sus sensores, es decir, la instalación que tendría cada estancia sin contar lugares en los que se deba de instalar caudalímetros y sensores de inundación. La herramienta encontrada ha sido _circuito.io_, que nos permite seleccionar la placa base deseada y los elementos a conectar, cosa que realiza de manera automática y que, además, nos proporciona un código fuente base para el funcionamiento completo de todo el conjunto.
+
+  ![Primera versión de la placa base con sus componentes](/images/Placa_arduino.png "Primera versión de la placa con sus componentes")
+
+  Como se puede apreciar en la imagen anterior, disponemos de una placa base que tiene un módulo de comunicación Wi-Fi para la transmisión de los datos y que, además, cuenta con un total de 14 componentes (incluidos los de alimentación y excluido el módulo de comunicación).
+
+  Gracias a la herramienta de _circuito.io_ podemos observar como sería la conexión de cada uno de estos elementos a la placa y así podemos calcular el tamaño que ocuparía cada una de las cajas con este diseño. Hay que recalcar que este diseño esta realizado de cara a una estancia general, no esta contemplado estancias con instalación de corriente de agua. Ya que estas deberán de incluir sensores para posibles inundaciones y caudalímetros para el control de flujo de agua, esto permitirá tener un control más exhaustivo y, en todo caso, poder cerrar la corriente si es necesario.
+
+  A continuación se muestra el diseño que seguiriamos para la cocina, ya que contamos que el grifo de esta tiene las entradas de agua caliente y fría, por tanto se necesitará un total de 2 controladores de agua, una para cada.
+
+  ![Primera versión de la placa base con sus componentes en la cocina](/images/Placa_arduino_cocina.png "Primera versión de la placa con sus componentes en la cocina")
+
+  Por otro lado, se expose el diseño que se seguiría para la instalación completa y control en una baño típico (con una bañera o una ducha), por tanto tendremos para cada salida de agua 2 controladores y para el sanitario otro controlador. Por tanto, tendríamos 2 controladores para el frigo, 1 para el sanitario y otro para la ducha o bañera.
+
+  ![Primera versión de la placa base con sus componentes en el baño](/images/Placa_arduino_bathroom.png "Primera versión de la placa con sus componentes en el baño")
+
+  Hay que recalcar que estos diseños estan en su primera versión y que esta sería la forma más óptima de conectar todo, pero esto no se dará ya que la caja que contendrá la placa, los diferentes sensores y los controladores de flujo se colocarán en lugares estratégicos para impedir una manipulación indebida de estos, así como mejorar la seguridad y el uso correcto.
+
+  Finalmente, respecto a los diseños, la herramienta _circuito.io_ también nos realiza un posible cálculo del coste de los elementos instalados, hay que aclarar que estos precios son aproximados en base a la información que contiene la página web y no pueden ser del todo correctos.
+
+  ***
+
+  A continuación se muestra un listado de todos los elementos utilizados en los diagramas anteriores junto a su precio, por otro lado, se muestra una tabla con los precios y cantidad de elementos que tendremos en cada estancia y, finalmente, un cálculo de todo el coste general de los componentes:
+
+  - **Precio componentes habitación:**
+
+  - **Precio componentes cocina:**
+
+  - **Precio componentes baño:**
 
 **Avances futuros:**
 
