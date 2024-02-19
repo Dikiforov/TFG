@@ -302,11 +302,109 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   A continuación se muestra un listado de todos los elementos utilizados en los diagramas anteriores junto a su precio, por otro lado, se muestra una tabla con los precios y cantidad de elementos que tendremos en cada estancia y, finalmente, un cálculo de todo el coste general de los componentes:
 
+---
+
+- **19/02/2024**
+
   - **Precio componentes habitación:**
+
+    | Sensor                                                        | Precio  | Cantidad |   Total |
+    | :------------------------------------------------------------ | :-----: | -------: | ------: |
+    | Arduino Pro Mini 328 - 5V/16MHz                               | 9,95 €  |        1 |  9,95 € |
+    | PIR (motion) sensor                                           | 9,95 €  |        1 |  9,95 € |
+    | SparkFun Sound Detector                                       | 10,95 € |        1 | 10,95 € |
+    | SparkFun BME280 - Atmospheric Sensor Breakout                 | 19,95 € |        1 | 19,95 € |
+    | Wall Adapter Power Supply - 12VDC 2A                          | 15,77 € |        1 | 15,77 € |
+    | N-Channel MOFSET 60V 30A                                      | 1,46 €  |        2 |  2,92 € |
+    | 10K Ohms Resistor                                             | 0,10 €  |        1 |  0,10 € |
+    | Water Level Sensor Module                                     | 0,78 €  |        1 |  0,78 € |
+    | Carbon Monoxide and Combustible Gas Sensor - MQ-9             | 1,60 €  |        1 |  1,60 € |
+    | Adafruit TSL2591 High Dynamic Range Digital Light Sensor      | 6,95 €  |        1 |  6,95 € |
+    | Adafruit SGP30 Air Quality Sensor Breakout - VOC and eCO2     | 19,95 € |        1 | 19,95 € |
+    | ESP8266-01 - Wifi Module                                      | 6,95 €  |        1 |  6,95 € |
+    | Logic Level Converter - Bi-Directional                        | 2,95 €  |        1 |  2,95 € |
+    | DHT2/11 Humity and Temperature Sensor                         | 9,95 €  |        1 |  9,95 € |
+    | Female DC Power adapater - 2.1mm jack to screw terminal block | 2,00 €  |        1 |  2,00 € |
+    | Voltage Regulator 3.3V                                        | 0,55 €  |        1 |  0,55 € |
+    | Capacitor Ceramic 100nF                                       | 0,64 €  |        1 |  0,64 € |
+    | Electrolytic Decoupling Capacitors - 100uF/25V                | 0,27 €  |        1 |  0,27 € |
+    | USB Mini-B Cable with FTDI                                    | 3,11 €  |        1 |  3,11 € |
+    | BreadBoard                                                    | 8,25 €  |        2 | 16,50 € |
+    | Jumper Wires Pack - M/M                                       | 1,95 €  |        3 |  5,85 € |
+    | Jumper Wires Pack - M/F                                       | 1,95 €  |        1 |  1,95 € |
+    | Male Headers Pack - Break-Away                                | 0,66 €  |        2 |  1,32 € |
+    |                                                               |         |    Total | 150,91€ |
 
   - **Precio componentes cocina:**
 
+    | Sensor                                                        | Precio  | Cantidad |   Total |
+    | :------------------------------------------------------------ | :-----: | -------: | ------: |
+    | Arduino Pro Mini 328 - 5V/16MHz                               | 9,95 €  |        1 |  9,95 € |
+    | 12 V Solenoid Valve - 3/4"                                    | 7,95 €  |        2 | 15,90 € |
+    | Diode Rectifier - 1A 50V                                      | 0,11 €  |        2 |  0,22 € |
+    | PIR (motion) sensor                                           | 9,95 €  |        1 |  9,95 € |
+    | SparkFun Sound Detector                                       | 10,95 € |        1 | 10,95 € |
+    | SparkFun BME280 - Atmospheric Sensor Breakout                 | 19,95 € |        1 | 19,95 € |
+    | Wall Adapter Power Supply - 12VDC 2A                          | 15,77 € |        1 | 15,77 € |
+    | N-Channel MOFSET 60V 30A                                      | 1,46 €  |        2 |  2,92 € |
+    | 10K Ohms Resistor                                             | 0,10 €  |        3 |  0,30 € |
+    | Water Level Sensor Module                                     | 0,78 €  |        1 |  0,78 € |
+    | Carbon Monoxide and Combustible Gas Sensor - MQ-9             | 1,60 €  |        1 |  1,60 € |
+    | Adafruit TSL2591 High Dynamic Range Digital Light Sensor      | 6,95 €  |        1 |  6,95 € |
+    | Adafruit SGP30 Air Quality Sensor Breakout - VOC and eCO2     | 19,95 € |        1 | 19,95 € |
+    | ESP8266-01 - Wifi Module                                      | 6,95 €  |        1 |  6,95 € |
+    | Logic Level Converter - Bi-Directional                        | 2,95 €  |        1 |  2,95 € |
+    | DHT2/11 Humity and Temperature Sensor                         | 9,95 €  |        1 |  9,95 € |
+    | Female DC Power adapater - 2.1mm jack to screw terminal block | 2,00 €  |        1 |  2,00 € |
+    | Voltage Regulator 3.3V                                        | 0,55 €  |        1 |  0,55 € |
+    | Capacitor Ceramic 100nF                                       | 0,64 €  |        1 |  0,64 € |
+    | Electrolytic Decoupling Capacitors - 100uF/25V                | 0,27 €  |        1 |  0,27 € |
+    | USB Mini-B Cable with FTDI                                    | 3,11 €  |        1 |  3,11 € |
+    | BreadBoard                                                    | 8,25 €  |        2 | 16,50 € |
+    | Jumper Wires Pack - M/M                                       | 1,95 €  |        4 |  7,80 € |
+    | Jumper Wires Pack - M/F                                       | 1,95 €  |        1 |  1,95 € |
+    | Male Headers Pack - Break-Away                                | 0,66 €  |        2 |  1,32 € |
+    |                                                               |         |    Total | 169,18€ |
+
   - **Precio componentes baño:**
+
+    | Sensor                                                        | Precio  | Cantidad |     Total |
+    | :------------------------------------------------------------ | :-----: | -------: | --------: |
+    | Arduino Pro Mini 328 - 5V/16MHz                               | 9,95 €  |        1 |    9,95 € |
+    | 12 V Solenoid Valve - 3/4"                                    | 7,95 €  |        5 | 39,75 € € |
+    | Diode Rectifier - 1A 50V                                      | 0,11 €  |        5 |    0,55 € |
+    | PIR (motion) sensor                                           | 9,95 €  |        1 |    9,95 € |
+    | SparkFun Sound Detector                                       | 10,95 € |        1 |   10,95 € |
+    | SparkFun BME280 - Atmospheric Sensor Breakout                 | 19,95 € |        1 |   19,95 € |
+    | Wall Adapter Power Supply - 12VDC 2A                          | 15,77 € |        1 |   15,77 € |
+    | N-Channel MOFSET 60V 30A                                      | 1,46 €  |        5 |    7,30 € |
+    | 10K Ohms Resistor                                             | 0,10 €  |        6 |    0,60 € |
+    | Water Level Sensor Module                                     | 0,78 €  |        1 |    0,78 € |
+    | Carbon Monoxide and Combustible Gas Sensor - MQ-9             | 1,60 €  |        1 |    1,60 € |
+    | Adafruit TSL2591 High Dynamic Range Digital Light Sensor      | 6,95 €  |        1 |    6,95 € |
+    | Adafruit SGP30 Air Quality Sensor Breakout - VOC and eCO2     | 19,95 € |        1 |   19,95 € |
+    | ESP8266-01 - Wifi Module                                      | 6,95 €  |        1 |    6,95 € |
+    | Logic Level Converter - Bi-Directional                        | 2,95 €  |        1 |    2,95 € |
+    | DHT2/11 Humity and Temperature Sensor                         | 9,95 €  |        1 |    9,95 € |
+    | Female DC Power adapater - 2.1mm jack to screw terminal block | 2,00 €  |        1 |    2,00 € |
+    | Voltage Regulator 3.3V                                        | 0,55 €  |        1 |    0,55 € |
+    | Capacitor Ceramic 100nF                                       | 0,64 €  |        1 |    0,64 € |
+    | Electrolytic Decoupling Capacitors - 100uF/25V                | 0,27 €  |        1 |    0,27 € |
+    | USB Mini-B Cable with FTDI                                    | 3,11 €  |        1 |    3,11 € |
+    | BreadBoard                                                    | 8,25 €  |        2 |   16,50 € |
+    | Jumper Wires Pack - M/M                                       | 1,95 €  |        5 |    9,75 € |
+    | Jumper Wires Pack - M/F                                       | 1,95 €  |        1 |    1,95 € |
+    | Male Headers Pack - Break-Away                                | 0,66 €  |        2 |    1,32 € |
+    |                                                               |         |    Total |  199,99 € |
+
+    Después de tener el coste de cada una de las cajas que contendran los diferentes dispositivos para la obtención de datos, tenemos este presupuesto mínimo para la instalación de los componentes:
+
+    | Habitaciones |  Baños   |  Cocinas | Pasillos | Coste total |
+    | :----------- | :------: | -------: | -------: | ----------: |
+    | 5            |    1     |        1 |        2 |
+    | 754,55 €     | 199,99 € | 169,18 € |   301,81 |  1.425,54 € |
+
+    Por tanto, después de realizar este estudio, podemos apreciar como sería el coste mínimo, ya que debemos de tener en cuenta que este presupuesto es única y exclusivamente para la placa y los respectivos sensores. Por lo que no esta incluida la mano de obra, el servidor ni los programas específicos a implementar.
 
 **Avances futuros:**
 
