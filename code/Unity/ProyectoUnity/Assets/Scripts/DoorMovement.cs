@@ -49,7 +49,8 @@ public class DoorController : MonoBehaviour
     {
         if (isPlayerNearby)
         {
-            if (Input.GetKeyDown(KeyCode.E)){
+            if (Input.GetKeyDown(KeyCode.E))
+            {
                 StartCoroutine(ToggleDoorState());
             }
         }
@@ -57,25 +58,81 @@ public class DoorController : MonoBehaviour
 
     private IEnumerator ToggleDoorState()
     {
-
+        int doorDistance = 113;
+        // Inicialización de las variables
         isDoorOpen = !isDoorOpen;
         float targetAngle = isDoorOpen ? openAngle : closedAngle;
         float timeElapsed = 0f;
 
-        Quaternion initialRotation = doorPivot.localRotation;
-        Quaternion targetRotation = Quaternion.Euler(doorPivot.localRotation.eulerAngles.x, targetAngle, doorPivot.localRotation.eulerAngles.z);
-
-        while (timeElapsed < animationTime)
+        // Como aquí tendremos el movimiento de las puertas, en la terraza irá diferente, ya que se desplazarán en el eje x
+        if (this.gameObject.name == "Puerta1Terraza")
         {
-            float t = timeElapsed / animationTime;  // Normaliza el tiempo transcurrido
-            doorPivot.localRotation = Quaternion.Lerp(initialRotation, targetRotation, t);  // Interpola entre la rotación inicial y la rotación objetivo
-            timeElapsed += Time.deltaTime;  // Actualiza el tiempo transcurrido
-            yield return null;  // Espera hasta el próximo frame
+            Vector3 initialPos = doorPivot.localPosition;
+            Vector3 targetPos;
+            if (!isDoorOpen)
+            {
+                targetPos = new Vector3(initialPos.x - doorDistance, initialPos.y, initialPos.z);
+                isDoorOpen = false;
+            }
+            else
+            {
+                targetPos = new Vector3(initialPos.x + doorDistance, initialPos.y, initialPos.z);
+                isDoorOpen = true;
+            }
+            while (timeElapsed < animationTime)
+            {
+                float t = timeElapsed / animationTime;  // Normaliza el tiempo transcurrido
+                doorPivot.localPosition = Vector3.Lerp(initialPos, targetPos, t);  // Interpola entre la posición inicial y la posición objetivo
+                timeElapsed += Time.deltaTime;  // Actualiza el tiempo transcurrido
+                yield return null;  // Espera hasta el próximo frame
+            }
+            doorPivot.localPosition = targetPos;  // Asegura que la posición final sea exacta
+            SendDoorState();
         }
-        Debug.Log("Door Pivot ahora");
-        doorPivot.localRotation = targetRotation;  // Asegura que la rotación final sea exacta
-        Debug.Log("Enviando ahora la info a la rutina de SendDoorState");
-        SendDoorState();
+        else
+        {
+            if (this.gameObject.name == "Puerta2Terraza")
+            {
+                Vector3 initialPos = doorPivot.localPosition;
+                Vector3 targetPos;
+                if (!isDoorOpen)
+                {
+                    targetPos = new Vector3(initialPos.x + doorDistance, initialPos.y, initialPos.z);
+                    isDoorOpen = false;
+                }
+                else
+                {
+                    targetPos = new Vector3(initialPos.x - doorDistance, initialPos.y, initialPos.z);
+                    isDoorOpen = true;
+                }
+                while (timeElapsed < animationTime)
+                {
+                    float t = timeElapsed / animationTime;  // Normaliza el tiempo transcurrido
+                    doorPivot.localPosition = Vector3.Lerp(initialPos, targetPos, t);  // Interpola entre la posición inicial y la posición objetivo
+                    timeElapsed += Time.deltaTime;  // Actualiza el tiempo transcurrido
+                    yield return null;  // Espera hasta el próximo frame
+                }
+                doorPivot.localPosition = targetPos;  // Asegura que la posición final sea exacta
+                SendDoorState();
+            }
+            else
+            {
+                // En cambio, si es una puerta normal y corriente, se desplazará en ángulo de 90 grados para mostrar la apertura
+                Quaternion initialRotation = doorPivot.localRotation;
+                Quaternion targetRotation = Quaternion.Euler(doorPivot.localRotation.eulerAngles.x, targetAngle, doorPivot.localRotation.eulerAngles.z);
+
+                while (timeElapsed < animationTime)
+                {
+                    float t = timeElapsed / animationTime;  // Normaliza el tiempo transcurrido
+                    doorPivot.localRotation = Quaternion.Lerp(initialRotation, targetRotation, t);  // Interpola entre la rotación inicial y la rotación objetivo
+                    timeElapsed += Time.deltaTime;  // Actualiza el tiempo transcurrido
+                    yield return null;  // Espera hasta el próximo frame
+                }
+                doorPivot.localRotation = targetRotation;  // Asegura que la rotación final sea exacta
+                SendDoorState();
+            }
+
+        }
     }
 
     private void SendDoorState()

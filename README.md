@@ -406,6 +406,25 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
     Por tanto, después de realizar este estudio, podemos apreciar como sería el coste mínimo, ya que debemos de tener en cuenta que este presupuesto es única y exclusivamente para la placa y los respectivos sensores. Por lo que no esta incluida la mano de obra, el servidor ni los programas específicos a implementar.
 
+    ***
+
+    Actualmente, se puede apreciar como sería el diagrama de flujo de los datos:
+
+    ![Diagrama de flujo de los datos](/images/Diagrama_flujo_datos.png "Diagrama de flujo de los datos")
+
+    - Por un lado tenemos los sensores, que van enviando información a la placa específica a la que estan conectados cada cierto tiempo.
+    - Una vez la placa específica ha recibido los datos, lo que hará será compararlos con los que tenía anteriormente. Si estos valores son iguales, los descartará a no ser que hayan pasado unos 5 minutos (esto puede modificarse). Esto se ha decidido así ya que permite no saturar el sistema de datos y, de esta manera, tener un mejor flujo de datos. Por otro lado, a la hora de enviarlos a la placa general, esta placa se encargará de encriptarlos para evitar posibles corrupciones de datos.
+    - Cuando estos datos encriptados son enviados y recibidos por la placa general, esta los desencriptará y enviará al servidor (estará alojado en una dirección específica y podrá modificar esta base de datos con una clave que se le proporcionará a la hora de realizar la instalación).
+    - Los datos de la base de datos estarán organizados en base al diseño mostrado anteriormente.
+    - Como se ha propuesto también crear una página web en la que poder consultar estos datos obtenidos, se podrá acceder mediante unas credenciales proporcionadas y que nos permitirá realizar diferentes consultas:
+
+      - Mirar el valor de los sensores.
+      - Observar el domicilio completo con sus diferentes datos en cada estancia.
+      - Poder filtrar en base a lo que se desee, como puede ser fechas u horas específicas, mostrar únicamente 'x' sensores o diferentes opciones (aún sin implementar ni pensadas cómo).
+      - Consultar el valor de cada suministro contratado y comparalo en base a los valores obtenidos por los diferentes sensores.
+
+    (En este diseño se han tenido únicamente en cuenta sensores y no lectores de consumo energético como enchufes inteligentes, bombillas inteligenetes o cualquier herramienta IOT).
+
 **Avances futuros:**
 
 - Implementar código de la API para la base de datos, tanto su creación como modificación.
