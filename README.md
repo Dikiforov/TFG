@@ -425,6 +425,18 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
     (En este diseño se han tenido únicamente en cuenta sensores y no lectores de consumo energético como enchufes inteligentes, bombillas inteligenetes o cualquier herramienta IOT).
 
+- **20/02/2024**
+
+  Se ha buscando una forma de implementar un ciclo de día y noche, en base a este y los valores medios de Tarragona, se hará una simulación de la temperatura ambiente del domicilio. Esto se realizará mdiente una variables globales que permitirán modificar las variables de los sensores de humedad y temperatura en base a la estación seleccionada, ya que esta estación permitirá modificar el tiempo del ciclo de día y noche (más horas de luz o menos), las temperaturas (dependiendo de la estación estaremos en un baremos diferentes de temperaturas) y la humedad (ya que será un sistema parecido al de la temperatura).
+
+  El video que se ha usado como guía es el siguiente: _https://www.youtube.com/watch?v=FIjCwUj3As4_
+
+  También se han añadido el resto de puertas faltantes y también implementada su lógica a falta de algunos retoques.
+
+  ![Piso con puertas](/images/Domicilio_puertasImplementadas.png "Piso con las puertas")
+
+  Por otro lado, se ha implementado el _script_ 'DayNightCicle' para el ciclo de dí y noche
+
 **Avances futuros:**
 
 - Implementar código de la API para la base de datos, tanto su creación como modificación.

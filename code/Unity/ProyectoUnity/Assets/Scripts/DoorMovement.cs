@@ -9,7 +9,7 @@ public class DoorController : MonoBehaviour
     public Transform doorPivot;  // La visagra o punto de rotación de la puerta
     private bool isDoorOpen = false;
     private bool isPlayerNearby = false;
-    private float openAngle = -90f;
+    public float openAngle = -90f;
     private float closedAngle = 0f;
     private float animationTime = 2f;  // Duración de la animación en segundos
     public TMP_Text interactionPrompt;  // Referencia al objeto Text
@@ -87,7 +87,7 @@ public class DoorController : MonoBehaviour
                 yield return null;  // Espera hasta el próximo frame
             }
             doorPivot.localPosition = targetPos;  // Asegura que la posición final sea exacta
-            SendDoorState();
+            //SendDoorState();
         }
         else
         {
@@ -113,7 +113,7 @@ public class DoorController : MonoBehaviour
                     yield return null;  // Espera hasta el próximo frame
                 }
                 doorPivot.localPosition = targetPos;  // Asegura que la posición final sea exacta
-                SendDoorState();
+                //SendDoorState();
             }
             else
             {
@@ -129,7 +129,7 @@ public class DoorController : MonoBehaviour
                     yield return null;  // Espera hasta el próximo frame
                 }
                 doorPivot.localRotation = targetRotation;  // Asegura que la rotación final sea exacta
-                SendDoorState();
+                //SendDoorState();
             }
 
         }
