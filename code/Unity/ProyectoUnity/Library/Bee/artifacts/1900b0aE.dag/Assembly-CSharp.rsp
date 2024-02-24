@@ -358,7 +358,6 @@
 "Assets/Scripts/DayNightCicle.cs"
 "Assets/Scripts/DoorMovement.cs"
 "Assets/Scripts/MovementSensor.cs"
-"Assets/Scripts/NewBehaviourScript.cs"
 "Assets/Scripts/PlayerMovement.cs"
 "Assets/Scripts/PlayerTracker.cs"
 -langversion:9.0

@@ -24,7 +24,7 @@ public class DetectionSensor : MonoBehaviour
         if (playerMovementTracker == null) Debug.LogError("No se encontró el componente PlayerMovementTracker");
     }
 
-    
+
 
     private IEnumerator CheckPlayerMovement()
     {
@@ -56,9 +56,9 @@ public class DetectionSensor : MonoBehaviour
         placeText.text = "Habitación: ";
     }
 
-     private void SendData(string message)
+    private void SendData(string message)
     {
-        string formattedMessage = "Puertas:" + message;  // Agrega la clave "Puertas" antes del mensaje
+        string formattedMessage = "Movimiento:" + message;  // Agrega la clave "Puertas" antes del mensaje
         //Debug.LogError(formattedMessage);  // Imprime el mensaje formateado
         TcpClient client = new TcpClient("127.0.0.1", 8052);
         byte[] data = System.Text.Encoding.ASCII.GetBytes(formattedMessage);  // Usa el mensaje formateado
@@ -73,12 +73,11 @@ public class DetectionSensor : MonoBehaviour
         {
             if (playerMovementTracker.IsMoving && !alreadyDetected)
             {
-                string doorStatus = "Abierta";  // Suponiendo que el movimiento indica una puerta abierta
-                SendData("Estado de la puerta: " + doorStatus + ", Habitación: " + this.gameObject.name);
                 playerInside = true;
                 alreadyDetected = true;
                 movementText.text = "Movimiento: Sí";
                 placeText.text = "Habitación: " + this.gameObject.name;
+                Debug.Log(movementText.text + " " + placeText.text);
                 StartCoroutine(CheckPlayerMovement());
             }
         }
