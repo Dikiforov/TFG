@@ -437,12 +437,46 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   Por otro lado, se ha implementado el _script_ 'DayNightCicle' para el ciclo de dí y noche
 
+- **02/03/2024**
+
+  Se ha implementado una nueva funcionalidad de día y noche, donde la _directional light_ o "sol" se desplaza en alrededor del domicilio, para esto se ha realizado lo siguiente:
+
+  - Crear un material.
+  - Con el material seleccionado, convertirlo en _skybox material_.
+  - Configurar el material creado para que genere sombras de manera procedural.
+  - Configuraciones varias para colores, tonalidades, etc.
+  - Crear un script que permita, en base a la velocidad del día y de la hora, crear un ciclo de día y noche.
+
+  Por otro lado, se han rehecho toda la estructura del domicilio ya que de la anterior manera no se podía configurar diferentes opciones en base a las colisiones ni texturas.
+
+  ![Nuevo Piso](/images/NuevoDise.png "Piso creado con diferentes cubos")
+
+  También, cuando se ha acabado de implementar el ciclo de día y noche, podemos apreciar en las siguientes imagenes como cambia las tonalidades de los objetos:
+
+  ![Horario nocturno](/images/Domicilio_HorarioNocturno.png "Domicilio con horario nocturno")
+
+  ![Horario diurno](/images/Domicilio_HorarioDiurno.png "Domicilio con horario diurno")
+
+  Como se puede apreciar en las imagenes, tanto las texturas del domicilio como las del entorno cambián, ya que estas pruebas son a las 00:00 y a las 08:00. Esto nos permitirá en un futuro, en base a una estación que selecionemos, hacer una pequeña simulación de temperatura y humedad en el domicilio para registrar datos más variados y probar diferentes sensores.
+
+  Esto se realizará de la siguiente manera:
+
+  - Obtener una media de temperatura y humedad de la ciudad de Tarragona en las diferentes estanciones.
+  - Con estos valores, se creará una pequeña condición global que permitirá aleatorizar los diferentes valores obtenido para que haya variación en el entorno.
+
+  Con estos cálculos, en base a la estancia deseada y posición del usuario, aumentar un poco la temperatura, disminuirla, etc. Esto también se verá afectado en base a la duración, acción o diferentes factores que se puedan realizar en la estancia.
+
+  Para realizar este tipo de movimientos, se ha pensando en implementar un pequeño circuito que vaya siguiente el usuario de manera constante para generar valores y así evitar obtenerlos de manera manual. Esto tendrá una lógica similar a la de la temperatura y humedad, ya que se hará mediante unos parámetros que se irán generando por cada movimiento del usuario. De esta manerá también podremos simular diferentes usuarios a la vez.
+
+  Finalmente, se ha implementado una cámara (vista de planta) para que, a la hora de simular todo, podamos ver las diferentes rutinas de cada usuario en cuestión.
+
 **Avances futuros:**
 
 - Implementar código de la API para la base de datos, tanto su creación como modificación.
-- Creación de un esquema de los componentes electrónicos en base al plano de la vivienda para ver como situar cada uno de ellos.
-- También se quiere estudiar la forma de implementar un ciclo de día y noche, para simular la temperatura, humedad y presión atmosférica.
-- Desarrollo del proyecto general para la incorporación completa de puertas en todas las estancias.
-- Mejorar gráficamente el escenario.
+- Obtener valores de temperatura, humedad, presión y otros valores para la generación de estos en base a una estación concreta.
+- Implementar _colliders_ para los diferentes objetos.
+- Añadir los sensores incorporados en anteriores versiones, como puede ser movimiento o apertura de puertas.
+- Incluir un sistema de reloj para el control de cilos del usuario.
+- Crear circuito por donde se irá moviendo el usuario de manera automatizada.
 
 **Este proyecto se encuentra en desarrollo y se irán actualizando los avances en este archivo README.md.**
