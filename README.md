@@ -470,13 +470,38 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   Finalmente, se ha implementado una cámara (vista de planta) para que, a la hora de simular todo, podamos ver las diferentes rutinas de cada usuario en cuestión.
 
+- **13/03/2024**
+
+  Se ha generado una pequeña prueba en _unity_ para el cálculo y simulación de la temperatura en base a la hora y valores máximos/mínimos de temperatura. De esta manera podemos obtener valores para comprobar diferentes parámetros, como puede ser la temperatura interior del domicilio en base a donde se encuentre el usuario.
+
+  Por otro lado, actualmente tenemos valores que son contantes mediante un cálculo donde lo que se realiza es dividir la temperatura origen y destino entre el intervalo de horas deseado para que aumente o decremente la temperatura, de esta manera, como se ha comentado anteriormente, tenemos valores constantes y no muy realistas.
+
+  ![Gráfico constantes](/images/GráficoConstantes.png "Gráfico con valores incrementales constantes")
+
+  Como se puede observar en este gráfico, las temperaturas van modificandose de manera constante en base a la hora que queramos y el intervalo deseado.
+
+  ![Gráfico curva temperatura](/images/GráficaGeneralTemperatura.png "Gráfico curva temperatura objetivo")
+
+  En cambio, en el gráfico anterior podemos observar como funciona la curva de temperatura. Si nos fijamos, apreciamos como sería este último gráfico algo más realista en base a las temperaturas que podamos tener, para esto se han relizado diferentes pruebas en la plataforma _www.geogebra.org_, donde podemos apreciar que en base a la pendiente y unas serie de valores que actuarán como principalmente las temperaturas máximas y mínimas deseadas, hay una mejor relación y movimiento entre estas a partir de la hora del día actual.
+
+  Para la implementació de esta curva, se ha encontrado un objeto en unity, denominado _AnimationCurve_, que permite realizar este tipo de cálculos. Por otro lado, también es posible realizarlo con operaciones matemáticas.
+
 **Avances futuros:**
 
+- Aplicar sensores implementados en el nuevo domicilio.
+
+- Crear la curva de temperatura.
+
 - Implementar código de la API para la base de datos, tanto su creación como modificación.
+
 - Obtener valores de temperatura, humedad, presión y otros valores para la generación de estos en base a una estación concreta.
+
 - Implementar _colliders_ para los diferentes objetos.
-- Añadir los sensores incorporados en anteriores versiones, como puede ser movimiento o apertura de puertas.
-- Incluir un sistema de reloj para el control de cilos del usuario.
+
+- Añadir los sensores incorporados en anteriores versiones, como puede ser movimiento o apertura de puertas. OK
+
+- Incluir un sistema de reloj para el control de cilos del usuario. OK
+
 - Crear circuito por donde se irá moviendo el usuario de manera automatizada.
 
 **Este proyecto se encuentra en desarrollo y se irán actualizando los avances en este archivo README.md.**
