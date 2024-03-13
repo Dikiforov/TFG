@@ -57,35 +57,18 @@ public class CicloDN : MonoBehaviour
             // Cada 24 horas se reinicia la hora a las 00:00
             Hora = 0;
             // Recalcular las temperaturas para tener un registros más distintivo
-            TempMaxima += TempMaxima + 0.2f * (Random.value > 0.5f ? 1 : -1);
-            TempMinima += TempMinima + 0.2f * (Random.value > 0.5f ? 1 : -1);
+            TempMaxima += 0.2f * (Random.value > 0.5f ? 1 : -1);
+            TempMinima += 0.2f * (Random.value > 0.5f ? 1 : -1);
             TempActual = TempMinima;
         }
 
-        float CurvaTiempo = 0;
-        if (Hora < 8)
-        {
-            // Curva para el rango de 00:00-08:00
-            CurvaTiempo = Hora / 8f;
-        }
-        else if (Hora < 12)
-        {
-            // Curva para el rango de 08:00-12:00
-            CurvaTiempo = 1 + Mathf.Sin((Hora - 8) / 4f * Mathf.PI) * 0.5f;
-        }
-        else if (Hora < 16)
-        {
-            // Mantener la máxima de 12:00-16:00
-            CurvaTiempo = 1;
-        }
-        else
-        {
-            // Curva para el rango de 16:00-23:59
-            CurvaTiempo = Mathf.Cos((Hora - 16) / 8f * Mathf.PI) * 0.5f + 0.5f;
-        }
-        
-        TempActual = Mathf.Lerp(TempMinima, TempMaxima, CurvaTiempo);
-        Debug.Log(Hora + "(" + TempActual + ")");
+        float CurvaTemp = 2f;
+        if (Hora < 8) CurvaTemp =  (2 / 8);    // Hacemos que suba 2 grados en el intervalo de las 00-08
+        else if (Hora < 12) CurvaTemp = (TempMaxima - TempActual) / 4;  // Subimos lo que quede hasta el máximo en  horas
+            else if (Hora < 16) CurvaTemp = 0;  // Que no haya modificación de temperatura en las horas máximas
+                else if (Hora < 23.59) CurvaTemp = -(TempMaxima - TempMinima) / 8; // Decremento de temperatura
+        TempActual += CurvaTemp;
+        Debug.Log(Hora + "(" + TempActual + ")" + "Curva temp: " + CurvaTemp);
         RotacionSol();
     }
     // Zona de movimiento del Sol
