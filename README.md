@@ -486,22 +486,64 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   Para la implementació de esta curva, se ha encontrado un objeto en unity, denominado _AnimationCurve_, que permite realizar este tipo de cálculos. Por otro lado, también es posible realizarlo con operaciones matemáticas.
 
+- **14/03/2024**
+
+  Una vez estudiada más a fondo la función implementada en unity de _Mathf.Lerp()_ se ha podido implementar una curva de temperatura más suave en base a 3 factores:
+
+  - **Estación seleccionada:** en base a la estación que se haya escogido en la jerarquía, se aplicarán en un inicio diferentes valores para las máximas y mínimas relacionadas con la temperatura. (Código Start)
+
+  - **Hora actual:** como dependiendo de la hora las temperaturas debes ser más altas/bajas, se relaciona en base a tres intervalos que comprenden desde las 00:00-03:59 (incrementamos un grado), 04:00-07:59 (incrementamos otro grado), 08:00-11:59 (desde nuestra última temperatura registrada hasta el máximo), 12:00-15:59 (temperaturas máximas) y 16:00-23:59 (decremento de temperatura máxima a mínima).
+
+  - **Nuevo cálculo de máximas y mínimas:** inicialmente seleccionamos una estación, que contendrá un valor máximo y mínimo para las temperaturas, pero como cada día puede ser diferentes, se ha optado por aleatorizar cada 24 horas internas estos valores que nos sirven de abanico. Esto nos permite que cada día haya unos registros diferentes con la posibilidad de que algún día tenga la misma información. Esto es únicamente para que, a la hora de generar gráficos u otras lecturas de datos, haya una distribución más lógica.
+
+  Para la implementación de estas curvas, se ha utilizado la función mencionada anteriormente (_Mathf.Lerp()_) que nos permite realizar una interpolación lineal (cálculo para el valor intermedio como una combinación lineal de dos valores conocidos), donde en este caso nos aplicarlo a la temperatura, ya que nos permite crear transiciones o curvas suaves entre diferentes puntos de temperaturas a lo largo del día.
+
+  (Anexo con más información)
+
+  Como parámetros nos encontramos con:
+
+  - _a:_ valor inicial de la interpolación.
+  - _b:_ valor final de la interpolación.
+  - _t:_: valor que controla la posición dentro del intervalo de interpolación.
+
+  Un ejemplo, aplicando valores del código, sería:
+
+  (insertar fórmula)
+  a = TempMinima (7.5 ºC)
+  b = TempMinima + 1 ºC (8.5 ºC)
+  t = (Hora - 0) / 4 (desde las 00:00 hasta las 03:59, ya que son 4 horas como tal y queremos que haya un incremento equitativo por horas).
+
+  De esta manera, para las 02:00 de la madrugada, tendremos una temperatura de 8 grados, ya que la _t_ nos daría 0.5 y ese sería nuestro incremento por horas.
+
+  Enlaces:
+
+  - https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html
+  - https://www.youtube.com/watch?app=desktop&v=RNccTrsgO9g
+  - https://www.youtube.com/watch?v=q-1bFcMdUcg
+
+  Una vez aplicadas las temperaturas, estas se tendrán que enviar al servidor que acturará como receptor de datos, que los almacenará en una base de datos. Para evitar un envío masivo de datos, se programará una forma en la que cada se vayan comparando valores cada minuto, si estos cambian se enviarán todos los datos al servidor, pero si estos no cambian, se enviarán de manera automática cada 5 minutos, de esta manera evitamos saturar el servidor con tantas llamadas de almacenamiento.
+  Por otro lado, esta es la implementación de la temperatura ambiente, es decir, de la calle. En caso de la viviendo, se aumentará la temperatura una cantidad constante (a excepción de que sea verano), esto es debido a que dentro de una vivienda la temperatura humana y la calidez de esta permite una mayor temperatura en el entorno. Esta temperatura de las estancias de la vivienda también irá relacioanda con la posición del usuario y la hora, ya que cuando vaya a preparar la comida, la cocina aumentará de temperatura en base al individuo y la propia cocción de los alimentos. En cambio, para el tema de la humedad, también influirá la temperatura en esta, ya que cuanto más haya puede haber más calor o más frio, cosa que se debe de estudiar aún el método de como realizarlo.
+
+  En fin, la implementación de la temperatura ambiente esta implementada pero hay que aumentar esta misma dentro del domicilio, teniendo en cuenta la posición del usuario, la humedad y las horas del día. Por otro lado, la implementación de la humedad será pareciada a la de la temperatura, ya que será comprobar valores por horas.
+
 **Avances futuros:**
 
 - Aplicar sensores implementados en el nuevo domicilio.
 
-- Crear la curva de temperatura.
+- Crear la curva de temperatura. OK
 
 - Implementar código de la API para la base de datos, tanto su creación como modificación.
 
-- Obtener valores de temperatura, humedad, presión y otros valores para la generación de estos en base a una estación concreta.
+- Obtener valores de temperatura, humedad, presión y otros valores para la generación de estos en base a una estación concreta. TEMP OK
 
 - Implementar _colliders_ para los diferentes objetos.
 
-- Añadir los sensores incorporados en anteriores versiones, como puede ser movimiento o apertura de puertas. OK
+- Añadir los sensores incorporados en anteriores versiones, como puede ser movimiento o apertura de puertas. FALTA AÑADIR EN OBJETOS
 
 - Incluir un sistema de reloj para el control de cilos del usuario. OK
 
 - Crear circuito por donde se irá moviendo el usuario de manera automatizada.
+
+- Hacer una lógica de hábitos, donde dependiendo de la hora el usuario pueda moverse a una habitación en concreto o realizar diferentes tareas.
 
 **Este proyecto se encuentra en desarrollo y se irán actualizando los avances en este archivo README.md.**

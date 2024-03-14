@@ -8192,9 +8192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03bfd932659a7b34dbaa78e80a43630f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hora: 12
-  Sol: {fileID: 705507995}
-  duracionDiaMin: 1
+  EstacionSeleccionada: 0
+  Sol: {fileID: 705507993}
+  DuracionDiaMin: 0.5
 --- !u!1 &1376809114
 GameObject:
   m_ObjectHideFlags: 0
