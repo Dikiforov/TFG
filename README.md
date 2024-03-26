@@ -425,6 +425,8 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
     (En este diseño se han tenido únicamente en cuenta sensores y no lectores de consumo energético como enchufes inteligentes, bombillas inteligenetes o cualquier herramienta IOT).
 
+---
+
 - **20/02/2024**
 
   Se ha buscando una forma de implementar un ciclo de día y noche, en base a este y los valores medios de Tarragona, se hará una simulación de la temperatura ambiente del domicilio. Esto se realizará mdiente una variables globales que permitirán modificar las variables de los sensores de humedad y temperatura en base a la estación seleccionada, ya que esta estación permitirá modificar el tiempo del ciclo de día y noche (más horas de luz o menos), las temperaturas (dependiendo de la estación estaremos en un baremos diferentes de temperaturas) y la humedad (ya que será un sistema parecido al de la temperatura).
@@ -435,7 +437,9 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   ![Piso con puertas](/images/Domicilio_puertasImplementadas.png "Piso con las puertas")
 
-  Por otro lado, se ha implementado el _script_ 'DayNightCicle' para el ciclo de dí y noche
+  Por otro lado, se ha implementado el _script_ 'DayNightCicle' para el ciclo de día y noche.
+
+---
 
 - **02/03/2024**
 
@@ -470,6 +474,8 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   Finalmente, se ha implementado una cámara (vista de planta) para que, a la hora de simular todo, podamos ver las diferentes rutinas de cada usuario en cuestión.
 
+---
+
 - **13/03/2024**
 
   Se ha generado una pequeña prueba en _unity_ para el cálculo y simulación de la temperatura en base a la hora y valores máximos/mínimos de temperatura. De esta manera podemos obtener valores para comprobar diferentes parámetros, como puede ser la temperatura interior del domicilio en base a donde se encuentre el usuario.
@@ -485,6 +491,8 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
   En cambio, en el gráfico anterior podemos observar como funciona la curva de temperatura. Si nos fijamos, apreciamos como sería este último gráfico algo más realista en base a las temperaturas que podamos tener, para esto se han relizado diferentes pruebas en la plataforma _www.geogebra.org_, donde podemos apreciar que en base a la pendiente y unas serie de valores que actuarán como principalmente las temperaturas máximas y mínimas deseadas, hay una mejor relación y movimiento entre estas a partir de la hora del día actual.
 
   Para la implementació de esta curva, se ha encontrado un objeto en unity, denominado _AnimationCurve_, que permite realizar este tipo de cálculos. Por otro lado, también es posible realizarlo con operaciones matemáticas.
+
+---
 
 - **14/03/2024**
 
@@ -525,6 +533,52 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
   Por otro lado, esta es la implementación de la temperatura ambiente, es decir, de la calle. En caso de la viviendo, se aumentará la temperatura una cantidad constante (a excepción de que sea verano), esto es debido a que dentro de una vivienda la temperatura humana y la calidez de esta permite una mayor temperatura en el entorno. Esta temperatura de las estancias de la vivienda también irá relacioanda con la posición del usuario y la hora, ya que cuando vaya a preparar la comida, la cocina aumentará de temperatura en base al individuo y la propia cocción de los alimentos. En cambio, para el tema de la humedad, también influirá la temperatura en esta, ya que cuanto más haya puede haber más calor o más frio, cosa que se debe de estudiar aún el método de como realizarlo.
 
   En fin, la implementación de la temperatura ambiente esta implementada pero hay que aumentar esta misma dentro del domicilio, teniendo en cuenta la posición del usuario, la humedad y las horas del día. Por otro lado, la implementación de la humedad será pareciada a la de la temperatura, ya que será comprobar valores por horas.
+
+---
+
+- **26/03/2024**
+
+  Se ha añadido mensajes de _textMesh Pro_ en la parte derecha de la simulación para comprobar diferentes datos de los sensores, como puede ser la temperatura, humedad, presión, movimiento o estado de las puertas. Para esto, se ha creado un objeto _canva_ que almacenará todos los _textMesh Pro_ con los datos de los sensores. Esto implica que en todos los scripts que teníamos creados deberán de incluir un nuevo objeto público que será el mensaje mostrado.
+  _https://www.youtube.com/watch?v=bR0clpZvjXo_
+
+  ![Datos en pantalla](/images/InfoSensores.png "Datos en pantalla")
+
+  Como se puede apreciar, aparecen una gran cantidad de informació y, aun así, no esta completa, ya que únicamente se muestra la información de los sensores de temperatura, humedad y presión genéricos provocados por el ambiente. El objetivo es tener por cada habitación, en el momento que entramos, un cambio de datos en pantalla, lo que nos permitirá saber la información de cada habitación en concreto. Aunque queremos que se pueda cambiar con un botón, aunque esto será sencillo, ya que la idea es que durante la ejecución de la simulación tengamos en cada una de las estancias un cuadro de texto con información específica y general, es decir, que durante la rutina _update_ de la simulación y, si pulsamos alguna tecla en concreto, cambiemos la información mostrada en pantalla. Por otro lado, actualmente se muestra información genérica a excepción de las puertas y sensores de movimiento, que son los que hay en todo el sistema.
+
+  Una idea que se ha obtenido es la de crear ya una función individual por estancia, es decir, que cada habitación tenga un conjunto de sensores que envien los datos a un _script_ propio de la habitación, lo que provocaría una simulación y experencia en la transferencia de datos más real, ya que es la idea que se tiene. Esto se haría de la siguiente manera:
+
+  Crear un objeto _placa_ que contendrá todos los sensores de la habitación en cuestión, estos sensores, al esta bajo un mismo padre, enviarán la información a este. Cuando le llegue al padre, enviarlo a la placa general del sistema, o lo que es lo mismo, el padre de los padres, y que este procese la información para enviarla al servidor local (en este caso el localhost en unity) para que almacene los datos en la base de datos. Para la realización de esto, lo que puede hacer el padre de los sensores es obtener los datos que tiene los hijos (tengo que mirar la forma) y ya tratarlos.
+
+  Enlaces interesantes para esto:
+
+  - _https://docs.unity3d.com/ScriptReference/GameObject.SendMessage.html_
+  - _https://docs.unity3d.com/ScriptReference/Events.UnityEvent.html_
+  - _https://learn.unity.com/tutorial/eventos-w_
+
+  Por otro lado, se ha observado que hay otra forma de crear la animación del movimientos de las puertas, esto es con la opción _animation_ de unity, lo que nos permite crear en base a cualquier objeto una animación que puede reutilizarse en todos los casos, por tanto se ha probado este método para realizar el movimiento de las puertas.
+
+  Para la realización de esto, hay que crear 2 estados en la puerta, estado cerrada y abierta. Esto nos permitirá alternar el movimiento con la animación, después hay que crear un _clip_ del movimiento de la puerta y, finalmente, generar una variable que nos permita saber el estado de esta en todo momento.
+
+  Cuando se realice todo esto, en nuestro objeto puerta lo que debemos de hacer es asociar la animación creada y crear un _script_ que cuando entremos en el _trigger_ de la puerta nos permita realizar la apertura, así como cambiar su estado de cara a la simulación.
+
+  _https://www.youtube.com/watch?v=XIwW11OI_4E_
+
+  ![Escena 1 puerta](/images/animationPuerta1.png "Puerta Cerrada")
+  ![Escena 2 puerta](/images/AnimationPuerta2.png "Puerta Abierta")
+
+  Como se puede apreciar, se ha recreado la animación de abrir y cerrar una puerta, esto nos servirá para utilizarlo en cada una de las puertas del domicilio que conectan estancias y, se ha creado una variable interna que nos permite saber el estado de la puerta, cosa que se leerá y mostrará en pantalla.
+
+  Por otro lado, hay que crear la relación entre ambas escenas y combinando el estado de la variable del estado de la puerta.
+
+  ![Esquema relación escenas](/images/estadoAnimacion.png "Estados animación")
+
+  Para la ejecución de la animación es parecida a lo que se realizaba anteriormente, es decir, cuando el usuario con la etiqueta _player_ entre en el _trigger_ de la puerta, esta activará la animación cuando se de a la tecla de interacción deseada.
+
+  Por otro lado, se ha averiguado que es posible recrear una máquina de estados que nos permita generar una especie de rutina para el usuario, es decir, una lógica que diga al usuario a donde ir en cada momento u hora del día con diferentes variables, lo que viene a ser crear una rutina del día a día con posibilidad de que ocurran diferentes situaciones mediante algún valor aleatorio, como puede ser una caída, inundación, incremento de temperatura, etc.
+
+  _https://docs.unity3d.com/Manual/StateMachineBasics.html_
+
+---
 
 **Avances futuros:**
 

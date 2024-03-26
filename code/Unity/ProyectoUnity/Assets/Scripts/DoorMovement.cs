@@ -13,7 +13,7 @@ public class DoorController : MonoBehaviour
     private float closedAngle = 0f;
     private float animationTime = 2f;  // Duración de la animación en segundos
     public TMP_Text interactionPrompt;  // Referencia al objeto Text
-
+    public TMP_Text doorSensorPromt;
     private void Start()
     {
         if (doorPivot == null)
@@ -24,25 +24,28 @@ public class DoorController : MonoBehaviour
         {
             Debug.LogError("No se ha asignado un objeto Text a interactionPrompt.");
         }
+
+        if (doorSensorPromt == null)
+        {
+            Debug.LogError("No se ha asignado un objecto Text a informationPrompt");
+        }
         interactionPrompt.gameObject.SetActive(false);  // Oculta el texto al inicio
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerNearby = true;
-            interactionPrompt.gameObject.SetActive(true);  // Muestra el texto
-        }
+        Debug.Log("Entro en el trigger");
+        if (!other.CompareTag("Player")) return;
+        isPlayerNearby = true;
+        interactionPrompt.gameObject.SetActive(true);  // Muestra el texto
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerNearby = false;
-            interactionPrompt.gameObject.SetActive(false);  // Oculta el texto
-        }
+        Debug.Log("Salgo del trigger");
+        if (!other.CompareTag("Player")) return;
+        isPlayerNearby = false;
+        interactionPrompt.gameObject.SetActive(false);  // Oculta el texto
     }
 
     private void Update()
@@ -54,44 +57,47 @@ public class DoorController : MonoBehaviour
                 StartCoroutine(ToggleDoorState());
             }
         }
+
+        doorSensorPromt.text = this.gameObject.name + ':' + isDoorOpen;
     }
 
     private IEnumerator ToggleDoorState()
     {
-        int doorDistance = 113;
+        var doorDistance = 113;
         // Inicialización de las variables
         isDoorOpen = !isDoorOpen;
-        float targetAngle = isDoorOpen ? openAngle : closedAngle;
-        float timeElapsed = 0f;
+        var targetAngle = isDoorOpen ? openAngle : closedAngle;
+        var timeElapsed = 0f;
 
-        // Como aquí tendremos el movimiento de las puertas, en la terraza irá diferente, ya que se desplazarán en el eje x
-        if (this.gameObject.name == "Puerta1Terraza")
+        switch (this.gameObject.name)
         {
-            Vector3 initialPos = doorPivot.localPosition;
-            Vector3 targetPos;
-            if (!isDoorOpen)
+            // Como aquí tendremos el movimiento de las puertas, en la terraza irá diferente, ya que se desplazarán en el eje x
+            case "Puerta1Terraza":
             {
-                targetPos = new Vector3(initialPos.x - doorDistance, initialPos.y, initialPos.z);
-                isDoorOpen = false;
+                Vector3 initialPos = doorPivot.localPosition;
+                Vector3 targetPos;
+                if (!isDoorOpen)
+                {
+                    targetPos = new Vector3(initialPos.x - doorDistance, initialPos.y, initialPos.z);
+                    isDoorOpen = false;
+                }
+                else
+                {
+                    targetPos = new Vector3(initialPos.x + doorDistance, initialPos.y, initialPos.z);
+                    isDoorOpen = true;
+                }
+                while (timeElapsed < animationTime)
+                {
+                    float t = timeElapsed / animationTime;  // Normaliza el tiempo transcurrido
+                    doorPivot.localPosition = Vector3.Lerp(initialPos, targetPos, t);  // Interpola entre la posición inicial y la posición objetivo
+                    timeElapsed += Time.deltaTime;  // Actualiza el tiempo transcurrido
+                    yield return null;  // Espera hasta el próximo frame
+                }
+                doorPivot.localPosition = targetPos;  // Asegura que la posición final sea exacta
+                //SendDoorState();
+                break;
             }
-            else
-            {
-                targetPos = new Vector3(initialPos.x + doorDistance, initialPos.y, initialPos.z);
-                isDoorOpen = true;
-            }
-            while (timeElapsed < animationTime)
-            {
-                float t = timeElapsed / animationTime;  // Normaliza el tiempo transcurrido
-                doorPivot.localPosition = Vector3.Lerp(initialPos, targetPos, t);  // Interpola entre la posición inicial y la posición objetivo
-                timeElapsed += Time.deltaTime;  // Actualiza el tiempo transcurrido
-                yield return null;  // Espera hasta el próximo frame
-            }
-            doorPivot.localPosition = targetPos;  // Asegura que la posición final sea exacta
-            //SendDoorState();
-        }
-        else
-        {
-            if (this.gameObject.name == "Puerta2Terraza")
+            case "Puerta2Terraza":
             {
                 Vector3 initialPos = doorPivot.localPosition;
                 Vector3 targetPos;
@@ -114,31 +120,33 @@ public class DoorController : MonoBehaviour
                 }
                 doorPivot.localPosition = targetPos;  // Asegura que la posición final sea exacta
                 //SendDoorState();
+                break;
             }
-            else
+            default:
             {
                 // En cambio, si es una puerta normal y corriente, se desplazará en ángulo de 90 grados para mostrar la apertura
-                Quaternion initialRotation = doorPivot.localRotation;
-                Quaternion targetRotation = Quaternion.Euler(doorPivot.localRotation.eulerAngles.x, targetAngle, doorPivot.localRotation.eulerAngles.z);
+                var localRotation = doorPivot.localRotation;
+                Quaternion initialRotation = localRotation;
+                Quaternion targetRotation = Quaternion.Euler(localRotation.eulerAngles.x, targetAngle, localRotation.eulerAngles.z);
 
                 while (timeElapsed < animationTime)
                 {
-                    float t = timeElapsed / animationTime;  // Normaliza el tiempo transcurrido
+                    var t = timeElapsed / animationTime;  // Normaliza el tiempo transcurrido
                     doorPivot.localRotation = Quaternion.Lerp(initialRotation, targetRotation, t);  // Interpola entre la rotación inicial y la rotación objetivo
                     timeElapsed += Time.deltaTime;  // Actualiza el tiempo transcurrido
                     yield return null;  // Espera hasta el próximo frame
                 }
                 doorPivot.localRotation = targetRotation;  // Asegura que la rotación final sea exacta
                 //SendDoorState();
+                break;
             }
-
         }
     }
 
     private void SendDoorState()
     {
-        string doorState = isDoorOpen ? "Abierta" : "Cerrada";
-        string message = "Puertas:Estado de la puerta: " + doorState + ", Habitación: " + this.gameObject.name;
+        var doorState = isDoorOpen ? "Abierta" : "Cerrada";
+        var message = "Puertas:Estado de la puerta: " + doorState + ", Habitación: " + this.gameObject.name;
         TcpClient client = new TcpClient("127.0.0.1", 8052);
         byte[] data = Encoding.ASCII.GetBytes(message);
         NetworkStream stream = client.GetStream();
