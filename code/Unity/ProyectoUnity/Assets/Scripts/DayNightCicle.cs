@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CicloDN : MonoBehaviour
 {
@@ -13,14 +15,13 @@ public class CicloDN : MonoBehaviour
     };
 
     public Estaciones EstacionSeleccionada = Estaciones.Invierno;
-
-    private float Hora = 0;
+    public static float TempActual;
+    public static float Hora = 0;
     private float SolX;
     private float IniSolX;
 
     private float TempMinima;
     private float TempMaxima;
-    private float TempActual;
     private float[,] temperaturas = new float[,]
     {
         {12.5f, 7.8f},

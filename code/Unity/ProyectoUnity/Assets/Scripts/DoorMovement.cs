@@ -6,6 +6,7 @@ using TMPro;
 
 public class DoorController : MonoBehaviour
 {
+    public string nombreComponente;
     public Transform doorPivot;  // La visagra o punto de rotación de la puerta
     private bool isDoorOpen = false;
     private bool isPlayerNearby = false;
@@ -24,7 +25,7 @@ public class DoorController : MonoBehaviour
         {
             Debug.LogError("No se ha asignado un objeto Text a interactionPrompt.");
         }
-
+        
         if (doorSensorPromt == null)
         {
             Debug.LogError("No se ha asignado un objecto Text a informationPrompt");
@@ -34,7 +35,6 @@ public class DoorController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entro en el trigger");
         if (!other.CompareTag("Player")) return;
         isPlayerNearby = true;
         interactionPrompt.gameObject.SetActive(true);  // Muestra el texto
@@ -42,7 +42,6 @@ public class DoorController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Salgo del trigger");
         if (!other.CompareTag("Player")) return;
         isPlayerNearby = false;
         interactionPrompt.gameObject.SetActive(false);  // Oculta el texto
@@ -141,6 +140,7 @@ public class DoorController : MonoBehaviour
                 break;
             }
         }
+        Debug.Log("Estado de la puerta " + nombreComponente + ": " + isDoorOpen);
     }
 
     private void SendDoorState()

@@ -48,7 +48,9 @@
      <Compile Include="Assets\Scripts\MovementSensor.cs" />
      <Compile Include="Assets\Scripts\PlayerTracker.cs" />
      <Compile Include="Assets\Scripts\DoorMovement.cs" />
+     <Compile Include="Assets\Scripts\SensorTemperatura.cs" />
      <Compile Include="Assets\Scripts\DayNightCicle.cs" />
+     <Compile Include="Assets\Scripts\SensorPuerta.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\WorldMaterialsFree\Shaders\WorldMatHDRPFree.shader" />

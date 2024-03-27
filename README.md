@@ -580,6 +580,24 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
 ---
 
+- **27/03/2024**
+
+  Se ha implementado un primer prototípo del sensor de temperatura por estancia, esto se realiza leyendo la variable _tempActual_ que se encuentra en el script que controla el ciclo de día y noche, ya que calcula también la temperatura en base a la hora y la estación seleccionada, esto nos permite obtener los resultados en todo momento. Por tanto, con esta primera aproximación, se realizará un control de datos más exhaustivo que nos permitirá gestionar los datos a enviar.
+
+  Por otro lado, se ha empezado a usar la jerarquia mencionada anteriormente, es decir, que por estancia haya un componente general que contendrá todos los sensores de esta misma. Estos sensores 'hijos' enviarán los datos a ese componente 'padre', de esta manera tendrá un uso más fiel a la realidad que queremos demostrar.
+
+  También se ha incorporado todos los sensores de apertura de puertas, lo que nos permite saber el estado de cada una en todo momento.
+
+  Finalmente, se ha incorporado una función que nos permite comparar temperaturas, ya que al tener una curva de valores en grados centigrados nos permitirá enviar los datos de una manera más sencilla, esto es debido a que queremos enviar datos única y exclusivamente cuando haya una variación interesante de valores (por eso se ha aproximado los valores a 2 decimales, aunque internamente el cálculo se realiza con unos 6 decimales) o cuando haya pasado un intervalo de tiempo especificado.
+
+  A continuación se muestra la salida de los valores en la estancia del recibidor:
+
+  ![Temperatura Recibida](/images/LecturaTemperaturaDiferencia.png "Temperatura Recibida")
+
+  Como se puede observar, hay un cambio considerable en las horas en la que incrementa la temperatura, esto es debido a que guardamos la temperatura anterior para ir comparando con la actual (aproximación a 2 decimales), lo que nos permite ir comparando valores y ver si hay variación en un tiempo determinado.
+
+---
+
 **Avances futuros:**
 
 - Aplicar sensores implementados en el nuevo domicilio.

@@ -6,20 +6,12 @@ using System.Text;
 
 public class DetectionSensor : MonoBehaviour
 {
-    private TMP_Text movementText;
-    private TMP_Text placeText;
     private PlayerMovementTracker playerMovementTracker;
     private bool playerInside = false;
     private bool alreadyDetected = false;
 
     private void Start()
     {
-        movementText = GameObject.Find("TextMovementSensor").GetComponent<TMP_Text>();
-        if (movementText == null) Debug.LogError("No se encontró el componente TMP_Text en TextMovementSensor");
-
-        placeText = GameObject.Find("TextPlaceSensor").GetComponent<TMP_Text>();
-        if (placeText == null) Debug.LogError("No se encontró el componente TMP_Text en TextPlaceSensor");
-
         playerMovementTracker = FindObjectOfType<PlayerMovementTracker>();
         if (playerMovementTracker == null) Debug.LogError("No se encontró el componente PlayerMovementTracker");
     }
@@ -33,7 +25,6 @@ public class DetectionSensor : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (!playerMovementTracker.IsMoving)
             {
-                ResetText();
                 alreadyDetected = false;
                 playerInside = false;
             }
@@ -46,15 +37,9 @@ public class DetectionSensor : MonoBehaviour
         {
             playerInside = false;
             alreadyDetected = false;
-            ResetText();
         }
     }
-
-    private void ResetText()
-    {
-        movementText.text = "Movimiento: ";
-        placeText.text = "Habitación: ";
-    }
+    
 
     private void SendData(string message)
     {
@@ -75,9 +60,7 @@ public class DetectionSensor : MonoBehaviour
             {
                 playerInside = true;
                 alreadyDetected = true;
-                movementText.text = "Movimiento: Sí";
-                placeText.text = "Habitación: " + this.gameObject.name;
-                Debug.Log(movementText.text + " " + placeText.text);
+                Debug.Log("Movimiento en la habitación: " + this.gameObject.name);
                 StartCoroutine(CheckPlayerMovement());
             }
         }

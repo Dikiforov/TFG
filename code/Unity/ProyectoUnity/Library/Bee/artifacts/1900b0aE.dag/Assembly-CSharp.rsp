@@ -364,6 +364,8 @@
 "Assets/Scripts/MovementSensor.cs"
 "Assets/Scripts/PlayerMovement.cs"
 "Assets/Scripts/PlayerTracker.cs"
+"Assets/Scripts/SensorPuerta.cs"
+"Assets/Scripts/SensorTemperatura.cs"
 -langversion:9.0
 
 /deterministic
