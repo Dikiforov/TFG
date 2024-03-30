@@ -10,12 +10,15 @@ public class SensorTemperatura : MonoBehaviour
     private float _horaActual;
     public string nombreComponente;
     public CicloDN cicloDn;
+
+    private ISensorDataReciever _dataReciever;
     
     // Start is called before the first frame update
     void Start()
     {
         cicloDn = FindObjectOfType<CicloDN>();
         _temperaturaAnterior = temperaturaActual;
+        _dataReciever = GetComponentInParent<ISensorDataReciever>();
     }
 
     // Update is called once per frame
@@ -30,7 +33,8 @@ public class SensorTemperatura : MonoBehaviour
         {
             _temperaturaAnterior = temperaturaActual;
             //Debug.Log("Hora: " +_horaActual +"tActualRedondeada: " + tActualRedondeada + "tAnteriorRedondeada: " + tAnteriorRedondeada);
-            SendTemperature(tActualRedondeada);
+            _dataReciever.RecieveTempData(tActualRedondeada);
+            //SendTemperature(tActualRedondeada);
         }
     }
 

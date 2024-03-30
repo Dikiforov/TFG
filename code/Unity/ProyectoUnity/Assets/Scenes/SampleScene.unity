@@ -4287,11 +4287,11 @@ Transform:
   m_GameObject: {fileID: 610491258}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -6757.9277, y: 418.22852, z: 1604.5215}
+  m_LocalPosition: {x: -17155.117, y: 25952.146, z: -1089.731}
   m_LocalScale: {x: 900, y: 2000, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1012899248}
+  m_Father: {fileID: 819061985}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &610491261
 MeshRenderer:
@@ -4777,8 +4777,7 @@ Transform:
   m_LocalPosition: {x: -3807.929, y: -581.7722, z: 2904.5215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1378193132}
+  m_Children: []
   m_Father: {fileID: 1012899248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &675342010
@@ -5716,7 +5715,7 @@ GameObject:
   - component: {fileID: 819061985}
   - component: {fileID: 819061988}
   - component: {fileID: 819061987}
-  - component: {fileID: 819061986}
+  - component: {fileID: 819061989}
   m_Layer: 0
   m_Name: PlacaRecibidor
   m_TagString: Untagged
@@ -5740,29 +5739,11 @@ Transform:
   - {fileID: 427807367}
   - {fileID: 527455239}
   - {fileID: 1873691467}
+  - {fileID: 610491259}
+  - {fileID: 985241943}
+  - {fileID: 1378193132}
   m_Father: {fileID: 2142093065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &819061986
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819061984}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &819061987
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5813,6 +5794,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819061984}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &819061989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819061984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17bad7ed6a5aa504ea00f35dbd01c98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CicloDn: {fileID: 0}
 --- !u!1 &833912986
 GameObject:
   m_ObjectHideFlags: 0
@@ -7370,11 +7364,11 @@ Transform:
   m_GameObject: {fileID: 985241942}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -4857.9297, y: 418.22852, z: 1604.5212}
+  m_LocalPosition: {x: -15255.119, y: 25952.146, z: -1089.7312}
   m_LocalScale: {x: 900, y: 2000, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1012899248}
+  m_Father: {fileID: 819061985}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &985241945
 MeshRenderer:
@@ -7462,8 +7456,6 @@ Transform:
   - {fileID: 1658892995}
   - {fileID: 520158213}
   - {fileID: 1194691091}
-  - {fileID: 610491259}
-  - {fileID: 985241943}
   - {fileID: 675342009}
   m_Father: {fileID: 1678416792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10152,7 +10144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EstacionSeleccionada: 0
   Sol: {fileID: 705507993}
-  DuracionDiaMin: 10
+  DuracionDiaMin: 35
 --- !u!1 &1374597960
 GameObject:
   m_ObjectHideFlags: 0
@@ -10335,6 +10327,7 @@ GameObject:
   - component: {fileID: 1378193132}
   - component: {fileID: 1378193131}
   - component: {fileID: 1378193130}
+  - component: {fileID: 1378193133}
   m_Layer: 0
   m_Name: PuertaRecibidorSalon
   m_TagString: Untagged
@@ -10401,12 +10394,29 @@ Transform:
   m_GameObject: {fileID: 1378193128}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 58.928955, y: 1000, z: -625}
+  m_LocalPosition: {x: -14146.189, y: 25952.146, z: -414.73096}
   m_LocalScale: {x: 100.000015, y: 2000, z: 1250}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 675342009}
+  m_Father: {fileID: 819061985}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1378193133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378193128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203450078dc37c24a90fa14db3271be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreComponente: Puerta RS
+  doorPivot: {fileID: 206255715}
+  openAngle: -90
+  interactionPrompt: {fileID: 310632598}
+  doorSensorPromt: {fileID: 1529701512}
 --- !u!1 &1443144404
 GameObject:
   m_ObjectHideFlags: 0

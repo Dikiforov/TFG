@@ -15,6 +15,7 @@ public class DoorController : MonoBehaviour
     private float animationTime = 2f;  // Duración de la animación en segundos
     public TMP_Text interactionPrompt;  // Referencia al objeto Text
     public TMP_Text doorSensorPromt;
+    private ISensorDataReciever dataReciever;
     private void Start()
     {
         if (doorPivot == null)
@@ -31,6 +32,7 @@ public class DoorController : MonoBehaviour
             Debug.LogError("No se ha asignado un objecto Text a informationPrompt");
         }
         interactionPrompt.gameObject.SetActive(false);  // Oculta el texto al inicio
+        dataReciever = GetComponentInParent<ISensorDataReciever>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -136,11 +138,12 @@ public class DoorController : MonoBehaviour
                     yield return null;  // Espera hasta el próximo frame
                 }
                 doorPivot.localRotation = targetRotation;  // Asegura que la rotación final sea exacta
-                SendDoorState();
                 break;
             }
         }
-        Debug.Log("Estado de la puerta " + nombreComponente + ": " + isDoorOpen);
+        
+        dataReciever.RecieveDoorState(isDoorOpen); 
+        //Debug.Log("Estado de la puerta " + nombreComponente + ": " + isDoorOpen);
     }
 
     private void SendDoorState()

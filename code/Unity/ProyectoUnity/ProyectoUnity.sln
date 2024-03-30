@@ -65,9 +65,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ProBuilder.Stl", "Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Settings.Editor", "Unity.Settings.Editor.csproj", "{dc25d6e3-2410-a768-6c62-f26c00be9de8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ProBuilder.AssetIdRemapUtility", "Unity.ProBuilder.AssetIdRemapUtility.csproj", "{da99361f-7a77-9bfb-a14a-6411629a3e9d}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{8c613eff-c86a-4562-ed15-f49fa2974772}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ProBuilder.AssetIdRemapUtility", "Unity.ProBuilder.AssetIdRemapUtility.csproj", "{da99361f-7a77-9bfb-a14a-6411629a3e9d}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ProBuilder.KdTree", "Unity.ProBuilder.KdTree.csproj", "{7350b5ea-c055-c74d-593a-bddd28498591}"
 EndProject
@@ -198,10 +198,10 @@ Global
 		{df1ed5d0-c4de-ce67-009a-3d67bbd32d6d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{dc25d6e3-2410-a768-6c62-f26c00be9de8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{dc25d6e3-2410-a768-6c62-f26c00be9de8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{da99361f-7a77-9bfb-a14a-6411629a3e9d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{da99361f-7a77-9bfb-a14a-6411629a3e9d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8c613eff-c86a-4562-ed15-f49fa2974772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8c613eff-c86a-4562-ed15-f49fa2974772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{da99361f-7a77-9bfb-a14a-6411629a3e9d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{da99361f-7a77-9bfb-a14a-6411629a3e9d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7350b5ea-c055-c74d-593a-bddd28498591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7350b5ea-c055-c74d-593a-bddd28498591}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{380540ba-4cb4-488e-6256-05dc439a4c6a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

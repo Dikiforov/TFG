@@ -602,24 +602,39 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   Nos hemos encontrado con un error que había previsto que podía pasar. Y es que a la hora de enviar los datos al recepetor, este espera únicamente un cliente desde unity, pero la cuestión es que como hay 2 valores enviándose en este momento el servidor no puede tratar estos datos a la par. Cosa que no es lo que queremos, por tanto, vamos a intentar crear la jerarquía de envío de datos para poder llegar a enviar todos los datos a la vez.
 
+  La importancia de la jerarquía de objetos en Unity
+  Al desarrollar proyectos en Unity, la jerarquía de objetos juega un papel vital en la organización y estructuración de su escena. Esta característica le permite administrar elementos de manera eficiente en un entorno de trabajo, lo que contribuye significativamente a la coherencia y el mantenimiento del código.
+
+  - Organización y estructura: La jerarquía de objetos se basa en el concepto de objetos del juego, que son elementos básicos que actúan como contenedores de los distintos componentes y guiones que componen la escena. Estos objetos del juego se pueden organizar jerárquicamente para crear relaciones entre padres e hijos. Esta estructura de árbol facilita la agrupación de elementos relacionados en una organización lógicamente consistente de su escena.
+
+  - Manipulación dirigida: El uso de padres e hijos en una jerarquía de objetos permite operaciones compartidas en elementos. Cuando cambias las propiedades de un GameObject principal, como su posición, rotación o escala, esos cambios se aplican por igual a todos sus GameObjects secundarios. Esta característica es especialmente útil cuando se trabaja con conjuntos complejos de objetos, como figuras con múltiples partes móviles o accesorios.
+  - Comunicación entre componentes:Otra ventaja importante de la jerarquía de objetos es que facilita la comunicación entre diferentes componentes y guiones en una escena. Los objetos del juego pueden acceder a sus componentes padre e hijo, lo que permite un intercambio eficiente de datos y eventos. Esta función es fundamental para la implementación de la lógica del juego y la interacción de elementos.
+
+  - Reciclaje y mantenimiento: Además de ser útiles durante el desarrollo, las jerarquías de objetos facilitan la reutilización y el mantenimiento del código. Los conjuntos de objetos del juego se pueden convertir en elementos prefabricados y preconfigurados que se pueden usar fácilmente en múltiples escenas y proyectos. Esto no sólo mejora la eficiencia del desarrollo, sino que también promueve la coherencia y consistencia en el diseño del juego.
+
+  Por otro lado, se ha implementado una interfaz de padre que nos permite obtener los valores que envíen los hijos.
+  El código implementado hace referencia a un componente llamado PadreReceiver que está diseñado para adjuntarse al objeto principal en Unity. Este componente tiene una función para recibir datos de sensores infantiles, como un sensor de temperatura o un controlador de puerta, y enviar estos datos a un servidor local mediante una conexión TCP. función principal:
+  Recibir datos del sensor del niño:
+
+  El componente PadreReceiver implementa la interfaz ISensorDataReciever, que define métodos para recibir datos de temperatura y estado de la puerta. Cuando el subsensor detecta un cambio en los datos de temperatura o el estado de la puerta, se llamará a los métodos ReceiverTempData y ReceiverDoorState, respectivamente. Estos métodos actualizan los últimos valores conocidos de temperatura y estado de la puerta y configuran los indicadores de cambio (Tempchanges y Doorchanges) para indicar que los datos han cambiado. Enviar datos al servidor:
+
+  El elemento PadreReceiver comprueba periódicamente si han pasado cinco minutos desde la última actualización o si ha habido algún cambio en los datos del sensor.
+  Si se cumplen estas condiciones, el mensaje se combina con los datos de estado y/o temperatura del puerto modificados. El mensaje se envía al servidor local a través de una conexión TCP en el puerto 8052. El formato del mensaje es SensorType:datos, donde SensorType puede ser "Temperatura" o "Puerta" y los datos son el valor actual correspondiente. Una vez enviados los datos, el indicador de cambio y la última hora de actualización se actualizan para una mayor comparación.
+
+  El objetivo principal de este componente es proporcionar una interfaz centralizada para recibir y enviar datos del sensor en la aplicación del dispositivo. Al agrupar la lógica de control de datos en una instalación general, la gestión y el mantenimiento de los códigos se simplifican y la integración de nuevos sensores en el sistema. Además, el envío de datos al servidor permite su almacenamiento y posterior análisis, lo que puede resultar útil para monitorizar y controlar entornos virtuales o físicos.
+
 **Avances futuros:**
 
 - Aplicar sensores implementados en el nuevo domicilio.
 
-- Crear la curva de temperatura. OK
-
 - Implementar código de la API para la base de datos, tanto su creación como modificación.
 
-- Obtener valores de temperatura, humedad, presión y otros valores para la generación de estos en base a una estación concreta. TEMP OK
-
-- Implementar _colliders_ para los diferentes objetos.
-
-- Añadir los sensores incorporados en anteriores versiones, como puede ser movimiento o apertura de puertas. FALTA AÑADIR EN OBJETOS
-
-- Incluir un sistema de reloj para el control de cilos del usuario. OK
+- Obtener valores de humedad, presión y otros valores para la generación de estos en base a una estación concreta. TEMP OK
 
 - Crear circuito por donde se irá moviendo el usuario de manera automatizada.
 
 - Hacer una lógica de hábitos, donde dependiendo de la hora el usuario pueda moverse a una habitación en concreto o realizar diferentes tareas.
+
+- Volver a crear el servidor receptor de datos
 
 **Este proyecto se encuentra en desarrollo y se irán actualizando los avances en este archivo README.md.**

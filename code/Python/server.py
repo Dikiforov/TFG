@@ -3,7 +3,6 @@ import threading
 import time
 from queue import Queue
 from datetime import datetime
-import tabulate  # Necesitarás instalar esta librería con pip install tabulate
 
 # Definir un diccionario para almacenar las colas por tipo de sensor
 queues = {
@@ -28,20 +27,11 @@ def handle_client(client_socket):
 
     client_socket.close()
 
-def print_table():
-    global last_door_state  # Indica que estás usando la variable global
-    while True:
-        if not queues['Puertas'].empty():
-            door_data = queues['Puertas'].get()
-            if door_data != last_door_state:
-                print(f'Puerta: {door_data}')
-                last_door_state = door_data  # Actualiza el último estado
-
 def server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(("127.0.0.1", 8052))
+    server_socket.bind(("127.0.0.1", 8080))
     server_socket.listen(5)
-    print("El servidor está escuchando en el puerto 8052")
+    print("El servidor está escuchando en el puerto 8080")
 
     while True:
         client_socket, addr = server_socket.accept()
