@@ -598,6 +598,10 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
 ---
 
+- **30/03/2024**
+
+  Nos hemos encontrado con un error que había previsto que podía pasar. Y es que a la hora de enviar los datos al recepetor, este espera únicamente un cliente desde unity, pero la cuestión es que como hay 2 valores enviándose en este momento el servidor no puede tratar estos datos a la par. Cosa que no es lo que queremos, por tanto, vamos a intentar crear la jerarquía de envío de datos para poder llegar a enviar todos los datos a la vez.
+
 **Avances futuros:**
 
 - Aplicar sensores implementados en el nuevo domicilio.

@@ -17,9 +17,15 @@ queues = {
 last_door_state = None  # Variable para almacenar el último estado de la puerta
 
 def handle_client(client_socket):
+    print("Cliente")
     request = client_socket.recv(1024).decode('utf-8')
     sensor_type, data = request.split(':', 1)  # Asumiendo que los datos vienen en formato 'Tipo:Datos'
     queues[sensor_type].put(data)  # Asegúrate que 'sensor_type' coincida con las claves del diccionario
+    
+    # Almacena los datos en un archivo de texto
+    with open(f"{sensor_type}_data.txt", "a") as file:
+        file.write(f"{datetime.now()}: {data}\n")
+
     client_socket.close()
 
 def print_table():
@@ -39,12 +45,10 @@ def server():
 
     while True:
         client_socket, addr = server_socket.accept()
+        print("Servidor")
         client_handler = threading.Thread(target=handle_client, args=(client_socket,))
         client_handler.start()
 
 # Iniciar el servidor y la función de impresión en hilos separados
 server_thread = threading.Thread(target=server)
 server_thread.start()
-
-print_table_thread = threading.Thread(target=print_table)
-print_table_thread.start()

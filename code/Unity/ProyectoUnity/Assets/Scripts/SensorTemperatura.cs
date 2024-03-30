@@ -1,11 +1,14 @@
 using UnityEngine;
-
+using System.Collections;
+using System.Net.Sockets;
+using System.Text;
+using TMPro;
 public class SensorTemperatura : MonoBehaviour
 {
     public float temperaturaActual;
     private float _temperaturaAnterior;
     private float _horaActual;
-    
+    public string nombreComponente;
     public CicloDN cicloDn;
     
     // Start is called before the first frame update
@@ -26,8 +29,18 @@ public class SensorTemperatura : MonoBehaviour
         if (tAnteriorRedondeada != tActualRedondeada)
         {
             _temperaturaAnterior = temperaturaActual;
-            Debug.Log("Hora: " +_horaActual +"tActualRedondeada: " + tActualRedondeada + "tAnteriorRedondeada: " + tAnteriorRedondeada);
+            //Debug.Log("Hora: " +_horaActual +"tActualRedondeada: " + tActualRedondeada + "tAnteriorRedondeada: " + tAnteriorRedondeada);
+            SendTemperature(tActualRedondeada);
         }
+    }
 
+    private void SendTemperature(float temperatura)
+    {
+        var message = "Temperatura:" + temperatura + " C en " + nombreComponente;
+        TcpClient client = new TcpClient("127.0.0.1", 8052);
+        byte[] data = Encoding.ASCII.GetBytes(message);
+        NetworkStream stream = client.GetStream();
+        stream.Write(data, 0, data.Length);
+        client.Close();
     }
 }

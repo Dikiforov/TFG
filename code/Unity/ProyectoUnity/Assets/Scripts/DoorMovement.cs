@@ -136,7 +136,7 @@ public class DoorController : MonoBehaviour
                     yield return null;  // Espera hasta el próximo frame
                 }
                 doorPivot.localRotation = targetRotation;  // Asegura que la rotación final sea exacta
-                //SendDoorState();
+                SendDoorState();
                 break;
             }
         }
@@ -146,7 +146,7 @@ public class DoorController : MonoBehaviour
     private void SendDoorState()
     {
         var doorState = isDoorOpen ? "Abierta" : "Cerrada";
-        var message = "Puertas:Estado de la puerta: " + doorState + ", Habitación: " + this.gameObject.name;
+        var message = "Puertas:Estado de la puerta: " + doorState + ", Habitación: " + nombreComponente;
         TcpClient client = new TcpClient("127.0.0.1", 8052);
         byte[] data = Encoding.ASCII.GetBytes(message);
         NetworkStream stream = client.GetStream();
