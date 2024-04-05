@@ -10,7 +10,9 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     private bool lastDoorState = false;
     private float lastTime = 0f;
     private bool cambiosTemp = false;
-    private bool cambiosDoor = false;    
+    private bool cambiosDoor = false;
+
+    private string nombrePuerta = "";
     
     public CicloDN CicloDn;
     
@@ -22,7 +24,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 
     private void Update()
     {
-        var hora = CicloDN.TempActual;
+        var hora = CicloDN.Hora;
         if ((hora - lastTime) > 300 || cambiosTemp || cambiosDoor)
         {
             lastTime = hora;
@@ -41,7 +43,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         
     }
 
-    public void RecieveDoorState(bool isOpen)
+    public void RecieveDoorState(bool isOpen, string doorName)
     {
         // Comparar el nuevo valor con el anterior
         if (isOpen != lastDoorState)
@@ -49,6 +51,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             // Actualizar el último valor conocido
             lastDoorState = isOpen;
             cambiosDoor = true;
+            nombrePuerta = doorName;
         }
     }
 
@@ -59,7 +62,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         {
             // Crear mensaje con los datos a enviar al servidor
             StringBuilder messageBuilder = new StringBuilder();
-            messageBuilder.Append(this.gameObject.name + "\n");
+            messageBuilder.Append(this.gameObject.name + ";");
             if (cambiosTemp)
             {
                 cambiosTemp = false;
@@ -71,8 +74,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             if (cambiosDoor)
             {
                 cambiosDoor = false;
-                if (messageBuilder.Length > 0) messageBuilder.Append(";");
-                messageBuilder.Append("Puerta:");
+                messageBuilder.Append(nombrePuerta+":");
                 messageBuilder.Append(lastDoorState);
             }
     
