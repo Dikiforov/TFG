@@ -52,7 +52,7 @@ public class CicloDN : MonoBehaviour
             NuevoDiaTemperaturas();
         }
 
-        CalculoTemperatura();
+        TempActual = CalculoTemperatura();
         RotacionSol();
     }
 
@@ -62,28 +62,31 @@ public class CicloDN : MonoBehaviour
         Sol.transform.localEulerAngles = new Vector3(SolX, 0, 0);
     }
 
-    void CalculoTemperatura()
+    float CalculoTemperatura()
     {
+        float aux = 0;
         if (Hora >= 0 && Hora < 4 && TempActual < TempMinima + 1)
         {
-            TempActual = Mathf.Lerp(TempMinima, TempMinima + 1, (Hora - 0) / 4);
+            aux = Mathf.Lerp(TempMinima, TempMinima + 1, (Hora - 0) / 4);
         }
         else if (Hora >= 4 && Hora < 8 && TempActual < TempMinima + 2)
         {
-            TempActual = Mathf.Lerp(TempMinima, TempMinima + 2, (Hora - 4) / 4);
+            aux = Mathf.Lerp(TempMinima, TempMinima + 2, (Hora - 4) / 4);
         }
         else if (Hora >= 8 && Hora < 12)
         {
-            TempActual = Mathf.Lerp(TempMinima + 3, TempMaxima, (Hora - 8) / 4);
+            aux = Mathf.Lerp(TempMinima + 3, TempMaxima, (Hora - 8) / 4);
         }
         else if (Hora >= 12 && Hora < 16)
         {
-            TempActual = TempMaxima;
+            aux = TempMaxima;
         }
         else if (Hora >= 16 && Hora < 24)
         {
-            TempActual = Mathf.Lerp(TempMaxima, TempMinima, (Hora - 16) / 8);
+            aux = Mathf.Lerp(TempMaxima, TempMinima, (Hora - 16) / 8);
         }
+
+        return aux;
     }
 
     void NuevoDiaTemperaturas()
