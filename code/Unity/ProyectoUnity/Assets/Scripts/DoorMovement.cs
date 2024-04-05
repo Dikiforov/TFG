@@ -40,6 +40,7 @@ public class DoorController : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         isPlayerNearby = true;
         interactionPrompt.gameObject.SetActive(true);  // Muestra el texto
+        Debug.Log("Entrando al trigger");
     }
 
     private void OnTriggerExit(Collider other)
@@ -47,6 +48,7 @@ public class DoorController : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         isPlayerNearby = false;
         interactionPrompt.gameObject.SetActive(false);  // Oculta el texto
+        Debug.Log("Saliendo del trigger");
     }
 
     private void Update()
@@ -70,7 +72,7 @@ public class DoorController : MonoBehaviour
         var targetAngle = isDoorOpen ? openAngle : closedAngle;
         var timeElapsed = 0f;
 
-        switch (this.gameObject.name)
+        switch (nombreComponente)
         {
             // Como aquí tendremos el movimiento de las puertas, en la terraza irá diferente, ya que se desplazarán en el eje x
             case "Puerta1Terraza":
@@ -142,18 +144,7 @@ public class DoorController : MonoBehaviour
             }
         }
         
-        dataReciever.RecieveDoorState(isDoorOpen); 
+        dataReciever.RecieveDoorState(isDoorOpen, nombreComponente); 
         //Debug.Log("Estado de la puerta " + nombreComponente + ": " + isDoorOpen);
-    }
-
-    private void SendDoorState()
-    {
-        var doorState = isDoorOpen ? "Abierta" : "Cerrada";
-        var message = "Puertas:Estado de la puerta: " + doorState + ", Habitación: " + nombreComponente;
-        TcpClient client = new TcpClient("127.0.0.1", 8052);
-        byte[] data = Encoding.ASCII.GetBytes(message);
-        NetworkStream stream = client.GetStream();
-        stream.Write(data, 0, data.Length);
-        client.Close();
     }
 }
