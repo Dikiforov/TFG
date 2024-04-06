@@ -652,7 +652,11 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   Para la simulación, se ha pensado en que cuando el sujeto se acerque a una puerta, esta se abra automáticamente y, si sale del _trigger_ de la puerta, se cierre. Esto es para obtener datos de las puertas en movimiento también. Por otro lado, se quiere añadir luces en cada estancia y que, cuando el usuario entre en una estancia, estas se iluminen en caso de que el sensor de movimiento lo detecte. Para esto, se debe de tener en cuenta que el usuario puede quedarse en la habitación en cuestión en estático, cosa que debemos de considerar para no apagarlas antes de tiempo. Por otro lado, para el tema de la luminosidad, el sensor leera los valores de las _directional lights_ de cada estancia, ya que se incorporarán, y obtendrá un valor en base al movimiento y si se activan o no. También se ha pensado en que, depende de la hora y la posición del sol (que tenemos ambos valores) condicionar el encendido de la luz, es decir, obtener el valor de la luminosidad de las propias estancias para compararlo con un mínimo o máximo, lo que nos permitirá aumentar o no el valor de la propia luz.
 
+  Se ha modificado el código del servidor para diferenciar los datos recibidos por tipo de habitación y sensores, de esta manera se podrá consultar y manejar mejor los datos a la hora de usarlos en la base de datos.
 
+  ![Datos tratados](/images/DatosGuardados.png "Datos tratados")
+
+  Como podemos observar, tenemos el nombre de la estancia como nombre del fichero, la hora al inicio de la tabla de los sensores y, dentro de esta tabla, el contenido que hemos recibido de cada sensor. Ahora queda comprobar las horas y los datos respecto a los anteriores datos obtenidos y así poder tener unos valores más reales.
 
 
 **Avances futuros (+/- prioridad):**

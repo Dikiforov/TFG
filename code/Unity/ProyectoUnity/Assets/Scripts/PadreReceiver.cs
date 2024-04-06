@@ -120,8 +120,15 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             // Crear mensaje con los datos a enviar al servidor
             StringBuilder messageBuilder = new StringBuilder();
             TimeSpan tiempo = CicloDN.horaFormateada;
-            messageBuilder.Append(this.gameObject.name +"(" +string.Format("{0:D2}:{1:D2}:{2:D2}", tiempo.Hours, tiempo.Minutes, tiempo.Seconds) + ")"+";");
-            if (_cambiosTemp)
+            messageBuilder.Append(this.gameObject.name +" " +string.Format("{0:D2}:{1:D2}:{2:D2}", tiempo.Hours, tiempo.Minutes, tiempo.Seconds) + ""+";");
+            messageBuilder.Append("Temperatura:" + _lastTemperature + ",");
+            messageBuilder.Append("Puertas:"+_nombrePuerta + " " + _lastDoorState + ",");
+            messageBuilder.Append("Luminosidad:" + _lastLum + ",");
+            messageBuilder.Append("Movimiento:" + _lastMov + ",");
+            messageBuilder.Append("Sonido:" + _lastSonido + ",");
+            messageBuilder.Append("Presion:" + _lastPresion + ",");
+            messageBuilder.Append("Humedad:" + _lastHumedad);
+            /*if (_cambiosTemp)
             {
                 _cambiosTemp = false;
                 messageBuilder.Append("Temperatura:" + _lastTemperature + ",");
@@ -146,7 +153,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             if(_cambiosSonido)
             {
                 _cambiosSonido = false;
-                messageBuilder.Append("Sonido:" + _lastLum + ",");
+                messageBuilder.Append("Sonido:" + _lastSonido + ",");
             }
             if(_cambiosPresion)
             {
@@ -157,7 +164,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             {
                 _cambiosHumedad = false;
                 messageBuilder.Append("Humedad:" + _lastHumedad);
-            }
+            }*/
     
             string message = messageBuilder.ToString();
             using (TcpClient client = new TcpClient("127.0.0.1", 8080))

@@ -10489,7 +10489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EstacionSeleccionada: 0
   Sol: {fileID: 705507993}
-  DuracionDiaMin: 1
+  DuracionDiaMin: 1440
 --- !u!1 &1374597960
 GameObject:
   m_ObjectHideFlags: 0
