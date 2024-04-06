@@ -31,6 +31,7 @@ public class SensorTemperatura : MonoBehaviour
         if (_horaActual >= 12 && _horaActual < 16) 
             enviarData = true;
         //Debug.Log("Hora:" + _horaActual + "enviar_datos: " + enviarData);
+        Debug.Log("Ant: "+ tAnteriorRedondeada + "- Act:" + tActualRedondeada + "- Enviar: " + enviarData + "Hora:" + _horaActual);
         if (enviarData)
         {
             _temperaturaAnterior = temperaturaActual;

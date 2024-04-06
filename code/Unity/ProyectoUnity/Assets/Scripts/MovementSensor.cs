@@ -1,33 +1,30 @@
-using UnityEngine;
-using TMPro;
+using System;
 using System.Collections;
-using System.Net.Sockets;
-using System.Text;
+using UnityEngine;
 
 public class DetectionSensor : MonoBehaviour
 {
-    private PlayerMovementTracker playerMovementTracker;
-    private bool playerInside = false;
-    private bool alreadyDetected = false;
+    private PlayerMovementTracker _playerMovementTracker;
+    private bool _playerInside;
+    private Coroutine _checkPlayerCoroutine; // Referencia al coroutine para detenerlo si el jugador sale del trigger
+    private ISensorDataReciever _dataReciever;
 
     private void Start()
     {
-        playerMovementTracker = FindObjectOfType<PlayerMovementTracker>();
-        if (playerMovementTracker == null) Debug.LogError("No se encontró el componente PlayerMovementTracker");
+        _dataReciever = GetComponentInParent<ISensorDataReciever>();
+        _playerMovementTracker = FindObjectOfType<PlayerMovementTracker>();
+        if (_playerMovementTracker == null)
+        {
+            Debug.LogError("No se encontró el componente PlayerMovementTracker");
+        }
     }
 
 
-
-    private IEnumerator CheckPlayerMovement()
+    private void OnTriggerEnter(Collider other)
     {
-        while (playerInside)
+        if (other.CompareTag("Player"))
         {
-            yield return new WaitForSeconds(1f);
-            if (!playerMovementTracker.IsMoving)
-            {
-                alreadyDetected = false;
-                playerInside = false;
-            }
+            _playerInside = true;
         }
     }
 
@@ -35,34 +32,30 @@ public class DetectionSensor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInside = false;
-            alreadyDetected = false;
+            _playerInside = false;
         }
     }
-    
 
-    private void SendData(string message)
+    private void Update()
     {
-        string formattedMessage = "Movimiento:" + message;  // Agrega la clave "Puertas" antes del mensaje
-        //Debug.LogError(formattedMessage);  // Imprime el mensaje formateado
-        TcpClient client = new TcpClient("127.0.0.1", 8052);
-        byte[] data = System.Text.Encoding.ASCII.GetBytes(formattedMessage);  // Usa el mensaje formateado
-        NetworkStream stream = client.GetStream();
-        stream.Write(data, 0, data.Length);
-        client.Close();
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (_playerInside && _playerMovementTracker.IsMoving)
         {
-            if (playerMovementTracker.IsMoving && !alreadyDetected)
-            {
-                playerInside = true;
-                alreadyDetected = true;
-                Debug.Log("Movimiento en la habitación: " + this.gameObject.name);
-                StartCoroutine(CheckPlayerMovement());
-            }
+            _dataReciever.RecieveMovimientoData(true);
+        }
+        else
+        {
+            _dataReciever.RecieveMovimientoData(false);
         }
     }
+
+    /*private IEnumerator CheckPlayerMovement()
+    {
+        while (_playerInside)
+        {
+            yield return new WaitForSeconds(1f);
+            // Si el jugador se está moviendo, enviamos 'true' al padre
+            Debug.Log(_playerMovementTracker.IsMoving);
+            _dataReciever.RecieveMovimientoData(_playerMovementTracker.IsMoving);
+        }
+    }*/
 }

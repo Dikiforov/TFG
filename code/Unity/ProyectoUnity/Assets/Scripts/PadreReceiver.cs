@@ -15,31 +15,26 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     private float _lastLum;
     private float _lastTime;
     private float _lastSonido;
-    
-    private bool _cambiosTemp;
-    private bool _cambiosDoor;
-    private bool _cambiosHumedad;
-    private bool _cambiosLum;
-    private bool _cambiosMovimiento;
-    private bool _cambiosSonido;
-    private bool _cambiosPresion;
-    
+
     private string _nombrePuerta = "";
-    
+
     [FormerlySerializedAs("CicloDn")] public CicloDN cicloDn;
 
-    private const float Tolerance = 5; 
+    private bool _datosParaEnviar;
     // Start is called before the first frame update
     void Start()
     {
+        _lastMov = false;
         cicloDn = FindObjectOfType<CicloDN>();
     }
 
     private void Update()
     {
         var hora = CicloDN.Hora;
-        if ((hora - _lastTime) > 300 || _cambiosTemp || _cambiosDoor)
+        //Debug.Log("Hora: " + hora + " - " + _lastTime + " Diferencia " + (hora));
+        if ((hora - _lastTime) > 300 || _datosParaEnviar)
         {
+            _datosParaEnviar = false;
             _lastTime = hora;
             SendDataToServer();
         }
@@ -47,69 +42,72 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 
     public void RecieveTempData(float temperature, bool enviarData)
     {
-        // Comparar el nuevo valor con el anterior
-        if (Math.Abs(temperature - _lastTemperature) > Tolerance || enviarData)
+        Debug.Log("Temperatura: " + enviarData);
+        if (enviarData)
         {
+            _datosParaEnviar = true;
             _lastTemperature = temperature;
-            _cambiosTemp = true;
         }
-        
     }
 
     public void RecieveDoorState(bool isOpen, string doorName)
     {
-        // Comparar el nuevo valor con el anterior
+        Debug.Log("Puerta: " + isOpen);
         if (isOpen != _lastDoorState)
         {
-            // Actualizar el último valor conocido
+            _datosParaEnviar = true;
             _lastDoorState = isOpen;
-            _cambiosDoor = true;
             _nombrePuerta = doorName;
         }
     }
 
     public void RecieveHumedadData(float humedad, bool enviarData)
     {
-        if (humedad != _lastHumedad || enviarData)
+        Debug.Log("Humedad: " + enviarData);
+        if (enviarData)
         {
+            _datosParaEnviar = true;
             _lastHumedad = humedad;
-            _cambiosHumedad = true;
         }
     }
 
     public void RecieveLuminosidadData(float luminosidad, bool enviarData)
     {
-        if (luminosidad != _lastLum || enviarData)
+        Debug.Log("Luminosidad: " + enviarData);
+        if (enviarData)
         {
+            _datosParaEnviar = true;
             _lastLum = luminosidad;
-            _cambiosLum = true;
         }
     }
 
-    public void RecieveMovimientoData(bool movement, bool enviarData)
+    public void RecieveMovimientoData(bool movement)
     {
-        if (movement != _lastMov || enviarData)
+        Debug.Log("Movimiento: " + movement);
+        if (_lastMov != movement)
         {
+            _datosParaEnviar = true;
             _lastMov = movement;
-            _cambiosMovimiento = true;
         }
     }
 
     public void RecieveSonidoData(float sound, bool enviarData)
     {
-        if (sound != _lastSonido || enviarData)
+        Debug.Log("Sonido: " + enviarData);
+        if (enviarData)
         {
+            _datosParaEnviar = true;
             _lastSonido = sound;
-            _cambiosSonido = true;
         }
     }
 
     public void RecievePresionData(float presion, bool enviarData)
     {
-        if (presion != _lastPresion || enviarData)
+        Debug.Log("Presión: " + enviarData);
+        if (enviarData)
         {
+            _datosParaEnviar = true;
             _lastPresion = presion;
-            _cambiosPresion = true;
         }
     }
 
@@ -128,49 +126,13 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             messageBuilder.Append("Sonido:" + _lastSonido + ",");
             messageBuilder.Append("Presion:" + _lastPresion + ",");
             messageBuilder.Append("Humedad:" + _lastHumedad);
-            /*if (_cambiosTemp)
-            {
-                _cambiosTemp = false;
-                messageBuilder.Append("Temperatura:" + _lastTemperature + ",");
-            }
 
-            if (_cambiosDoor)
-            {
-                _cambiosDoor = false;
-                messageBuilder.Append("Puertas:"+_nombrePuerta + " " + _lastDoorState + ",");
-            }
-            
-            if(_cambiosLum)
-            {
-                _cambiosLum = false;
-                messageBuilder.Append("Luminosidad:" + _lastLum + ",");
-            }
-            if(_cambiosMovimiento)
-            {
-                _cambiosMovimiento = false;
-                messageBuilder.Append("Movimiento:" + _lastMov + ",");
-            }
-            if(_cambiosSonido)
-            {
-                _cambiosSonido = false;
-                messageBuilder.Append("Sonido:" + _lastSonido + ",");
-            }
-            if(_cambiosPresion)
-            {
-                _cambiosPresion = false;
-                messageBuilder.Append("Presion:" + _lastPresion + ",");
-            }
-            if(_cambiosHumedad)
-            {
-                _cambiosHumedad = false;
-                messageBuilder.Append("Humedad:" + _lastHumedad);
-            }*/
-    
             string message = messageBuilder.ToString();
             using (TcpClient client = new TcpClient("127.0.0.1", 8080))
             using (NetworkStream stream = client.GetStream())
             using (StreamWriter writer = new StreamWriter(stream))
             {
+                //Debug.Log("Envio el mensaje: " + message);
                 // Enviar el mensaje al servidor
                 writer.WriteLine(message);
             }
@@ -179,6 +141,5 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         {
             Debug.LogError("Error al enviar datos al servidor: " + ex.Message);
         }
-        
     }
 }
