@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5510724, g: 0.3883548, b: 0.18904215, a: 1}
+  m_IndirectSpecularColor: {r: 0.5510722, g: 0.3883546, b: 0.18904218, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3395,6 +3395,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 511321930}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &496315484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496315485}
+  - component: {fileID: 496315486}
+  m_Layer: 0
+  m_Name: SensorTemperatura
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496315485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496315484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1195412838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &496315486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496315484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f1c36be6ab96f44bcb32e1d7740c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperaturaActual: 0
+  nombreComponente: SalonComedor
+  cicloDn: {fileID: 1360500525}
 --- !u!1 &498231296
 GameObject:
   m_ObjectHideFlags: 0
@@ -4287,11 +4334,11 @@ Transform:
   m_GameObject: {fileID: 610491258}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -17155.117, y: 25952.146, z: -1089.731}
+  m_LocalPosition: {x: 450, y: 910, z: -40}
   m_LocalScale: {x: 900, y: 2000, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 819061985}
+  m_Father: {fileID: 1523992723}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &610491261
 MeshRenderer:
@@ -4759,7 +4806,7 @@ GameObject:
   - component: {fileID: 675342010}
   - component: {fileID: 675342011}
   m_Layer: 0
-  m_Name: Visagra
+  m_Name: VisagraRecibidorSalon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4773,12 +4820,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675342008}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3807.929, y: -581.7722, z: 2904.5215}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -14205.118, y: 24952.146, z: 210.26904}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1012899248}
+  m_Children:
+  - {fileID: 1378193132}
+  m_Father: {fileID: 819061985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &675342010
 MonoBehaviour:
@@ -4792,11 +4840,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203450078dc37c24a90fa14db3271be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nombreComponente: Puerta_RS
+  nombreComponente: RecibidorSalon
   doorPivot: {fileID: 1378193132}
   openAngle: -90
-  interactionPrompt: {fileID: 310632598}
-  doorSensorPromt: {fileID: 1926065402}
 --- !u!65 &675342011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5142,6 +5188,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1360500524}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &730627627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 730627628}
+  m_Layer: 0
+  m_Name: SensorMovimiento
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &730627628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730627627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1195412838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740399228
 GameObject:
   m_ObjectHideFlags: 0
@@ -5222,8 +5299,6 @@ MonoBehaviour:
   nombreComponente: 
   doorPivot: {fileID: 1378193132}
   openAngle: -90
-  interactionPrompt: {fileID: 310632598}
-  doorSensorPromt: {fileID: 1529701512}
 --- !u!1 &781869302
 GameObject:
   m_ObjectHideFlags: 0
@@ -5739,9 +5814,9 @@ Transform:
   - {fileID: 427807367}
   - {fileID: 527455239}
   - {fileID: 1873691467}
-  - {fileID: 610491259}
-  - {fileID: 985241943}
-  - {fileID: 1378193132}
+  - {fileID: 675342009}
+  - {fileID: 974524153}
+  - {fileID: 1523992723}
   m_Father: {fileID: 2142093065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &819061987
@@ -5806,7 +5881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bad7ed6a5aa504ea00f35dbd01c98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CicloDn: {fileID: 0}
+  cicloDn: {fileID: 1360500525}
 --- !u!1 &833912986
 GameObject:
   m_ObjectHideFlags: 0
@@ -7232,6 +7307,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956076781}
   m_CullTransparentMesh: 1
+--- !u!1 &974524152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 974524153}
+  - component: {fileID: 974524154}
+  - component: {fileID: 974524155}
+  m_Layer: 0
+  m_Name: VisagraRecibidorCocina
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &974524153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974524152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15705.117, y: 25042.146, z: -1049.731}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 985241943}
+  m_Father: {fileID: 819061985}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &974524154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974524152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203450078dc37c24a90fa14db3271be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreComponente: RecibidorCocina
+  doorPivot: {fileID: 985241943}
+  openAngle: -90
+--- !u!65 &974524155
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974524152}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 930.2046, y: 1689.8846, z: 880.4453}
+  m_Center: {x: 474.48657, y: 725.2022, z: -122.31189}
 --- !u!1 &976510804
 GameObject:
   m_ObjectHideFlags: 0
@@ -7364,11 +7509,11 @@ Transform:
   m_GameObject: {fileID: 985241942}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -15255.119, y: 25952.146, z: -1089.7312}
+  m_LocalPosition: {x: 449.99805, y: 910, z: -40.000244}
   m_LocalScale: {x: 900, y: 2000, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 819061985}
+  m_Father: {fileID: 974524153}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &985241945
 MeshRenderer:
@@ -7449,14 +7594,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1067403256}
   - {fileID: 942528138}
   - {fileID: 658643056}
   - {fileID: 858098341}
   - {fileID: 1658892995}
   - {fileID: 520158213}
   - {fileID: 1194691091}
-  - {fileID: 675342009}
   m_Father: {fileID: 1678416792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1028533241
@@ -7756,12 +7899,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067403255}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1507.9282, y: 418.22778, z: -445.4795}
-  m_LocalScale: {x: 100.00003, y: 2000, z: 900.0001}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 50.00007, y: 1000, z: -450.00006}
+  m_LocalScale: {x: 100.000046, y: 2000, z: 900.0001}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1012899248}
+  m_Father: {fileID: 1247944103}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!23 &1067403258
 MeshRenderer:
@@ -8140,6 +8283,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084026933}
   m_CullTransparentMesh: 1
+--- !u!1 &1095587194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1095587195}
+  m_Layer: 0
+  m_Name: SensorHumedad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1095587195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095587194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1195412838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1117682103
 GameObject:
   m_ObjectHideFlags: 0
@@ -8952,6 +9126,107 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194691090}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1195412837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1195412838}
+  - component: {fileID: 1195412841}
+  - component: {fileID: 1195412840}
+  - component: {fileID: 1195412839}
+  m_Layer: 0
+  m_Name: PlacaSalonComedor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1195412838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195412837}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10397.189, y: -25533.918, z: 2694.2524}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 496315485}
+  - {fileID: 1095587195}
+  - {fileID: 730627628}
+  - {fileID: 1247944103}
+  m_Father: {fileID: 1678416792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1195412839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195412837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17bad7ed6a5aa504ea00f35dbd01c98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cicloDn: {fileID: 1360500525}
+--- !u!23 &1195412840
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195412837}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1195412841
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195412837}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1201666401
 GameObject:
   m_ObjectHideFlags: 0
@@ -9430,6 +9705,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1234186355}
   m_CullTransparentMesh: 1
+--- !u!1 &1247944102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1247944103}
+  - component: {fileID: 1247944105}
+  - component: {fileID: 1247944104}
+  m_Layer: 0
+  m_Name: VisagraSalonPasillo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1247944103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247944102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -11455.117, y: 24952.146, z: -3089.732}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1067403256}
+  m_Father: {fileID: 1195412838}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &1247944104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247944102}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 488.75906, y: 1992.7922, z: 899.87933}
+  m_Center: {x: -23.45668, y: 977.0574, z: -449.43967}
+--- !u!114 &1247944105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247944102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203450078dc37c24a90fa14db3271be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreComponente: RecibidorSalon
+  doorPivot: {fileID: 1067403256}
+  openAngle: -90
 --- !u!1 &1256666274
 GameObject:
   m_ObjectHideFlags: 0
@@ -10144,7 +10489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EstacionSeleccionada: 0
   Sol: {fileID: 705507993}
-  DuracionDiaMin: 35
+  DuracionDiaMin: 1
 --- !u!1 &1374597960
 GameObject:
   m_ObjectHideFlags: 0
@@ -10394,11 +10739,11 @@ Transform:
   m_GameObject: {fileID: 1378193128}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14146.189, y: 25952.146, z: -414.73096}
+  m_LocalPosition: {x: 58.92871, y: 1000, z: -625}
   m_LocalScale: {x: 100.000015, y: 2000, z: 1250}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 819061985}
+  m_Father: {fileID: 675342009}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1378193133
 MonoBehaviour:
@@ -10407,7 +10752,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378193128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 203450078dc37c24a90fa14db3271be3, type: 3}
   m_Name: 
@@ -10415,8 +10760,6 @@ MonoBehaviour:
   nombreComponente: Puerta RS
   doorPivot: {fileID: 206255715}
   openAngle: -90
-  interactionPrompt: {fileID: 310632598}
-  doorSensorPromt: {fileID: 1529701512}
 --- !u!1 &1443144404
 GameObject:
   m_ObjectHideFlags: 0
@@ -10628,6 +10971,76 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1523992722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1523992723}
+  - component: {fileID: 1523992724}
+  - component: {fileID: 1523992725}
+  m_Layer: 0
+  m_Name: VisagraRecibidoHabitacion4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1523992723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523992722}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17605.117, y: 25042.146, z: -1049.731}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 610491259}
+  m_Father: {fileID: 819061985}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1523992724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523992722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203450078dc37c24a90fa14db3271be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreComponente: RecibidorHabitacion4
+  doorPivot: {fileID: 610491259}
+  openAngle: -90
+--- !u!65 &1523992725
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523992722}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 900.91895, y: 1922.8284, z: 1006.5813}
+  m_Center: {x: 443.51465, y: 937.3474, z: -124.22534}
 --- !u!1 &1529701510
 GameObject:
   m_ObjectHideFlags: 0
@@ -12277,6 +12690,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 704890131}
+  - {fileID: 1195412838}
   - {fileID: 1079235590}
   - {fileID: 1577712445}
   - {fileID: 387768241}
