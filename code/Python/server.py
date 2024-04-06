@@ -33,22 +33,36 @@ room_queues = {
 
 def handle_client(client_socket):
     # Formato del mensaje entrante: room hora;sensor_type:data_sensor,...
-    request = client_socket.recv(1024).decode('utf-8')
+    request = client_socket.recv(1024).decode('utf-8').rstrip()
     roomAndHour, sensorData = request.split(';') # Los datos nos llegan en forma -> habitación Hora;datos_sensores
     room, hour = roomAndHour.split(' ') # Obtención de la habitación y hora de actualización
     lista_sensores = sensorData.split(',')
-    
+
     # Diccionario para almacenar los datos de los sensores por habitación
     sensor_dict = {}
     
     # Recopilar datos de los sensores para cada habitación
+
     for sensor in lista_sensores:
-        sensor_type, sensor_value = sensor.split(':')
-        if room not in sensor_dict:
-            sensor_dict[room] = {}
-        if sensor_type not in sensor_dict[room]:
-            sensor_dict[room][sensor_type] = []
-        sensor_dict[room][sensor_type].append(sensor_value)
+        try:
+            if sensor != '':
+                sensor_type, sensor_value = sensor.split(':')
+                if sensor_value.lower() == 'true':
+                    sensor_value = 1
+                elif sensor_value.lower() == 'false':
+                    sensor_value = 0
+                if room not in sensor_dict:
+                    sensor_dict[room] = {}
+                if sensor_type not in sensor_dict[room]:
+                    sensor_dict[room][sensor_type] = []
+                sensor_dict[room][sensor_type].append(sensor_value)
+        except ValueError:
+            # Si el split falla, imprimir el mensaje del request directamente
+            print(request)
+            break  # Salir del bucle para evitar procesar más datos
+
+    print(request)
+
 
     # Construir la tabla con los datos de los sensores
     for room, sensors in sensor_dict.items():
@@ -64,7 +78,6 @@ def handle_client(client_socket):
         #print(f"Habitación: {room} a las {hour}")
         #print(tabulate(table_rows, headers=table_headers, tablefmt="grid"))
         #print()  # Añadir línea en blanco entre tablas de habitaciones
-
     client_socket.close()
 
 def server():
@@ -77,29 +90,45 @@ def server():
         client_socket, addr = server_socket.accept()
         client_handler = threading.Thread(target=handle_client, args=(client_socket,))
         client_handler.start()
-
-def guardar_datos_room_queues():
-    for room, sensors in room_queues.items():
-        rows = []
-        for sensor, queue in sensors.items():
-            valores_sensor = []
-            while not queue.empty():
-                value = queue.get()
-                valores_sensor.append(value)
-            queue.queue.clear()  # Limpiamos la cola después de imprimir sus valores
-            rows.append([sensor] + valores_sensor)
-
-        # Construir la tabla con la cabecera y los datos
-        table = ""
-        for row in rows:
-            table += f"Sensor: {row[0]}\n"
-            table += tabulate([row[1:]], headers=["Valor"], tablefmt="plain")
-            table += "\n\n"  # Añadir un espacio entre cada sensor
-
-        # Guardar la tabla en un archivo de texto
-        with open(f"{room}.txt", "w") as file:
-            file.write(table)
             
 # Iniciar el servidor y la función de impresión en hilos separados
 server_thread = threading.Thread(target=server)
 server_thread.start()
+
+
+'''
+Zona de prueba de códigos
+    # Diccionario para almacenar los datos de los sensores por habitación
+    sensor_dict = {}
+    
+    # Recopilar datos de los sensores para cada habitación
+
+    for sensor in lista_sensores:
+        try:
+            sensor_type, sensor_value = sensor.split(':')
+            if room not in sensor_dict:
+                sensor_dict[room] = {}
+            if sensor_type not in sensor_dict[room]:
+                sensor_dict[room][sensor_type] = []
+            sensor_dict[room][sensor_type].append(sensor_value)
+        except ValueError:
+            # Si el split falla, imprimir el mensaje del request directamente
+            print(request)
+            break  # Salir del bucle para evitar procesar más datos
+
+
+    # Construir la tabla con los datos de los sensores
+    for room, sensors in sensor_dict.items():
+        table_headers = ["Sensor", "Valor"]
+        table_rows = []
+        for sensor_type, sensor_values in sensors.items():
+            table_headers.append(sensor_type)
+            table_rows.append([sensor_type] + sensor_values)
+
+        with open(f"{room}.txt", "a") as file:
+            file.write(f"\n{hour}\n")
+            file.write(tabulate(table_rows, headers=table_headers, tablefmt="grid"))
+        #print(f"Habitación: {room} a las {hour}")
+        #print(tabulate(table_rows, headers=table_headers, tablefmt="grid"))
+        #print()  # Añadir línea en blanco entre tablas de habitaciones
+'''
