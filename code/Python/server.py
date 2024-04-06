@@ -4,28 +4,45 @@ import time
 from queue import Queue
 from datetime import datetime
 
-# Definir un diccionario para almacenar las colas por tipo de sensor
-queues = {
+# Diccionario para almacenar las colas por tipo de sensor
+
+sensor_queues = {
     'Puertas': Queue(),
-    'Posición': Queue(),
+    'Movimiento': Queue(),
     'Temperatura': Queue(),
     'Humedad': Queue(),
-    'Sonido': Queue()
+    'Sonido': Queue(),
+    'Presion': Queue(),
+    'Luminosidad': Queue()
 }
 
-last_door_state = None  # Variable para almacenar el último estado de la puerta
+# Diccionario que contendrá cada habitación asociada a su conjunto de sensores
+room_queues = {
+    'Recibidor': dict(sensor_queues),
+    'Salon': dict(sensor_queues),
+    'Cocina': dict(sensor_queues),
+    'Habitacion_1': dict(sensor_queues),
+    'Habitacion_2': dict(sensor_queues),
+    'Habitacion_3': dict(sensor_queues),
+    'Habitacion_4': dict(sensor_queues),
+    'Servicio': dict(sensor_queues),
+    'Pasillo': dict(sensor_queues)
+}
 
 def handle_client(client_socket):
     request = client_socket.recv(1024).decode('utf-8')
-    room, data = request.split(';', 1) # Los datos nos llegan en forma -> habitación;datos...
+    room, data = request.split(';', 1) # Los datos nos llegan en forma -> habitación;datos_sensores
+    
+    print(f"{room} -> {data}")
+    '''lista_sensores = data.split(':')
     print(f"{room}-->{data}");
-    sensor_type, data = data.split(':')  # Asumiendo que los datos vienen en formato 'Tipo:Datos'
+    sensor_type, data = data.split(':')  # Asumiendo que los datos vienen en formato 'Tipo_Sensor:Datos,'
     queues[sensor_type].put(data)  # Asegúrate que 'sensor_type' coincida con las claves del diccionario
     
     # Almacena los datos en un archivo de texto
     
     with open(f"{sensor_type}_data.txt", "a") as file:
-        file.write(f"{room}{sensor_type}: {data}\n")
+        file.write(f"{room}{sensor_type}: {data}\n")'''
 
     client_socket.close()
 

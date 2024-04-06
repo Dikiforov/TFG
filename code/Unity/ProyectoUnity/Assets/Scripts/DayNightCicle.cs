@@ -17,6 +17,7 @@ public class CicloDN : MonoBehaviour
     public Estaciones EstacionSeleccionada = Estaciones.Invierno;
     public static float TempActual;
     public static float Hora = 0;
+    public static TimeSpan horaFormateada;
     private float SolX;
     private float IniSolX;
 
@@ -45,8 +46,8 @@ public class CicloDN : MonoBehaviour
 
     void Update()
     {
-        Hora += Time.deltaTime * (24 / (60 * DuracionDiaMin));
-
+        Hora += Time.deltaTime * (24 / (60 * DuracionDiaMin)); // Obtención de la hora en base a la duración del día
+        horaFormateada = TimeSpan.FromHours(Hora);
         if (Hora >= 24)
         {
             NuevoDiaTemperaturas();

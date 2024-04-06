@@ -8,8 +8,7 @@ public class SensorTemperatura : MonoBehaviour
     public CicloDN cicloDn;
 
     private ISensorDataReciever _dataReciever;
-
-    private float hora_ant = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -25,12 +24,17 @@ public class SensorTemperatura : MonoBehaviour
         _horaActual = CicloDN.Hora;
         float tActualRedondeada = Mathf.Round(temperaturaActual * 100.0f) * 0.01f;
         float tAnteriorRedondeada = Mathf.Round(_temperaturaAnterior * 100.0f) * 0.01f;
-        if (tAnteriorRedondeada != tActualRedondeada || (_horaActual >= 12 && _horaActual < 16))
+        
+        bool enviarData = false;
+        if (tAnteriorRedondeada != tActualRedondeada)
+            enviarData = true;
+        if (_horaActual >= 12 && _horaActual < 16) 
+            enviarData = true;
+        //Debug.Log("Hora:" + _horaActual + "enviar_datos: " + enviarData);
+        if (enviarData)
         {
             _temperaturaAnterior = temperaturaActual;
-            //Debug.Log("Hora: " +_horaActual +"tActualRedondeada: " + tActualRedondeada + "tAnteriorRedondeada: " + tAnteriorRedondeada);
-            _dataReciever.RecieveTempData(tActualRedondeada);
-            //SendTemperature(tActualRedondeada);
+            _dataReciever.RecieveTempData(tActualRedondeada, enviarData);
         }
     }
 }
