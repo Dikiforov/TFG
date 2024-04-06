@@ -622,19 +622,51 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
   Si se cumplen estas condiciones, el mensaje se combina con los datos de estado y/o temperatura del puerto modificados. El mensaje se envía al servidor local a través de una conexión TCP en el puerto 8052. El formato del mensaje es SensorType:datos, donde SensorType puede ser "Temperatura" o "Puerta" y los datos son el valor actual correspondiente. Una vez enviados los datos, el indicador de cambio y la última hora de actualización se actualizan para una mayor comparación.
 
   El objetivo principal de este componente es proporcionar una interfaz centralizada para recibir y enviar datos del sensor en la aplicación del dispositivo. Al agrupar la lógica de control de datos en una instalación general, la gestión y el mantenimiento de los códigos se simplifican y la integración de nuevos sensores en el sistema. Además, el envío de datos al servidor permite su almacenamiento y posterior análisis, lo que puede resultar útil para monitorizar y controlar entornos virtuales o físicos.
+- **06/04/2024**
 
-**Avances futuros:**
+  Se ha implementado una serie extra de funciones que deberá de declarar el padre para poder recibir datos. De esta manera se ha obtenido la función de recibir todos los datos de los sensores que contiene la placa de la habitación, por tanto, cada 'x' tiempo vamos recibiendo datos de todos los sensores. Una vez que nos llegan los datos, tenemos dos opciones para enviarlos al servidor, con una diferencia de tiempo de 5 minutos en la simulación (que depende de la velocidad a la que queremos que avance un día) o cuando haya algún tipo de cambio en alguno de los sensores, es decir, cada cierto tiempo o cada vez que haya alguna actualización de alguno de los sensores respecto a su valor anterior. Para esto, se obtiene el dato del sensor y se compara con el dato (del mismo sensor) que recibimos anteriormente. Esto nos permite enviar los datos al servidor en un formato determinado:
 
-- Aplicar sensores implementados en el nuevo domicilio.
+  -  Placa_Habitación(Hora_Interna);tipo_sensor_1:datos_1,tipo_sensor_2:datos_2,...
+
+  ![Datos recibidos en el servidor](/images/DosPlacasYHoraNueva.png "Datos recibidos en el servidor")
+
+  Esto nos permite enviar todos los datos de los sensores de golpe y, una vez recibidos en el servidor, tratarlos de la siguiente manera (aún no implementado):
+
+  - Recibir datos.
+  - Obtener los datos de la placa y sus datos mediante el separador ';'.
+  - Separar los sensores entre ellos para diferenciarlos, mediante el separador ','.
+  - Obtener el tipo de sensor y los datos de este, mediante el separado ':'.
+
+  
+  Con todo esto, podemos ir comparando datos en base a la hora del sistema y los datos obtenidos de cada sensor.
+
+  Por otro lado, se ha añadido un nuevo diccionario en el servidor que recibirá los datos. Este contendrá el nombre de cada estancia como clave y otro diccionario que tendrá colas de datos para cada sensor, esto nos permitirá ir almacenando y tratando mediante un FCFS. Esto se ha decidido así para evitar saturar al servidor, ya que tendrá que recibir datos muy seguidamente y podría provocar la perdida de estos, por tanto, si los vamos almacenando en una cola para cada sensor y estancia, podemos tratarlos de diferentes maneras en diferentes momentos.
+
+  Otra opción que se ha estando investigando, es el guardado de datos en ficheros de texto y después ir tratandolos mediante con algún otro proceso (aún hay que mirarlo bien).
+
+  Otros cambios realizados han sido el de cambiar el formato de la hora, es decir, anteriormente calculabamos la hora y contabamos con esta mediante un nuevo decimal que iba del 0 al 100 para cambiar la hora, pero se ha usado la variable de tipo _TimeSpan_ que nos permite cambiar la hora al formato que deseamos. Este cambio de datos lo realiza el script que lleva el control del movimiento del sol y de la temperatura. En si, la lógica es la misma, calculamos la hora del sistema en formato decimal en función de la duración del día deseada y, después, cambia el formato en una nueva variable que se usará para enviar los datos al servidor y, de esta manera, como se puede apreciar en la imagen anterior, tener un formado de HH:MM:SS.
+
+  También se ha optado por no mostrar mensajes de interacción entre el usuario real y el de la simulación, es decir, anteriormente cuando nos acercabamos a una puerta nos salía un mensaje indicando la tecla para abrir la puerta, pero esto se ha considerado innecesario ya que será una simulación y no un juego o algo del estilo. Aunque la función de la tecla quedará en el código para diferentes pruebas.
+
+  Finalmente, se ha arreglado un problema al enviar la temperatura de la simulación cuando llegabamos a la máxima del día. Esto era porque, en la placa principal, comparabamos la temperaturas entre ellas y, si era diferente, pues entonces la enviabamos al servidor, cosa que es incorrecta y se ha solucionando comparando las horas donde la temperatura es máxima.
+
+  Para la simulación, se ha pensado en que cuando el sujeto se acerque a una puerta, esta se abra automáticamente y, si sale del _trigger_ de la puerta, se cierre. Esto es para obtener datos de las puertas en movimiento también. Por otro lado, se quiere añadir luces en cada estancia y que, cuando el usuario entre en una estancia, estas se iluminen en caso de que el sensor de movimiento lo detecte. Para esto, se debe de tener en cuenta que el usuario puede quedarse en la habitación en cuestión en estático, cosa que debemos de considerar para no apagarlas antes de tiempo. Por otro lado, para el tema de la luminosidad, el sensor leera los valores de las _directional lights_ de cada estancia, ya que se incorporarán, y obtendrá un valor en base al movimiento y si se activan o no. También se ha pensado en que, depende de la hora y la posición del sol (que tenemos ambos valores) condicionar el encendido de la luz, es decir, obtener el valor de la luminosidad de las propias estancias para compararlo con un mínimo o máximo, lo que nos permitirá aumentar o no el valor de la propia luz.
+
+
+
+
+**Avances futuros (+/- prioridad):**
+
+- Crear las luces para cada estancia.
+
+- Implementar sensor de luminosidad, presión, humedad, sonido y movimiento (ya implementado pero a falta de probar).
+
+- Gestionar la recepción de los datos recibidos en el servidor, para guardarlo en ficheros o en colas.
 
 - Implementar código de la API para la base de datos, tanto su creación como modificación.
 
-- Obtener valores de humedad, presión y otros valores para la generación de estos en base a una estación concreta. TEMP OK
-
-- Crear circuito por donde se irá moviendo el usuario de manera automatizada.
+- Crear circuito por donde se irá moviendo el usuario de manera automatizada (máquina de estados).
 
 - Hacer una lógica de hábitos, donde dependiendo de la hora el usuario pueda moverse a una habitación en concreto o realizar diferentes tareas.
-
-- Volver a crear el servidor receptor de datos
 
 **Este proyecto se encuentra en desarrollo y se irán actualizando los avances en este archivo README.md.**
