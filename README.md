@@ -658,12 +658,20 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   Como podemos observar, tenemos el nombre de la estancia como nombre del fichero, la hora al inicio de la tabla de los sensores y, dentro de esta tabla, el contenido que hemos recibido de cada sensor. Ahora queda comprobar las horas y los datos respecto a los anteriores datos obtenidos y así poder tener unos valores más reales.
 
+  Se ha implementado una nueva versión del sensor de movimiento que nos permite saber si hay algún usuario en la estancia en la que se encuentra el sensor. Este valor de modifica cada vez que detecta movimiento.
+  Por otro lado, ahora se envían todos los datos al servidor si hay una diferencia de 5 minutos entre los datos recibidos (en tiempo de simulación) o si hay algún valor que se ha modificado respecto a su última actualización.
+
+  Esto nos permite tener el siguiente contenido recibido en el servidor:
+
+  ![Datos recibidos en base a tiempo o actualización](/images/DatosRecibidosPorActualizacionTiempo.png "Datos recibidos")
+
+  Por otro lado, nos hemos dado cuenta de que a la hora de abrir puertas o cerrarlas recibimos los datos, pero si es con más de una a la vez, esto no funciona correctamente. Por lo que se ha pensando en implementar alguna función auxiliar que reciba el estado de las puertas en todo momento y que si hay algún tipo de cambio pues que se muestre. Esto cambia la lógica de las puertas, ya que actualmente enviamos al padre el estado de cada una, pero ahora deberá de enviarse en todo momento el estado de la puerta.
 
 **Avances futuros (+/- prioridad):**
 
 - Crear las luces para cada estancia.
 
-- Implementar sensor de luminosidad, presión, humedad, sonido y movimiento (ya implementado pero a falta de probar).
+- Implementar sensor de luminosidad, presión, humedad y sonido.
 
 - Gestionar la recepción de los datos recibidos en el servidor, para guardarlo en ficheros o en colas.
 
