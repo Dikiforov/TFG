@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class DetectionSensor : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class DetectionSensor : MonoBehaviour
         {
             Debug.LogError("No se encontró el componente PlayerMovementTracker");
         }
+
+        _checkPlayerCoroutine = StartCoroutine(CheckPlayerMovement());
     }
 
 
@@ -36,26 +39,18 @@ public class DetectionSensor : MonoBehaviour
         }
     }
 
-    private void Update()
+    private IEnumerator CheckPlayerMovement()
     {
-        if (_playerInside && _playerMovementTracker.IsMoving)
-        {
-            _dataReciever.RecieveMovimientoData(true);
-        }
-        else
-        {
-            _dataReciever.RecieveMovimientoData(false);
-        }
-    }
-
-    /*private IEnumerator CheckPlayerMovement()
-    {
-        while (_playerInside)
+        while (true)
         {
             yield return new WaitForSeconds(1f);
-            // Si el jugador se está moviendo, enviamos 'true' al padre
-            Debug.Log(_playerMovementTracker.IsMoving);
-            _dataReciever.RecieveMovimientoData(_playerMovementTracker.IsMoving);
+            if (_playerInside)
+            {
+                if (_playerMovementTracker.IsMoving)
+                    _dataReciever.RecieveMovimientoData(true);
+                else
+                    _dataReciever.RecieveMovimientoData(false);
+            }
         }
-    }*/
+    }
 }
