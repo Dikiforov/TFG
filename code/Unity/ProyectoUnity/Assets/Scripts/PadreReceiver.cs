@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
@@ -7,6 +8,8 @@ using UnityEngine.Serialization;
 
 public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 {
+    public int _serverPort = 8888;
+    public string _serverIp = "192.168.1.52";
     private float _lastPresion;
     private float _lastHumedad;
     private float _lastTemperature = float.NaN;
@@ -17,7 +20,8 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     private float _lastSonido;
 
     private string _nombrePuerta = "";
-
+    private float umbral;
+    private Dictionary<string, bool> estadoPuertas = new Dictionary<string, bool>();
     [FormerlySerializedAs("CicloDn")] public CicloDN cicloDn;
 
     private bool _datosParaEnviar;
@@ -26,13 +30,16 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     {
         _lastMov = false;
         cicloDn = FindObjectOfType<CicloDN>();
+        _lastTime = CicloDN.Hora;
+        umbral = 5.0f / 60.0f;  // 5 minutos aproximadamente
     }
 
     private void Update()
     {
         var hora = CicloDN.Hora;
-        //Debug.Log("Hora: " + hora + " - " + _lastTime + " Diferencia " + (hora));
-        if ((hora - _lastTime) > 300 || _datosParaEnviar)
+        var diferencia = Mathf.Abs(hora - _lastTime);
+        
+        if (_datosParaEnviar)
         {
             _datosParaEnviar = false;
             _lastTime = hora;
@@ -42,73 +49,86 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 
     public void RecieveTempData(float temperature, bool enviarData)
     {
-        Debug.Log("Temperatura: " + enviarData);
+        //Debug.Log("Temperatura: " + enviarData);
         if (enviarData)
         {
             _datosParaEnviar = true;
             _lastTemperature = temperature;
         }
+        Debug.Log("_datosParaEnviar desde Temp: "+_datosParaEnviar);
     }
 
     public void RecieveDoorState(bool isOpen, string doorName)
     {
-        Debug.Log("Puerta: " + isOpen);
-        if (isOpen != _lastDoorState)
+        if (estadoPuertas.ContainsKey(doorName))
         {
-            _datosParaEnviar = true;
-            _lastDoorState = isOpen;
-            _nombrePuerta = doorName;
+            // Si el nombre de la puerta no esta en el diccionario de la placa, se añade
+            if (estadoPuertas[doorName] != isOpen)
+            {
+                estadoPuertas[doorName] = isOpen;
+                _datosParaEnviar = true;
+            }
         }
+        else
+        {
+            estadoPuertas.Add(doorName, isOpen);
+        }
+        Debug.Log("_datosParaEnviar desde Puertas en "+doorName+": "+_datosParaEnviar);
     }
 
     public void RecieveHumedadData(float humedad, bool enviarData)
     {
-        Debug.Log("Humedad: " + enviarData);
+        //Debug.Log("Humedad: " + enviarData);
         if (enviarData)
         {
             _datosParaEnviar = true;
             _lastHumedad = humedad;
         }
+        Debug.Log("_datosParaEnviar desde Humedad: "+_datosParaEnviar);
     }
 
     public void RecieveLuminosidadData(float luminosidad, bool enviarData)
     {
-        Debug.Log("Luminosidad: " + enviarData);
+        //Debug.Log("Luminosidad: " + enviarData);
         if (enviarData)
         {
             _datosParaEnviar = true;
             _lastLum = luminosidad;
         }
+        Debug.Log("_datosParaEnviar desde Luminosidad: "+_datosParaEnviar);
     }
 
     public void RecieveMovimientoData(bool movement)
     {
-        Debug.Log("Movimiento: " + movement);
+        //Debug.Log("Movimiento: " + movement);
         if (_lastMov != movement)
         {
             _datosParaEnviar = true;
             _lastMov = movement;
         }
+        Debug.Log("_datosParaEnviar desde Movimiento: "+_datosParaEnviar);
     }
 
     public void RecieveSonidoData(float sound, bool enviarData)
     {
-        Debug.Log("Sonido: " + enviarData);
+        //Debug.Log("Sonido: " + enviarData);
         if (enviarData)
         {
             _datosParaEnviar = true;
             _lastSonido = sound;
         }
+        Debug.Log("_datosParaEnviar desde Sonido: "+_datosParaEnviar);
     }
 
     public void RecievePresionData(float presion, bool enviarData)
     {
-        Debug.Log("Presión: " + enviarData);
+        //Debug.Log("Presión: " + enviarData);
         if (enviarData)
         {
             _datosParaEnviar = true;
             _lastPresion = presion;
         }
+        Debug.Log("_datosParaEnviar desde Presión: "+_datosParaEnviar);
     }
 
     private void SendDataToServer()
@@ -118,17 +138,22 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             // Crear mensaje con los datos a enviar al servidor
             StringBuilder messageBuilder = new StringBuilder();
             TimeSpan tiempo = CicloDN.horaFormateada;
-            messageBuilder.Append(this.gameObject.name +" " +string.Format("{0:D2}:{1:D2}:{2:D2}", tiempo.Hours, tiempo.Minutes, tiempo.Seconds) + ""+";");
-            messageBuilder.Append("Temperatura:" + _lastTemperature + ",");
-            messageBuilder.Append("Puertas:"+_nombrePuerta + " " + _lastDoorState + ",");
+            messageBuilder.Append(this.gameObject.name + " " + string.Format("{0:D2}:{1:D2}:{2:D2}", tiempo.Hours, tiempo.Minutes, tiempo.Seconds) + "" + ";");
+            messageBuilder.Append("Temperatura:" + (_lastTemperature.ToString("0.0")).Replace(',', '.') + ",");
+            string auxDoorStates = "";
+            foreach (var kDoor in estadoPuertas)
+            {
+                auxDoorStates += kDoor.Key + '=' + kDoor.Value + ' ';
+            }
+            messageBuilder.Append("Puertas:" + auxDoorStates.TrimEnd() + ',');
             messageBuilder.Append("Luminosidad:" + _lastLum + ",");
             messageBuilder.Append("Movimiento:" + _lastMov + ",");
             messageBuilder.Append("Sonido:" + _lastSonido + ",");
             messageBuilder.Append("Presion:" + _lastPresion + ",");
             messageBuilder.Append("Humedad:" + _lastHumedad);
-
+        
             string message = messageBuilder.ToString();
-            using (TcpClient client = new TcpClient("127.0.0.1", 8080))
+            using (TcpClient client = new TcpClient(_serverIp, _serverPort))
             using (NetworkStream stream = client.GetStream())
             using (StreamWriter writer = new StreamWriter(stream))
             {
