@@ -1,7 +1,1 @@
-
-00:00:00
-+-------------+---------+
-| Sensor      |   Valor |
-+=============+=========+
-| Temperatura |       7 |
-+-------------+---------+
+PlacaRecibidor 00:00:17;Temperatura:7.8,Puertas:RecibidorSalon=False RecibidorCocina=True,Luminosidad:0,Movimiento:False,Sonido:0,Presion:0,Humedad:0

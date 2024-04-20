@@ -622,11 +622,14 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
   Si se cumplen estas condiciones, el mensaje se combina con los datos de estado y/o temperatura del puerto modificados. El mensaje se envía al servidor local a través de una conexión TCP en el puerto 8052. El formato del mensaje es SensorType:datos, donde SensorType puede ser "Temperatura" o "Puerta" y los datos son el valor actual correspondiente. Una vez enviados los datos, el indicador de cambio y la última hora de actualización se actualizan para una mayor comparación.
 
   El objetivo principal de este componente es proporcionar una interfaz centralizada para recibir y enviar datos del sensor en la aplicación del dispositivo. Al agrupar la lógica de control de datos en una instalación general, la gestión y el mantenimiento de los códigos se simplifican y la integración de nuevos sensores en el sistema. Además, el envío de datos al servidor permite su almacenamiento y posterior análisis, lo que puede resultar útil para monitorizar y controlar entornos virtuales o físicos.
+
+---
+
 - **06/04/2024**
 
   Se ha implementado una serie extra de funciones que deberá de declarar el padre para poder recibir datos. De esta manera se ha obtenido la función de recibir todos los datos de los sensores que contiene la placa de la habitación, por tanto, cada 'x' tiempo vamos recibiendo datos de todos los sensores. Una vez que nos llegan los datos, tenemos dos opciones para enviarlos al servidor, con una diferencia de tiempo de 5 minutos en la simulación (que depende de la velocidad a la que queremos que avance un día) o cuando haya algún tipo de cambio en alguno de los sensores, es decir, cada cierto tiempo o cada vez que haya alguna actualización de alguno de los sensores respecto a su valor anterior. Para esto, se obtiene el dato del sensor y se compara con el dato (del mismo sensor) que recibimos anteriormente. Esto nos permite enviar los datos al servidor en un formato determinado:
 
-  -  Placa_Habitación(Hora_Interna);tipo_sensor_1:datos_1,tipo_sensor_2:datos_2,...
+  - Placa_Habitación(Hora_Interna);tipo_sensor_1:datos_1,tipo_sensor_2:datos_2,...
 
   ![Datos recibidos en el servidor](/images/DosPlacasYHoraNueva.png "Datos recibidos en el servidor")
 
@@ -637,7 +640,6 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
   - Separar los sensores entre ellos para diferenciarlos, mediante el separador ','.
   - Obtener el tipo de sensor y los datos de este, mediante el separado ':'.
 
-  
   Con todo esto, podemos ir comparando datos en base a la hora del sistema y los datos obtenidos de cada sensor.
 
   Por otro lado, se ha añadido un nuevo diccionario en el servidor que recibirá los datos. Este contendrá el nombre de cada estancia como clave y otro diccionario que tendrá colas de datos para cada sensor, esto nos permitirá ir almacenando y tratando mediante un FCFS. Esto se ha decidido así para evitar saturar al servidor, ya que tendrá que recibir datos muy seguidamente y podría provocar la perdida de estos, por tanto, si los vamos almacenando en una cola para cada sensor y estancia, podemos tratarlos de diferentes maneras en diferentes momentos.
@@ -667,18 +669,31 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
   Por otro lado, nos hemos dado cuenta de que a la hora de abrir puertas o cerrarlas recibimos los datos, pero si es con más de una a la vez, esto no funciona correctamente. Por lo que se ha pensando en implementar alguna función auxiliar que reciba el estado de las puertas en todo momento y que si hay algún tipo de cambio pues que se muestre. Esto cambia la lógica de las puertas, ya que actualmente enviamos al padre el estado de cada una, pero ahora deberá de enviarse en todo momento el estado de la puerta.
 
-**Avances futuros (+/- prioridad):**
+---
 
-- Crear las luces para cada estancia.
+- **20/04/2024**
+  Se ha implementado una forma en la que un servidor en la red doméstica local recibe los datos que nos proporcionan los diferentes sensores, de esta manera nos permitirá comprobar diferentes formas de mejorar la seguridad en este caso.
 
-- Implementar sensor de luminosidad, presión, humedad y sonido.
+  Por otro lado, se ha creado un diccionario que gestionará todas las puertas que haya en el domicilio y, de esta manera, tener el control del estado de estas en todo momento.
 
-- Gestionar la recepción de los datos recibidos en el servidor, para guardarlo en ficheros o en colas.
+  Finalmente, se ha gestionado una mejor forma de enviar los datos de la temperatura, con un único decimal. Para evitar saturar el sistemas.
 
-- Implementar código de la API para la base de datos, tanto su creación como modificación.
+---
 
-- Crear circuito por donde se irá moviendo el usuario de manera automatizada (máquina de estados).
+Se ha creado la base de datos que se había propuesto más atrás. Habrá que modelar un poco esta para su optimización y poder analizar datos.
 
-- Hacer una lógica de hábitos, donde dependiendo de la hora el usuario pueda moverse a una habitación en concreto o realizar diferentes tareas.
+- **Avances futuros (+/- prioridad):**
+
+* Crear las luces para cada estancia.
+
+* Implementar sensor de luminosidad, presión, humedad y sonido.
+
+* Gestionar la recepción de los datos recibidos en el servidor, para guardarlo en ficheros o en colas.
+
+* Implementar código de la API para la base de datos, tanto su creación como modificación.
+
+* Crear circuito por donde se irá moviendo el usuario de manera automatizada (máquina de estados).
+
+* Hacer una lógica de hábitos, donde dependiendo de la hora el usuario pueda moverse a una habitación en concreto o realizar diferentes tareas.
 
 **Este proyecto se encuentra en desarrollo y se irán actualizando los avances en este archivo README.md.**
