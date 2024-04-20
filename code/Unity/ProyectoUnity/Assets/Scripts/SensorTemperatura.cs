@@ -22,8 +22,8 @@ public class SensorTemperatura : MonoBehaviour
     {
         temperaturaActual = CicloDN.TempActual;
         _horaActual = CicloDN.Hora;
-        float tActualRedondeada = Mathf.Round(temperaturaActual * 100.0f) * 0.01f;
-        float tAnteriorRedondeada = Mathf.Round(_temperaturaAnterior * 100.0f) * 0.01f;
+        float tActualRedondeada = Mathf.Round(temperaturaActual * 10.0f) * 0.1f;
+        float tAnteriorRedondeada = Mathf.Round(_temperaturaAnterior * 10.0f) * 0.1f;
         
         bool enviarData = false;
         if (tAnteriorRedondeada != tActualRedondeada)
@@ -31,9 +31,9 @@ public class SensorTemperatura : MonoBehaviour
         if (_horaActual >= 12 && _horaActual < 16) 
             enviarData = true;
         //Debug.Log("Hora:" + _horaActual + "enviar_datos: " + enviarData);
-        Debug.Log("Ant: "+ tAnteriorRedondeada + "- Act:" + tActualRedondeada + "- Enviar: " + enviarData + "Hora:" + _horaActual);
         if (enviarData)
         {
+            Debug.Log("Ant: "+ tAnteriorRedondeada + "- Act:" + tActualRedondeada + "- Enviar: " + enviarData + "Hora:" + _horaActual);
             _temperaturaAnterior = temperaturaActual;
             _dataReciever.RecieveTempData(tActualRedondeada, enviarData);
         }

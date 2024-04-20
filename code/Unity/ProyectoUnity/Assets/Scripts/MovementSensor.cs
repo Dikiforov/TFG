@@ -39,6 +39,7 @@ public class DetectionSensor : MonoBehaviour
         }
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     private IEnumerator CheckPlayerMovement()
     {
         while (true)
@@ -46,10 +47,7 @@ public class DetectionSensor : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (_playerInside)
             {
-                if (_playerMovementTracker.IsMoving)
-                    _dataReciever.RecieveMovimientoData(true);
-                else
-                    _dataReciever.RecieveMovimientoData(false);
+                _dataReciever.RecieveMovimientoData(_playerMovementTracker.IsMoving);
             }
         }
     }

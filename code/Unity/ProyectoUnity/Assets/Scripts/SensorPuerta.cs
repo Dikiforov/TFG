@@ -10,6 +10,12 @@ public class Puerta : MonoBehaviour
     private void Start()
     {
         _nombrePuerta = this.gameObject.name;
+        puertaAbierta = false;
+    }
+
+    private void Update()
+    {
+        EnviarMensajePuerta();
     }
 
     private void Awake()

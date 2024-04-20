@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5510722, g: 0.3883546, b: 0.18904218, a: 1}
+  m_IndirectSpecularColor: {r: 0.5510724, g: 0.3883548, b: 0.18904215, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3424,6 +3424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bad7ed6a5aa504ea00f35dbd01c98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _serverPort: 8888
+  _serverIp: 192.168.1.52
   cicloDn: {fileID: 1360500525}
 --- !u!1 &833912986
 GameObject:
@@ -5637,11 +5639,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195412837}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17bad7ed6a5aa504ea00f35dbd01c98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _serverPort: 8888
+  _serverIp: 192.168.1.52
   cicloDn: {fileID: 1360500525}
 --- !u!23 &1195412840
 MeshRenderer:
