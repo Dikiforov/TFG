@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DoorController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class DoorController : MonoBehaviour
     private float _closedAngle = 0f;
     private float _animationTime = 2f;  // Duración de la animación en segundos
     private ISensorDataReciever _dataReciever;
+
     private void Start()
     {
         if (doorPivot == null)
@@ -34,12 +36,9 @@ public class DoorController : MonoBehaviour
 
     private void Update()
     {
-        if (_isPlayerNearby)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                StartCoroutine(ToggleDoorState());
-            }
+        if (Input.GetKeyDown(KeyCode.E) && _isPlayerNearby)
+        { 
+            StartCoroutine(ToggleDoorState());
         }
     }
 
@@ -122,7 +121,6 @@ public class DoorController : MonoBehaviour
                 break;
             }
         }
-        
-        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente); 
+        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente);
     }
 }
