@@ -680,7 +680,90 @@ Este proyecto implementa una vivienda de prueba en Unity, ambientada en mi propi
 
 ---
 
-Se ha creado la base de datos que se había propuesto más atrás. Habrá que modelar un poco esta para su optimización y poder analizar datos.
+- **26/04/2024**
+
+  He estado reflexionando sobre cómo optimizar mi modelo de control del hogar inteligente y he concebido una solución que considero muy ventajosa.
+
+  En lugar de recurrir a dos bases de datos independientes, una relacional y otra NoSQL, propongo fusionarlas en una única base de datos híbrida. Esta base de datos híbrida aprovecharía las fortalezas de ambos tipos de bases de datos para crear un sistema más eficiente, escalable y flexible.
+
+  Las tablas relacionales de la base de datos híbrida almacenarían información estructurada como usuarios, viviendas, estancias y suministros. Esto permitiría establecer relaciones entre entidades y realizar consultas complejas que involucran múltiples tablas y relaciones.
+
+  La parte NoSQL de la base de datos híbrida se encargaría de almacenar datos no estructurados o semi-estructurados, como las lecturas de los sensores. Esto permitiría almacenar y consultar datos de forma eficiente, especialmente para grandes volúmenes de información.
+
+  Estoy convencido de que esta combinación de bases de datos relacionales y NoSQL sería la mejor manera de crear un sistema de control del hogar inteligente que satisfaga todas mis necesidades.
+
+  Beneficios de este enfoque:
+
+  - Eficiencia superior: La base de datos híbrida sería más eficiente que dos bases de datos separadas, ya que no sería necesario duplicar los datos.
+  - Escalabilidad mejorada: La base de datos híbrida sería más escalable que dos bases de datos separadas, ya que los datos podrían distribuirse en múltiples servidores.
+  - Flexibilidad ampliada: La base de datos híbrida sería más flexible que dos bases de datos separadas, ya que podría almacenar una variedad de tipos de datos.
+  - Facilidad de uso: La base de datos híbrida sería más fácil de usar que dos bases de datos separadas, ya que no sería necesario administrar dos sistemas separados.
+
+  Por tanto, he llegado a la siguiente conclusión para la nueva implementación de mi base de datos híbrida:
+
+  _Usuarios_:
+
+  - id_usuario: Identificador único de usuario (clave primaria).
+  - nombre: Nombre de usuario.
+  - contraseña: Contraseña cifrada del usuario.
+  - dirección: Dirección del usuario.
+  - región: Región del usuario.
+  - cp: Código postal del usuario.
+
+  _Suministros_:
+
+  - id_suministro: Identificador único del suministro (clave primaria).
+  - tipo_suministro: Tipo de suministro (agua, gas, electricidad).
+  - id_usuario: Identificador del usuario del suministro (clave externa a la tabla Usuarios).
+  - compañia: Nombre de la empresa suministradora.
+
+  _LecturasSuministro_:
+
+  - id_lectura: Identificador único de lectura (clave primaria).
+  - id_suministro: Identificador de suministro de la lectura (clave ajena a la tabla Suministros).
+  - fecha: Fecha de la lectura.
+  - consumo: Valor del consumo en la lectura.
+
+  _Viviendas_:
+
+  - id_vivienda: Identificador único de vivienda (clave primaria).
+  - id_usuario: Identificador de usuario de la vivienda (clave ajena a la tabla Usuarios).
+  - número_estancias: Número de estancias de la vivienda.
+
+  _Estancias_:
+
+  - id_estancia: Identificador único de la estancia (clave primaria).
+  - id_vivienda: Identificador de la vivienda para la estancia (clave ajena a la tabla Viviendas).
+  - nombre_estancia: Nombre de la habitación.
+
+  _Base de datos NoSQL:_
+
+  **Colección**:
+
+  _Sensores_:
+
+  - id_sensor: Identificador único del sensor (clave primaria).
+  - tipo_sensor: Tipo de sensor (temperatura, humedad, movimiento, puertas, luz).
+  - id_estancia: Identificador de la estancia donde se encuentra el sensor (clave ajena a la tabla Estancias).
+  - lecturas: Matriz de documentos que contienen información sobre las lecturas del sensor.
+  - fecha: Fecha de la lectura.
+  - valor: Valor de lectura del sensor.
+
+---
+
+Por otro lado, se ha empezado la implementación de los sensores de iluminación y/o luminosidad, donde se tiene en cuenta lo siguiente:
+
+- Ajustar la intensidad de las luces en función del ciclo diurno y nocturno, creando un entorno más inmersivo y realista.
+- Encender o apagar las luces en función de la detección de movimiento del usuario, lo que puede ayudar a crear sensación de presencia e interacción en la simulación.
+- Obtener el valor de la intensidad de cada luz y ajustarlo en tiempo real en función de las condiciones de la simulación, lo que permite una mayor flexibilidad y control sobre el entorno.
+
+Algunos beneficios adicionales de esta implementación incluyen:
+
+- Mayor realismo e inmersión en la simulación, gracias a la posibilidad de controlar dinámicamente la iluminación.
+- Mejora de la experiencia del usuario, ya que la iluminación puede ajustarse para crear un entorno más cómodo y atractivo.
+- Mayor flexibilidad y control sobre el entorno, lo que permite a los desarrolladores crear experiencias más personalizadas y específicas para cada usuario.
+
+![Luces encendidas de noche en todo el domicilio](/images/VistaConLuces.png "Luces encendidas")
 
 - **Avances futuros (+/- prioridad):**
 
