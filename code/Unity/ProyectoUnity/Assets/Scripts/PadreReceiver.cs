@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 {
     public int _serverPort = 8888;
-    public string _serverIp = "192.168.1.80";
+    public string _serverIp = "192.168.1.52";
     private float _lastPresion;
     private float _lastHumedad;
     private float _lastTemperature = float.NaN;

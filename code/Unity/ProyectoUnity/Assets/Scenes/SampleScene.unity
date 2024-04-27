@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 131658488}
   - component: {fileID: 131658489}
   m_Layer: 0
-  m_Name: LuzRecibidor (2)
+  m_Name: LuzCocina2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -681,7 +681,7 @@ GameObject:
   - component: {fileID: 150796379}
   - component: {fileID: 150796380}
   m_Layer: 0
-  m_Name: LuzRecibidor (6)
+  m_Name: LuzHabitacion1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1053,7 +1053,7 @@ GameObject:
   - component: {fileID: 288960527}
   - component: {fileID: 288960528}
   m_Layer: 0
-  m_Name: LuzRecibidor (10)
+  m_Name: LuzHabitacion2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1357,7 +1357,7 @@ GameObject:
   - component: {fileID: 376722057}
   - component: {fileID: 376722058}
   m_Layer: 0
-  m_Name: LuzRecibidor (9)
+  m_Name: LuzHabitacion3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2365,7 +2365,7 @@ GameObject:
   - component: {fileID: 515785166}
   - component: {fileID: 515785167}
   m_Layer: 0
-  m_Name: LuzRecibidor (8)
+  m_Name: LuzAseo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5095,7 +5095,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 100
   m_Range: 3560.5188
   m_SpotAngle: 112.59699
   m_InnerSpotAngle: 21.80208
@@ -5193,7 +5193,7 @@ GameObject:
   - component: {fileID: 1017646048}
   - component: {fileID: 1017646049}
   m_Layer: 0
-  m_Name: LuzRecibidor (5)
+  m_Name: LuzSalon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6829,7 +6829,7 @@ GameObject:
   - component: {fileID: 1349813679}
   - component: {fileID: 1349813680}
   m_Layer: 0
-  m_Name: LuzRecibidor (4)
+  m_Name: LuzSalon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6923,7 +6923,7 @@ GameObject:
   - component: {fileID: 1352473352}
   - component: {fileID: 1352473353}
   m_Layer: 0
-  m_Name: LuzRecibidor (7)
+  m_Name: LuzPasillo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7304,6 +7304,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1448059356}
+  - component: {fileID: 1448059358}
+  - component: {fileID: 1448059357}
   m_Layer: 0
   m_Name: SensorLuminosidad
   m_TagString: Untagged
@@ -7337,6 +7339,37 @@ Transform:
   - {fileID: 288960527}
   m_Father: {fileID: 819061985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1448059357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448059355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebc6f1298e98d93498a9fbde0324c23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightSensor: {fileID: 1448059358}
+  minimumVisibleLuminosity: 10
+  lightsToControl:
+  - {fileID: 1007773263}
+  movementSensor: 0
+--- !u!114 &1448059358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448059355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891c3487313776d489081cc2cc11ffbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRadius: 5
+  minNumberOfLights: 3
 --- !u!1 &1523992722
 GameObject:
   m_ObjectHideFlags: 0
@@ -8199,7 +8232,7 @@ GameObject:
   - component: {fileID: 1745484165}
   - component: {fileID: 1745484166}
   m_Layer: 0
-  m_Name: LuzRecibidor (3)
+  m_Name: LuzHabitacion4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8807,6 +8840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eaba5aa52d168448f3e9a4475bf116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dataSend: {fileID: 0}
 --- !u!65 &1873691469
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9013,7 +9047,7 @@ GameObject:
   - component: {fileID: 2077423393}
   - component: {fileID: 2077423394}
   m_Layer: 0
-  m_Name: LuzRecibidor (1)
+  m_Name: LuzCocina1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

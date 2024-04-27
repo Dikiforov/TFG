@@ -6,8 +6,6 @@ from datetime import datetime
 from tabulate import tabulate
 import sqlite3
 import os
-from pymongo import MongoClient
-
 # Puerto para la recepción de datos
 puerto = 8888
 ip_addr = "0.0.0.0"

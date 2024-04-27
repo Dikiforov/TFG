@@ -9,10 +9,11 @@ public class DetectionSensor : MonoBehaviour
     private bool _playerInside;
     private Coroutine _checkPlayerCoroutine; // Referencia al coroutine para detenerlo si el jugador sale del trigger
     private ISensorDataReciever _dataReciever;
-
+    public LightController _dataSend;
     private void Start()
     {
         _dataReciever = GetComponentInParent<ISensorDataReciever>();
+        _dataSend = GetComponent<LightController>();
         _playerMovementTracker = FindObjectOfType<PlayerMovementTracker>();
         if (_playerMovementTracker == null)
         {
@@ -48,6 +49,7 @@ public class DetectionSensor : MonoBehaviour
             if (_playerInside)
             {
                 _dataReciever.RecieveMovimientoData(_playerMovementTracker.IsMoving);
+                _dataSend.movementSensor = _playerMovementTracker.IsMoving;
             }
         }
     }
