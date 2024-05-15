@@ -7,7 +7,7 @@ from tabulate import tabulate
 import sqlite3
 import os
 # Puerto para la recepción de datos
-puerto = 8888
+puerto = 1234
 ip_addr = "0.0.0.0"
 # Diccionario para almacenar las colas por tipo de sensor
 
@@ -63,7 +63,7 @@ def handle_client(client_socket):
             print(request)
             break  # Salir del bucle para evitar procesar más datos
 
-    #print(request)
+    print(request)
 
     # Conectar a la base de datos
     conn = sqlite3.connect('sensores.db')

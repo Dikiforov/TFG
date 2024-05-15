@@ -33,7 +33,7 @@ public class SensorTemperatura : MonoBehaviour
         //Debug.Log("Hora:" + _horaActual + "enviar_datos: " + enviarData);
         if (enviarData)
         {
-            Debug.Log("Ant: "+ tAnteriorRedondeada + "- Act:" + tActualRedondeada + "- Enviar: " + enviarData + "Hora:" + _horaActual);
+            //Debug.Log("Ant: "+ tAnteriorRedondeada + "- Act:" + tActualRedondeada + "- Enviar: " + enviarData + "Hora:" + _horaActual);
             _temperaturaAnterior = temperaturaActual;
             _dataReciever.RecieveTempData(tActualRedondeada, enviarData);
         }

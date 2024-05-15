@@ -8,8 +8,8 @@ using UnityEngine.Serialization;
 
 public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 {
-    public int _serverPort = 8888;
-    public string _serverIp = "192.168.1.52";
+    public int _serverPort = 1234;
+    public string _serverIp = "192.168.1.47";
     private float _lastPresion;
     private float _lastHumedad;
     private float _lastTemperature = float.NaN;
@@ -18,9 +18,6 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     private float _lastLum;
     private float _lastTime;
     private float _lastSonido;
-
-    private string _nombrePuerta = "";
-    private float umbral;
     private Dictionary<string, bool> estadoPuertas = new Dictionary<string, bool>();
     [FormerlySerializedAs("CicloDn")] public CicloDN cicloDn;
 
@@ -31,7 +28,6 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         _lastMov = false;
         cicloDn = FindObjectOfType<CicloDN>();
         _lastTime = CicloDN.Hora;
-        umbral = 5.0f / 60.0f;  // 5 minutos aproximadamente
     }
 
     private void Update()
@@ -55,7 +51,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             _datosParaEnviar = true;
             _lastTemperature = temperature;
         }
-        Debug.Log("_datosParaEnviar desde Temp: "+_datosParaEnviar);
+        //Debug.Log("_datosParaEnviar desde Temp: "+_datosParaEnviar);
     }
 
     public void RecieveDoorState(bool isOpen, string doorName)
@@ -73,7 +69,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         {
             estadoPuertas.Add(doorName, isOpen);
         }
-        Debug.Log("_datosParaEnviar desde Puertas en "+doorName+": "+_datosParaEnviar);
+        //Debug.Log("_datosParaEnviar desde Puertas en "+doorName+": "+_datosParaEnviar);
     }
 
     public void RecieveHumedadData(float humedad, bool enviarData)
@@ -84,7 +80,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             _datosParaEnviar = true;
             _lastHumedad = humedad;
         }
-        Debug.Log("_datosParaEnviar desde Humedad: "+_datosParaEnviar);
+        //Debug.Log("_datosParaEnviar desde Humedad: "+_datosParaEnviar);
     }
 
     public void RecieveLuminosidadData(float luminosidad, bool enviarData)
@@ -95,7 +91,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             _datosParaEnviar = true;
             _lastLum = luminosidad;
         }
-        Debug.Log("_datosParaEnviar desde Luminosidad: "+_datosParaEnviar);
+        Debug.Log("_datosParaEnviar desde Luminosidad: "+ luminosidad);
     }
 
     public void RecieveMovimientoData(bool movement)
@@ -106,7 +102,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             _datosParaEnviar = true;
             _lastMov = movement;
         }
-        Debug.Log("_datosParaEnviar desde Movimiento: "+_datosParaEnviar);
+        //Debug.Log("_datosParaEnviar desde Movimiento: "+_datosParaEnviar);
     }
 
     public void RecieveSonidoData(float sound, bool enviarData)
@@ -117,7 +113,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             _datosParaEnviar = true;
             _lastSonido = sound;
         }
-        Debug.Log("_datosParaEnviar desde Sonido: "+_datosParaEnviar);
+        //Debug.Log("_datosParaEnviar desde Sonido: "+_datosParaEnviar);
     }
 
     public void RecievePresionData(float presion, bool enviarData)
@@ -128,7 +124,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             _datosParaEnviar = true;
             _lastPresion = presion;
         }
-        Debug.Log("_datosParaEnviar desde Presión: "+_datosParaEnviar);
+        //Debug.Log("_datosParaEnviar desde Presión: "+_datosParaEnviar);
     }
 
     private void SendDataToServer()

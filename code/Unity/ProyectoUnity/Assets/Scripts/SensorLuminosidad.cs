@@ -1,51 +1,32 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class LightSensor : MonoBehaviour
 {
-    [SerializeField] private float detectionRadius = 5f;
-    [SerializeField] private int minNumberOfLights = 3;
+    private ISensorDataReciever _dataReciever;
+    public Light[] lights; // Array para referenciar todas las luces de la habitación
 
-    private List<Light> lights = new List<Light>();
-
-    public float AverageLuminosity => CalculateAverageLuminosity();
-
-    private void OnTriggerStay(Collider other)
+    private void Start()
     {
-        if (other.CompareTag("Player"))
+        _dataReciever = GetComponentInParent<ISensorDataReciever>();
+        
+        // Asegúrate de asignar las luces al array en el Inspector de Unity
+        if (lights.Length == 0) 
         {
-            CollectLights();
-            CalculateAverageLuminosity();
+            Debug.LogError("No se han asignado luces al sensor.");
         }
     }
 
-    private void CollectLights()
+    private void Update()
     {
-        lights.Clear();
-        Collider[] lightsInRange = Physics.OverlapSphere(transform.position, detectionRadius);
-
-        foreach (Collider lightCollider in lightsInRange)
-        {
-            Light lightComponent = lightCollider.GetComponent<Light>();
-            if (lightComponent != null && lightComponent.type == LightType.Spot)
-            {
-                lights.Add(lightComponent);
-            }
-        }
-    }
-
-    private float CalculateAverageLuminosity()
-    {
-        if (lights.Count < minNumberOfLights) return 0;
-
-        float totalLuminosity = 0;
+        float totalIntensity = 0f;
 
         foreach (Light light in lights)
         {
-            totalLuminosity += light.intensity;
+            totalIntensity += light.intensity;
         }
 
-        float averageLuminosity = totalLuminosity / lights.Count;
-        return averageLuminosity;
+        float averageIntensity = totalIntensity / lights.Length;
+        _dataReciever.RecieveLuminosidadData(averageIntensity, true); 
     }
 }

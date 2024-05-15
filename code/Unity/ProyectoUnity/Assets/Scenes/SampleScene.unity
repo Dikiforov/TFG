@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5510724, g: 0.3883548, b: 0.18904215, a: 1}
+  m_IndirectSpecularColor: {r: 0.5510722, g: 0.3883546, b: 0.18904218, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7305,7 +7305,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1448059356}
   - component: {fileID: 1448059358}
-  - component: {fileID: 1448059357}
   m_Layer: 0
   m_Name: SensorLuminosidad
   m_TagString: Untagged
@@ -7339,23 +7338,6 @@ Transform:
   - {fileID: 288960527}
   m_Father: {fileID: 819061985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1448059357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448059355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebc6f1298e98d93498a9fbde0324c23a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightSensor: {fileID: 1448059358}
-  minimumVisibleLuminosity: 10
-  lightsToControl:
-  - {fileID: 1007773263}
-  movementSensor: 0
 --- !u!114 &1448059358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7368,8 +7350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891c3487313776d489081cc2cc11ffbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 5
-  minNumberOfLights: 3
+  lights:
+  - {fileID: 1007773263}
 --- !u!1 &1523992722
 GameObject:
   m_ObjectHideFlags: 0
@@ -8840,7 +8822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eaba5aa52d168448f3e9a4475bf116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dataSend: {fileID: 0}
 --- !u!65 &1873691469
 BoxCollider:
   m_ObjectHideFlags: 0

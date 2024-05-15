@@ -25,7 +25,7 @@ public class Puerta : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("A");
+        //Debug.Log("A");
         if (other.CompareTag("Player")) // Detecta la entrada del usuario
         {
             puertaAbierta = true; // Cambia el estado de la puerta a abierta
@@ -35,7 +35,7 @@ public class Puerta : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("B");
+        //Debug.Log("B");
         if (other.CompareTag("Player")) // Detecta la salida del usuario
         {
             puertaAbierta = false; // Cambia el estado de la puerta a cerrada
@@ -53,7 +53,7 @@ public class Puerta : MonoBehaviour
 
         // Enviamos el mensaje al padre
         padre.gameObject.SendMessage(_nombrePuerta + "->" + mensaje);
-        Debug.Log(_nombrePuerta + "->" + mensaje);
+        //Debug.Log(_nombrePuerta + "->" + mensaje);
     }
 }
 
