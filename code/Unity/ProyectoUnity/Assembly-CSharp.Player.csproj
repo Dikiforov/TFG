@@ -51,7 +51,6 @@
      <Compile Include="Assets\Scripts\PlayerTracker.cs" />
      <Compile Include="Assets\Scripts\DoorMovement.cs" />
      <Compile Include="Assets\Scripts\SensorTemperatura.cs" />
-     <Compile Include="Assets\Scripts\ControlLuminosidad.cs" />
      <Compile Include="Assets\Scripts\DayNightCicle.cs" />
      <Compile Include="Assets\Scripts\SensorPuerta.cs" />
      <Compile Include="Assets\Scripts\PadreReceiver.cs" />

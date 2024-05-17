@@ -1,32 +1,48 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class LightSensor : MonoBehaviour
+[RequireComponent(typeof(BoxCollider))] // Asegurarse de que el sensor tenga un BoxCollider
+public class SensorLuminosidad : MonoBehaviour
 {
-    private ISensorDataReciever _dataReciever;
-    public Light[] lights; // Array para referenciar todas las luces de la habitación
+    public Light[] luces;
+    public float luminosidadMinima = 20f;
+    public float velocidadIncremento = 1f;
+
+    private float currentLuminosity;
 
     private void Start()
     {
-        _dataReciever = GetComponentInParent<ISensorDataReciever>();
-        
-        // Asegúrate de asignar las luces al array en el Inspector de Unity
-        if (lights.Length == 0) 
+        // Verificar si el componente BoxCollider existe
+        if (GetComponent<BoxCollider>() == null)
         {
-            Debug.LogError("No se han asignado luces al sensor.");
+            Debug.LogError("El sensor de luminosidad no tiene un BoxCollider.");
+            return;
         }
     }
 
-    private void Update()
+    void Update()
     {
-        float totalIntensity = 0f;
+        // Obtener el centro del BoxCollider
+        Vector3 probePosition = GetComponent<BoxCollider>().bounds.center;
 
-        foreach (Light light in lights)
+        LightProbes.GetInterpolatedProbe(probePosition, null, out SphericalHarmonicsL2 sh);
+
+        currentLuminosity = 0.2126f * sh[0, 0] + 0.7152f * sh[1, 0] + 0.0722f * sh[2, 0];
+
+        Debug.Log("Luminosidad actual: " + currentLuminosity);
+
+        foreach (Light luz in luces)
         {
-            totalIntensity += light.intensity;
+            if (currentLuminosity < luminosidadMinima)
+            {
+                luz.intensity = Mathf.Min(luz.intensity + velocidadIncremento * Time.deltaTime, luminosidadMinima);
+                luz.enabled = true;
+            }
+            else
+            {
+                luz.intensity = luminosidadMinima;
+            }
+            Debug.Log("\tLuz: "+luz.name+" tiene una intensidad de: "+luz.intensity);
         }
-
-        float averageIntensity = totalIntensity / lights.Length;
-        _dataReciever.RecieveLuminosidadData(averageIntensity, true); 
     }
 }

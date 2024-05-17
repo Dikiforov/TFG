@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 
 public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 {
+    private bool pathImpreso;
     public int _serverPort = 1234;
     public string _serverIp = "192.168.1.47";
     private float _lastPresion;
@@ -25,6 +26,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     // Start is called before the first frame update
     void Start()
     {
+        pathImpreso = false;
         _lastMov = false;
         cicloDn = FindObjectOfType<CicloDN>();
         _lastTime = CicloDN.Hora;
@@ -91,7 +93,6 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             _datosParaEnviar = true;
             _lastLum = luminosidad;
         }
-        Debug.Log("_datosParaEnviar desde Luminosidad: "+ luminosidad);
     }
 
     public void RecieveMovimientoData(bool movement)
@@ -131,6 +132,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     {
         try
         {
+            string filePath = Path.Combine("C:/Users/dgall/Desktop/TFG", "sensor_data.txt");
             // Crear mensaje con los datos a enviar al servidor
             StringBuilder messageBuilder = new StringBuilder();
             TimeSpan tiempo = CicloDN.horaFormateada;
@@ -147,16 +149,26 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             messageBuilder.Append("Sonido:" + _lastSonido + ",");
             messageBuilder.Append("Presion:" + _lastPresion + ",");
             messageBuilder.Append("Humedad:" + _lastHumedad);
-        
+            
             string message = messageBuilder.ToString();
-            using (TcpClient client = new TcpClient(_serverIp, _serverPort))
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                if (!pathImpreso)
+                {
+                    Debug.Log("Path de almacenamiento de los datos: "+filePath);
+                    pathImpreso = true;
+                }
+                writer.WriteLine(message);
+            }
+
+            /*using (TcpClient client = new TcpClient(_serverIp, _serverPort))
             using (NetworkStream stream = client.GetStream())
             using (StreamWriter writer = new StreamWriter(stream))
             {
                 //Debug.Log("Envio el mensaje: " + message);
                 // Enviar el mensaje al servidor
                 writer.WriteLine(message);
-            }
+            }*/
         }
         catch (Exception ex)
         {
