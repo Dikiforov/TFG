@@ -1,53 +1,41 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class DetectionSensor : MonoBehaviour
 {
     private PlayerMovementTracker _playerMovementTracker;
-    private bool _playerInside;
-    private Coroutine _checkPlayerCoroutine; // Referencia al coroutine para detenerlo si el jugador sale del trigger
+    private BoxCollider _sensorCollider; // Referencia al BoxCollider del sensor
     private ISensorDataReciever _dataReciever;
+    private DetectionSensor sensorMovimiento;
+    public bool _hayMovimientoCache; 
+    
+    // Propiedad pública para acceder al estado de movimiento
+    public bool _playerInside; 
     private void Start()
     {
         _dataReciever = GetComponentInParent<ISensorDataReciever>();
         _playerMovementTracker = FindObjectOfType<PlayerMovementTracker>();
+        _sensorCollider = GetComponent<BoxCollider>(); // Obtener el BoxCollider
+
         if (_playerMovementTracker == null)
         {
             Debug.LogError("No se encontró el componente PlayerMovementTracker");
         }
 
-        _checkPlayerCoroutine = StartCoroutine(CheckPlayerMovement());
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (_sensorCollider == null)
         {
-            _playerInside = true;
+            Debug.LogError("El sensor de movimiento no tiene un BoxCollider.");
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Player"))
+        if (_sensorCollider != null && _playerMovementTracker != null) 
         {
-            _playerInside = false;
-        }
-    }
+            // Verificar si el jugador está dentro del área del sensor
+            _playerInside = _sensorCollider.bounds.Contains(_playerMovementTracker.transform.position);
 
-    // ReSharper disable Unity.PerformanceAnalysis
-    private IEnumerator CheckPlayerMovement()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            if (_playerInside)
-            {
-                _dataReciever.RecieveMovimientoData(_playerMovementTracker.IsMoving);
-            }
+            // Actualizar la variable _hayMovimientoCache
+            _hayMovimientoCache = _playerInside && _playerMovementTracker.IsMoving;
         }
     }
 }

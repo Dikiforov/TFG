@@ -1,48 +1,62 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-[RequireComponent(typeof(BoxCollider))] // Asegurarse de que el sensor tenga un BoxCollider
+[RequireComponent(typeof(BoxCollider))]
 public class SensorLuminosidad : MonoBehaviour
 {
     public Light[] luces;
     public float luminosidadMinima = 20f;
-    public float velocidadIncremento = 1f;
+    public float velocidadIncremento = 0.001f;
+    public float tiempoApagado = 5f;
 
     private float currentLuminosity;
+    public DetectionSensor detectionSensor; // Referencia al sensor de movimiento
+    private float tiempoSinMovimiento;
 
     private void Start()
     {
-        // Verificar si el componente BoxCollider existe
         if (GetComponent<BoxCollider>() == null)
         {
             Debug.LogError("El sensor de luminosidad no tiene un BoxCollider.");
             return;
         }
+
+        detectionSensor = transform.parent.GetComponentInChildren<DetectionSensor>();
+        if (detectionSensor == null)
+        {
+            Debug.LogError("El sensor de luminosidad no tiene un componente DetectionSensor.");
+        }
     }
 
     void Update()
     {
-        // Obtener el centro del BoxCollider
         Vector3 probePosition = GetComponent<BoxCollider>().bounds.center;
-
         LightProbes.GetInterpolatedProbe(probePosition, null, out SphericalHarmonicsL2 sh);
 
         currentLuminosity = 0.2126f * sh[0, 0] + 0.7152f * sh[1, 0] + 0.0722f * sh[2, 0];
 
-        Debug.Log("Luminosidad actual: " + currentLuminosity);
+        bool hayJugadorDentro = detectionSensor != null && detectionSensor._playerInside;
 
         foreach (Light luz in luces)
         {
-            if (currentLuminosity < luminosidadMinima)
+            Debug.Log("HayJugadorDentro: " + hayJugadorDentro + " intensidad: " + luz.intensity);
+
+            if (currentLuminosity < luminosidadMinima && hayJugadorDentro)
             {
-                luz.intensity = Mathf.Min(luz.intensity + velocidadIncremento * Time.deltaTime, luminosidadMinima);
-                luz.enabled = true;
-            }
-            else
-            {
+                // Encender la luz si hay poca luz y el jugador está dentro
                 luz.intensity = luminosidadMinima;
+                luz.enabled = true;
+                tiempoSinMovimiento = 0f; // Reiniciar el contador si el jugador está dentro
             }
-            Debug.Log("\tLuz: "+luz.name+" tiene una intensidad de: "+luz.intensity);
+            else if (luz.intensity > 0f && !hayJugadorDentro)
+            {
+                // Reducir la intensidad gradualmente si la luz está encendida y el jugador NO está dentro
+                tiempoSinMovimiento += Time.deltaTime;
+                if (tiempoSinMovimiento >= tiempoApagado)
+                {
+                    luz.enabled = false;
+                }
+            }
         }
     }
 }
