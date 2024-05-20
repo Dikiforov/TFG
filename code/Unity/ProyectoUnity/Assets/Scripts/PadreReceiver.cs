@@ -151,6 +151,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             messageBuilder.Append("Humedad:" + _lastHumedad);
             
             string message = messageBuilder.ToString();
+            Debug.Log(message+"\n\n");
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
                 if (!pathImpreso)

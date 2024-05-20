@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,15 +7,23 @@ public class SensorLuminosidad : MonoBehaviour
 {
     public Light[] luces;
     public float luminosidadMinima = 20f;
-    public float velocidadIncremento = 0.001f;
-    public float tiempoApagado = 5f;
 
+    public float tiempoApagado = 5f;
+    private ISensorDataReciever _dataReciever;
+    
     private float currentLuminosity;
     public DetectionSensor detectionSensor; // Referencia al sensor de movimiento
     private float tiempoSinMovimiento;
-
+    private CicloDN cicloDN;
+    
     private void Start()
     {
+        cicloDN = FindObjectOfType<CicloDN>(); // Obtener el script CicloDN
+        if (cicloDN == null)
+        {
+            Debug.LogError("No se encontró un componente CicloDN en la escena.");
+        }
+        _dataReciever = GetComponentInParent<ISensorDataReciever>();
         if (GetComponent<BoxCollider>() == null)
         {
             Debug.LogError("El sensor de luminosidad no tiene un BoxCollider.");
@@ -30,18 +39,11 @@ public class SensorLuminosidad : MonoBehaviour
 
     void Update()
     {
-        Vector3 probePosition = GetComponent<BoxCollider>().bounds.center;
-        LightProbes.GetInterpolatedProbe(probePosition, null, out SphericalHarmonicsL2 sh);
-
-        currentLuminosity = 0.2126f * sh[0, 0] + 0.7152f * sh[1, 0] + 0.0722f * sh[2, 0];
-
         bool hayJugadorDentro = detectionSensor != null && detectionSensor._playerInside;
-
+        
         foreach (Light luz in luces)
         {
-            Debug.Log("HayJugadorDentro: " + hayJugadorDentro + " intensidad: " + luz.intensity);
-
-            if (currentLuminosity < luminosidadMinima && hayJugadorDentro)
+            if (hayJugadorDentro && !(CicloDN.Hora >= 8 && CicloDN.Hora <= 20))
             {
                 // Encender la luz si hay poca luz y el jugador está dentro
                 luz.intensity = luminosidadMinima;
@@ -57,6 +59,11 @@ public class SensorLuminosidad : MonoBehaviour
                     luz.enabled = false;
                 }
             }
+        }
+
+        if (cicloDN != null)
+        {
+            _dataReciever.RecieveLuminosidadData(cicloDN.IntensidadLuminica, true);
         }
     }
 }

@@ -32,6 +32,11 @@ public class CicloDN : MonoBehaviour
     };
 
     public GameObject Sol;
+    public Light luzSolar; // Referencia al componente Light del sol
+    public float intensidadMaxima = 1f; // Intensidad máxima de la luz solar al mediodía
+    public float intensidadMinima = 0.2f; // Intensidad mínima de la luz solar durante la noche
+    public float IntensidadLuminica; // Propiedad pública para acceder a la intensidad
+
     public float DuracionDiaMin = 1;
 
     void Start()
@@ -39,7 +44,11 @@ public class CicloDN : MonoBehaviour
         TempMaxima = temperaturas[(int)EstacionSeleccionada, 0];
         TempMinima = temperaturas[(int)EstacionSeleccionada, 1];
         TempActual = TempMinima;
-
+        luzSolar = Sol.GetComponent<Light>();
+        if (luzSolar == null)
+        {
+            Debug.LogError("El GameObject del sol no tiene un componente Light.");
+        }
         IniSolX = (Hora * (-90)) * 12;
         Sol.transform.localEulerAngles = new Vector3(IniSolX, 0, 0);
     }
@@ -53,10 +62,25 @@ public class CicloDN : MonoBehaviour
             NuevoDiaTemperaturas();
         }
 
+        AjustarIntensidadLuzSolar();
         TempActual = CalculoTemperatura();
         RotacionSol();
     }
+    void AjustarIntensidadLuzSolar()
+    {
+        if (luzSolar != null)
+        {
+            // Calcular la intensidad de la luz solar en función de la hora
+            float t = Mathf.InverseLerp(0f, 24f, Hora); // Normalizar la hora a un valor entre 0 y 1
+            float intensidad = Mathf.Lerp(intensidadMinima, intensidadMaxima, Mathf.Sin(t * Mathf.PI));
+            luzSolar.intensity = intensidad;
 
+            // Actualizar la propiedad IntensidadLuminica
+            IntensidadLuminica = intensidad;
+        }
+        //Debug.Log("\t\tIntensidad de sol en el script: "+IntensidadLuminica);
+    }
+    
     void RotacionSol()
     {
         SolX = 15 * Hora;

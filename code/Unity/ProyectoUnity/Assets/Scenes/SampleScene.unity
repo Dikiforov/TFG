@@ -7145,7 +7145,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EstacionSeleccionada: 0
   Sol: {fileID: 705507993}
-  DuracionDiaMin: 12
+  luzSolar: {fileID: 0}
+  intensidadMaxima: 20
+  intensidadMinima: 1
+  DuracionDiaMin: 1
 --- !u!1 &1376809114
 GameObject:
   m_ObjectHideFlags: 0
@@ -9301,10 +9304,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   luces:
   - {fileID: 1007773263}
-  luminosidadMinima: 20
+  luminosidadMinima: 10
   velocidadIncremento: 1
   tiempoApagado: 5
   detectionSensor: {fileID: 0}
+  luzSolar: {fileID: 705507994}
 --- !u!65 &2100530061
 BoxCollider:
   m_ObjectHideFlags: 0
