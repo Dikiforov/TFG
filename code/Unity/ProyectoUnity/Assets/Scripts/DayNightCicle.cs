@@ -33,11 +33,11 @@ public class CicloDN : MonoBehaviour
 
     public GameObject Sol;
     public Light luzSolar; // Referencia al componente Light del sol
-    public float intensidadMaxima = 1f; // Intensidad máxima de la luz solar al mediodía
-    public float intensidadMinima = 0.2f; // Intensidad mínima de la luz solar durante la noche
+    public float intensidadMaxima; // Intensidad máxima de la luz solar al mediodía
+    public float intensidadMinima; // Intensidad mínima de la luz solar durante la noche
     public float IntensidadLuminica; // Propiedad pública para acceder a la intensidad
 
-    public float DuracionDiaMin = 1;
+    public float DuracionDiaMin;
 
     void Start()
     {

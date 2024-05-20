@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class SensorLuminosidad : MonoBehaviour
 {
     public Light[] luces;
-    public float luminosidadMinima = 20f;
+    public float luminosidadMinima = 10f;
 
     public float tiempoApagado = 5f;
     private ISensorDataReciever _dataReciever;
@@ -15,9 +15,10 @@ public class SensorLuminosidad : MonoBehaviour
     public DetectionSensor detectionSensor; // Referencia al sensor de movimiento
     private float tiempoSinMovimiento;
     private CicloDN cicloDN;
-    
+    private float luminosidad;
     private void Start()
     {
+        luminosidad = 0;
         cicloDN = FindObjectOfType<CicloDN>(); // Obtener el script CicloDN
         if (cicloDN == null)
         {
@@ -40,14 +41,18 @@ public class SensorLuminosidad : MonoBehaviour
     void Update()
     {
         bool hayJugadorDentro = detectionSensor != null && detectionSensor._playerInside;
-        
         foreach (Light luz in luces)
         {
+            if (cicloDN != null && !luz.enabled)
+            {
+                luminosidad = cicloDN.IntensidadLuminica;
+            }
             if (hayJugadorDentro && !(CicloDN.Hora >= 8 && CicloDN.Hora <= 20))
             {
                 // Encender la luz si hay poca luz y el jugador está dentro
                 luz.intensity = luminosidadMinima;
                 luz.enabled = true;
+                luminosidad = luz.intensity;
                 tiempoSinMovimiento = 0f; // Reiniciar el contador si el jugador está dentro
             }
             else if (luz.intensity > 0f && !hayJugadorDentro)
@@ -60,10 +65,6 @@ public class SensorLuminosidad : MonoBehaviour
                 }
             }
         }
-
-        if (cicloDN != null)
-        {
-            _dataReciever.RecieveLuminosidadData(cicloDN.IntensidadLuminica, true);
-        }
+        _dataReciever.RecieveLuminosidadData(luminosidad, true);
     }
 }
