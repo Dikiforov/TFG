@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\ComunicacionPadreHijo.cs" />
      <Compile Include="Assets\Scripts\MovementSensor.cs" />
+     <Compile Include="Assets\Scripts\SensorHumedad.cs" />
      <Compile Include="Assets\Scripts\SensorLuminosidad.cs" />
      <Compile Include="Assets\Scripts\PlayerTracker.cs" />
      <Compile Include="Assets\Scripts\DoorMovement.cs" />

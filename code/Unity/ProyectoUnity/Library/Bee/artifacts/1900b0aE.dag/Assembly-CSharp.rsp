@@ -366,6 +366,7 @@
 "Assets/Scripts/PadreReceiver.cs"
 "Assets/Scripts/PlayerMovement.cs"
 "Assets/Scripts/PlayerTracker.cs"
+"Assets/Scripts/SensorHumedad.cs"
 "Assets/Scripts/SensorLuminosidad.cs"
 "Assets/Scripts/SensorPuerta.cs"
 "Assets/Scripts/SensorTemperatura.cs"
