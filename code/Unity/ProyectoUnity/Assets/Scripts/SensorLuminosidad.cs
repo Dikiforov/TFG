@@ -2,7 +2,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-[RequireComponent(typeof(BoxCollider))]
 public class SensorLuminosidad : MonoBehaviour
 {
     public Light[] luces;

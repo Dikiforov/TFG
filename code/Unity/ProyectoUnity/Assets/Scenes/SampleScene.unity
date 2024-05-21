@@ -1875,7 +1875,7 @@ GameObject:
   - component: {fileID: 427807368}
   - component: {fileID: 427807369}
   m_Layer: 0
-  m_Name: SensorTemperatura
+  m_Name: Sensor Temperatura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1932,6 +1932,56 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3939.525, y: 1984.722, z: 1484.79}
   m_Center: {x: -1970.2625, y: -991.861, z: -741.895}
+--- !u!1 &441338063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 441338064}
+  - component: {fileID: 441338065}
+  m_Layer: 0
+  m_Name: Sensor Luminosidad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &441338064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441338063}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1195412838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &441338065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441338063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891c3487313776d489081cc2cc11ffbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luces:
+  - {fileID: 1349813680}
+  - {fileID: 1017646049}
+  luminosidadMinima: 10
+  tiempoApagado: 5
+  detectionSensor: {fileID: 0}
 --- !u!1 &469935766
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,53 +2256,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 511321930}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &496315484
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 496315485}
-  - component: {fileID: 496315486}
-  m_Layer: 0
-  m_Name: SensorTemperatura
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &496315485
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496315484}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1195412838}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &496315486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496315484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f1c36be6ab96f44bcb32e1d7740c2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  temperaturaActual: 0
-  nombreComponente: SalonComedor
-  cicloDn: {fileID: 1360500525}
 --- !u!1 &498231296
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,7 +2609,7 @@ GameObject:
   - component: {fileID: 527455239}
   - component: {fileID: 527455240}
   m_Layer: 0
-  m_Name: SensorHumedad
+  m_Name: Sensor Humedad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2621,7 +2624,7 @@ Transform:
   m_GameObject: {fileID: 527455238}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14205.117, y: 26952.146, z: 560.2693}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2994,6 +2997,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610491258}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &615095927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 615095928}
+  - component: {fileID: 615095929}
+  m_Layer: 0
+  m_Name: Sensor Temperatura
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &615095928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615095927}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1195412838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &615095929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615095927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f1c36be6ab96f44bcb32e1d7740c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperaturaActual: 0
+  nombreComponente: Salon
+  cicloDn: {fileID: 1360500525}
 --- !u!1 &658643055
 GameObject:
   m_ObjectHideFlags: 0
@@ -3111,7 +3161,7 @@ GameObject:
   - component: {fileID: 675342010}
   - component: {fileID: 675342011}
   m_Layer: 0
-  m_Name: VisagraRecibidorSalon
+  m_Name: AperturaRecibidorSalon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3493,37 +3543,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1360500524}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1 &730627627
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 730627628}
-  m_Layer: 0
-  m_Name: SensorMovimiento
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &730627628
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730627627}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1195412838}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740399228
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,6 +3681,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781869302}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &789389146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 789389147}
+  - component: {fileID: 789389148}
+  m_Layer: 0
+  m_Name: Sensor Humedad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &789389147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789389146}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -0.5, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1195412838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &789389148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789389146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc59a51e878fd9f4293759dc5409ef8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humedadBase: 65
+  variacionManana: 15
+  variacionMediodia: -10
 --- !u!1 &792360145
 GameObject:
   m_ObjectHideFlags: 0
@@ -3767,6 +3833,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1075954615}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &794487885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 794487886}
+  - component: {fileID: 794487888}
+  - component: {fileID: 794487887}
+  m_Layer: 0
+  m_Name: Sensor Movimiento
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &794487886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794487885}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1195412838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &794487887
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794487885}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2659.0776, y: 2004.8628, z: 3507.783}
+  m_Center: {x: -978.87915, y: -1001.9314, z: -1665.7482}
+--- !u!114 &794487888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794487885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23eaba5aa52d168448f3e9a4475bf116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hayMovimientoCache: 0
+  _playerInside: 0
 --- !u!1 &808616730
 GameObject:
   m_ObjectHideFlags: 0
@@ -4913,7 +5047,7 @@ GameObject:
   - component: {fileID: 974524154}
   - component: {fileID: 974524155}
   m_Layer: 0
-  m_Name: VisagraRecibidorCocina
+  m_Name: AperturaRecibidorCocina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5766,37 +5900,6 @@ Transform:
   - {fileID: 1566555914}
   m_Father: {fileID: 1622214361}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1095587194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1095587195}
-  m_Layer: 0
-  m_Name: SensorHumedad
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1095587195
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095587194}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1195412838}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1128977053
 GameObject:
   m_ObjectHideFlags: 0
@@ -6361,14 +6464,15 @@ Transform:
   m_GameObject: {fileID: 1195412837}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10397.189, y: -25533.918, z: 2694.2524}
+  m_LocalPosition: {x: -1407.4277, y: 1417.7285, z: 3054.021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 496315485}
-  - {fileID: 1095587195}
-  - {fileID: 730627628}
   - {fileID: 1247944103}
+  - {fileID: 615095928}
+  - {fileID: 789389147}
+  - {fileID: 441338064}
+  - {fileID: 794487886}
   m_Father: {fileID: 1172073578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1195412839
@@ -6378,7 +6482,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195412837}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17bad7ed6a5aa504ea00f35dbd01c98f, type: 3}
   m_Name: 
@@ -6658,7 +6762,7 @@ GameObject:
   - component: {fileID: 1247944105}
   - component: {fileID: 1247944104}
   m_Layer: 0
-  m_Name: VisagraSalonPasillo
+  m_Name: AperturaSalonPasillo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6672,8 +6776,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247944102}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -11455.117, y: 24952.146, z: -3089.732}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 349.5, y: -1999.5, z: -3449.5005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6699,8 +6803,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 488.75906, y: 1992.7922, z: 899.87933}
-  m_Center: {x: -23.45668, y: 977.0574, z: -449.43967}
+  m_Size: {x: 489.53986, y: 1992.7922, z: 899.87933}
+  m_Center: {x: 22.050629, y: 977.0574, z: -449.43967}
 --- !u!114 &1247944105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7419,7 +7523,7 @@ GameObject:
   - component: {fileID: 1523992724}
   - component: {fileID: 1523992725}
   m_Layer: 0
-  m_Name: VisagraRecibidoHabitacion4
+  m_Name: AperturaRecibidoHabitacion4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8845,7 +8949,7 @@ GameObject:
   - component: {fileID: 1873691469}
   - component: {fileID: 1873691468}
   m_Layer: 0
-  m_Name: SensorMovimiento
+  m_Name: Sensor Movimiento
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9286,7 +9390,7 @@ GameObject:
   - component: {fileID: 2100530061}
   - component: {fileID: 2100530060}
   m_Layer: 0
-  m_Name: SensorLuminico
+  m_Name: Sensor Luminico
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

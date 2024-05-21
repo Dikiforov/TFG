@@ -45,17 +45,17 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\ComunicacionPadreHijo.cs" />
-     <Compile Include="Assets\Scripts\MovementSensor.cs" />
+     <Compile Include="Assets\Scripts\SensorMovimiento.cs" />
+     <Compile Include="Assets\Scripts\SensorApertura_2.cs" />
+     <Compile Include="Assets\Scripts\UsuarioMovimiento.cs" />
      <Compile Include="Assets\Scripts\SensorHumedad.cs" />
+     <Compile Include="Assets\Scripts\InteficieComunicacion.cs" />
+     <Compile Include="Assets\Scripts\UsuarioSeguimiento.cs" />
      <Compile Include="Assets\Scripts\SensorLuminosidad.cs" />
-     <Compile Include="Assets\Scripts\PlayerTracker.cs" />
-     <Compile Include="Assets\Scripts\DoorMovement.cs" />
+     <Compile Include="Assets\Scripts\SensorApertura.cs" />
+     <Compile Include="Assets\Scripts\CicloDiaNoche.cs" />
      <Compile Include="Assets\Scripts\SensorTemperatura.cs" />
-     <Compile Include="Assets\Scripts\DayNightCicle.cs" />
-     <Compile Include="Assets\Scripts\SensorPuerta.cs" />
-     <Compile Include="Assets\Scripts\PadreReceiver.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\ReceptorDatos.cs" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\Variations\mono\Managed\UnityEngine.dll</HintPath>
      </Reference>
