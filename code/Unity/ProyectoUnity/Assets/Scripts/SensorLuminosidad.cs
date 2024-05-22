@@ -24,11 +24,11 @@ public class SensorLuminosidad : MonoBehaviour
             Debug.LogError("No se encontró un componente CicloDN en la escena.");
         }
         _dataReciever = GetComponentInParent<ISensorDataReciever>();
-        if (GetComponent<BoxCollider>() == null)
+        /*if (GetComponent<BoxCollider>() == null)
         {
             Debug.LogError("El sensor de luminosidad no tiene un BoxCollider.");
             return;
-        }
+        }*/
 
         detectionSensor = transform.parent.GetComponentInChildren<DetectionSensor>();
         if (detectionSensor == null)
