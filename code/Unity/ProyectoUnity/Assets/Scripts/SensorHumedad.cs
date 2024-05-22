@@ -9,8 +9,12 @@ public class SensorHumedad : MonoBehaviour
     private ISensorDataReciever _dataReciever;
     private float _ultimaHumedadEnviada;
 
-    private void Start()
+    private string nombrePlacaPadre; // Variable para almacenar el nombre del padre
+
+    // Start is called before the first frame update
+    void Start()
     {
+        nombrePlacaPadre = transform.parent.name;
         _dataReciever = GetComponentInParent<ISensorDataReciever>();
         _ultimaHumedadEnviada = 0f; // Inicializar para forzar el primer envío
     }
@@ -26,7 +30,7 @@ public class SensorHumedad : MonoBehaviour
         // Enviar datos si la humedad ha cambiado significativamente
         if (Mathf.Abs(humedadActual - _ultimaHumedadEnviada) >= 0.1f)
         {
-            _dataReciever.RecieveHumedadData(humedadActual, true);
+            _dataReciever.RecieveHumedadData(humedadActual, true, nombrePlacaPadre);
             _ultimaHumedadEnviada = humedadActual;
         }
     }

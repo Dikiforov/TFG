@@ -13,8 +13,12 @@ public class DoorController : MonoBehaviour
     private float _animationTime = 2f;  // Duración de la animación en segundos
     private ISensorDataReciever _dataReciever;
 
-    private void Start()
+    private string nombrePlacaPadre; // Variable para almacenar el nombre del padre
+
+    // Start is called before the first frame update
+    void Start()
     {
+        nombrePlacaPadre = transform.parent.name;
         if (doorPivot == null)
         {
             Debug.LogError("No se ha asignado una visagra a la puerta.");
@@ -121,6 +125,6 @@ public class DoorController : MonoBehaviour
                 break;
             }
         }
-        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente);
+        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre);
     }
 }

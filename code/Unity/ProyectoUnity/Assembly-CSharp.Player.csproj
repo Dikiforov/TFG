@@ -628,6 +628,10 @@
      </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.Player.csproj">
+      <Project>{4e01e3d7-bc2d-c9ec-32f6-d3a67fe2b716}</Project>
+      <Name>Assembly-CSharp-firstpass.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.ProBuilder.Player.csproj">
       <Project>{4a12c0f0-e550-6404-0c60-583660a19bb2}</Project>
       <Name>Unity.ProBuilder.Player</Name>

@@ -10,8 +10,12 @@ public class DetectionSensor : MonoBehaviour
     
     // Propiedad pública para acceder al estado de movimiento
     public bool _playerInside; 
-    private void Start()
+    private string nombrePlacaPadre; // Variable para almacenar el nombre del padre
+
+    // Start is called before the first frame update
+    void Start()
     {
+        nombrePlacaPadre = transform.parent.name;
         _dataReciever = GetComponentInParent<ISensorDataReciever>();
         _playerMovementTracker = FindObjectOfType<PlayerMovementTracker>();
         _sensorCollider = GetComponent<BoxCollider>(); // Obtener el BoxCollider
@@ -37,6 +41,6 @@ public class DetectionSensor : MonoBehaviour
             // Actualizar la variable _hayMovimientoCache
             _hayMovimientoCache = _playerInside && _playerMovementTracker.IsMoving;
         }
-        _dataReciever.RecieveMovimientoData(_hayMovimientoCache);
+        _dataReciever.RecieveMovimientoData(_hayMovimientoCache, nombrePlacaPadre);
     }
 }

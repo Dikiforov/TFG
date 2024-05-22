@@ -931,6 +931,10 @@
      </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{cd5165ac-a087-6f39-d958-4c53697bdc0a}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj">
       <Project>{de38a281-a8ed-ccf2-d386-a3e1693ee0aa}</Project>
       <Name>Unity.EditorCoroutines.Editor</Name>

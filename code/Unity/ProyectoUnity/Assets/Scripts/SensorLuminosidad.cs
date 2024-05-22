@@ -15,8 +15,12 @@ public class SensorLuminosidad : MonoBehaviour
     private float tiempoSinMovimiento;
     private CicloDN cicloDN;
     private float luminosidad;
-    private void Start()
+    private string nombrePlacaPadre; // Variable para almacenar el nombre del padre
+
+    // Start is called before the first frame update
+    void Start()
     {
+        nombrePlacaPadre = transform.parent.name;
         luminosidad = 0;
         cicloDN = FindObjectOfType<CicloDN>(); // Obtener el script CicloDN
         if (cicloDN == null)
@@ -64,6 +68,6 @@ public class SensorLuminosidad : MonoBehaviour
                 }
             }
         }
-        _dataReciever.RecieveLuminosidadData(luminosidad, true);
+        _dataReciever.RecieveLuminosidadData(luminosidad, true, nombrePlacaPadre);
     }
 }

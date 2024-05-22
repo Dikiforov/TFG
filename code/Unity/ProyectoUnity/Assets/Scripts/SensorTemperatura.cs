@@ -8,10 +8,12 @@ public class SensorTemperatura : MonoBehaviour
     public CicloDN cicloDn;
 
     private ISensorDataReciever _dataReciever;
-    
+    private string nombrePlacaPadre; // Variable para almacenar el nombre del padre
+
     // Start is called before the first frame update
     void Start()
     {
+        nombrePlacaPadre = transform.parent.name;
         cicloDn = FindObjectOfType<CicloDN>();
         _temperaturaAnterior = temperaturaActual;
         _dataReciever = GetComponentInParent<ISensorDataReciever>();
@@ -35,7 +37,7 @@ public class SensorTemperatura : MonoBehaviour
         {
             //Debug.Log("Ant: "+ tAnteriorRedondeada + "- Act:" + tActualRedondeada + "- Enviar: " + enviarData + "Hora:" + _horaActual);
             _temperaturaAnterior = temperaturaActual;
-            _dataReciever.RecieveTempData(tActualRedondeada, enviarData);
+            _dataReciever.RecieveTempData(tActualRedondeada, enviarData, nombrePlacaPadre);
         }
     }
 }
