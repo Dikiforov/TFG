@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using UnityEngine.Serialization;
+using System.Collections;
 
 public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 {
@@ -46,7 +47,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             SendDataToServer();
         }
     }
-
+    
     public void RecieveTempData(float temperature, bool enviarData, string nombrePlaca)
     {
         ActualizarDatoPlaca(nombrePlaca, "Temperatura", temperature, enviarData);
@@ -120,4 +121,82 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             Debug.LogError("Error al enviar datos al servidor: " + ex.Message);
         }
     }
+    [Serializable]
+    public class SensorData
+    {
+        public float Temperatura;
+        public string Puertas;
+        public float Luminosidad;
+        public bool Movimiento;
+        public float Sonido;
+        public float Presion;
+        public float Humedad;
+    }
+
+    [Serializable]
+    public class PlacaData
+    {
+        public string Nombre;
+        public List<SensorData> Datos = new List<SensorData>();
+    }
+
+    [Serializable]
+    public class RegistroDatos
+    {
+        public string FechaHora;
+        public List<PlacaData> Placas = new List<PlacaData>();
+    }
+    /*private void SaveDataToJson()
+    {
+        try
+        {
+            string filePath = Path.Combine("C:/Users/dgall/Desktop/TFG", "sensor_data.json");
+
+            // Crear una instancia de RegistroDatos
+            RegistroDatos registro = new RegistroDatos
+            {
+                FechaHora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            };
+
+            // Iterar sobre las placas y sus datos
+            foreach (var placa in datosPlacas)
+            {
+                PlacaData placaData = new PlacaData
+                {
+                    Nombre = placa.Key
+                };
+
+                foreach (var dato in placa.Value)
+                {
+                    SensorData sensorData = new SensorData
+                    {
+                        Temperatura = (float)dato.Value["Temperatura"],
+                        Puertas = (string)dato.Value["Puertas"],
+                        Luminosidad = (float)dato.Value["Luminosidad"],
+                        Movimiento = (bool)dato.Value["Movimiento"],
+                        Sonido = (float)dato.Value["Sonido"],
+                        Presion = (float)dato.Value["Presion"],
+                        Humedad = (float)dato.Value["Humedad"]
+                    };
+                    placaData.Datos.Add(sensorData);
+                }
+
+                registro.Placas.Add(placaData);
+            }
+
+            // Serializar a JSON y guardar en el archivo
+            string jsonString = JsonUtility.ToJson(registro, true); // El segundo parámetro 'true' formatea el JSON para mejor legibilidad
+            File.WriteAllText(filePath, jsonString);
+
+            if (!pathImpreso)
+            {
+                Debug.Log("Path de almacenamiento de los datos: " + filePath);
+                pathImpreso = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Error al guardar datos en el archivo JSON: " + ex.Message);
+        }
+    }*/
 }
