@@ -6,43 +6,57 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine.Serialization;
 using System.Collections;
+using System.Linq;
+using System.Xml;
+using static UnityEngine.JsonUtility;
+
+
 
 public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 {
+    [Serializable]
+    public class SensorData
+    {
+        public string hora;
+        public float Temperatura;
+        public string Puertas;
+        public float Luminosidad;
+        public bool Movimiento;
+        public float Humedad;
+    }
+    [Serializable] // Asegúrate de que esta clase sea serializable
+    public class DatosPlaca // Nueva clase para representar los datos de una placa
+    {
+        public string Placa;
+        public List<SensorData> Datos; 
+    }
     public int _serverPort;
     public string _serverIp = "192.168.1.";
     
-    private bool _lastMov;
-    private float _lastTime;
-    private Dictionary<string, bool> estadoPuertas = new Dictionary<string, bool>();
-
-    private Dictionary<string, Dictionary<string, object>> datosPlacas =
-        new Dictionary<string, Dictionary<string, object>>();
     
-    private Dictionary<string, Dictionary<string, object>> _ultimosDatosPlacas =
-        new Dictionary<string, Dictionary<string, object>>();
     [FormerlySerializedAs("CicloDn")] public CicloDN cicloDn;
 
     private bool _datosParaEnviar;
 
+    private SensorData datosActuales = new SensorData();
+    private SensorData ultimosDatos;
+    private Dictionary<string, Dictionary<string, SensorData>> datosPorPlaca = new Dictionary<string, Dictionary<string, SensorData>>();
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        _lastMov = false;
         cicloDn = FindObjectOfType<CicloDN>();
-        _lastTime = CicloDN.Hora;
     }
 
     private void Update()
     {
         var hora = CicloDN.Hora;
-        var diferencia = Mathf.Abs(hora - _lastTime);
 
         if (_datosParaEnviar)
         {
             _datosParaEnviar = false;
-            _lastTime = hora;
-            SendDataToParent();
+            AlmacenarDatos();
         }
     }
 
@@ -74,137 +88,74 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 
     private void ActualizarDatoPlaca(string nombrePlaca, string tipoDato, object valor, bool enviarData)
     {
-        if (!datosPlacas.ContainsKey(nombrePlaca))
+        datosActuales.hora = CicloDN.horaFormateada.ToString(@"hh\:mm\:ss");
+        switch (tipoDato)
         {
-            datosPlacas[nombrePlaca] = new Dictionary<string, object>();
+            case "Temperatura":
+                datosActuales.Temperatura = (float)valor;
+                break;
+            case "Puertas":
+                datosActuales.Puertas = (string)valor;
+                break;
+            case "Luminosidad":
+                datosActuales.Luminosidad = (float)valor;
+                break;
+            case "Movimiento":
+                datosActuales.Movimiento = (bool)valor; 
+                break;
+            case "Humedad":
+                datosActuales.Humedad = (float)valor; 
+                break;
         }
-        datosPlacas[nombrePlaca][tipoDato] = valor;
-        if (datosPlacas != _ultimosDatosPlacas)
+        bool datosCambiados = ultimosDatos == null ||
+                              !SonDatosIguales(ultimosDatos, datosActuales);
+
+        // Comprobar si ha pasado el tiempo mínimo desde el último envío
+        //bool tiempoTranscurrido = (Time.time - _lastTime) >= intervaloEnvioMinimo;
+
+        if (datosCambiados)
         {
-            _ultimosDatosPlacas = datosPlacas;
-            _datosParaEnviar = true;
-        }
-    }
-
-    private void SendDataToParent()
-    {
-        
-    }
-}
-
-/*private void SendDataToServer()
-{
-    try
-    {
-        string filePath = Path.Combine("C:/Users/Daniil/Documents/GitHub/TFG", "sensor_data.txt");
-
-        using (StreamWriter writer = new StreamWriter(filePath, true))
-        {
-            if (!pathImpreso)
+            ultimosDatos = datosActuales; // Actualizar ultimosDatos
+            // Almacenar los datos por placa y hora
+            if (!datosPorPlaca.ContainsKey(nombrePlaca))
             {
-                //Debug.Log("Path de almacenamiento de los datos: " + filePath);
-                pathImpreso = true;
+                datosPorPlaca[nombrePlaca] = new Dictionary<string, SensorData>();
             }
+            datosPorPlaca[nombrePlaca][datosActuales.hora] = datosActuales;
 
-            foreach (var placa in datosPlacas)
-            {
-                TimeSpan tiempo = CicloDN.horaFormateada;
-                string mensaje = $"{placa.Key} {string.Format("{0:D2}:{1:D2}:{2:D2}", tiempo.Hours, tiempo.Minutes, tiempo.Seconds)};";
-                foreach (var dato in placa.Value)
-                {
-                    mensaje += $"{dato.Key}:{dato.Value},";
-                }
-                mensaje = mensaje.TrimEnd(','); // Eliminar la última coma
-
-                writer.WriteLine(mensaje);
-                if (mensaje.Contains("PlacaRecibidor"))
-                {
-                    Debug.Log(mensaje);
-                }
-            }
+            _datosParaEnviar = true; // Indicar que hay datos para enviar
         }
     }
-    catch (Exception ex)
+    private bool SonDatosIguales(SensorData datos1, SensorData datos2)
     {
-        Debug.LogError("Error al enviar datos al servidor: " + ex.Message);
+        return datos1.Temperatura == datos2.Temperatura &&
+               datos1.Puertas == datos2.Puertas &&
+               datos1.Luminosidad == datos2.Luminosidad &&
+               datos1.Movimiento == datos2.Movimiento &&
+               datos1.Humedad == datos2.Humedad;
     }
-}
-[Serializable]
-public class SensorData
-{
-    public float Temperatura;
-    public string Puertas;
-    public float Luminosidad;
-    public bool Movimiento;
-    public float Sonido;
-    public float Presion;
-    public float Humedad;
-}
 
-[Serializable]
-public class PlacaData
-{
-    public string Nombre;
-    public List<SensorData> Datos = new List<SensorData>();
-}
-
-[Serializable]
-public class RegistroDatos
-{
-    public string FechaHora;
-    public List<PlacaData> Placas = new List<PlacaData>();
-}
-/*private void SaveDataToJson()
-{
-    try
+    private void AlmacenarDatos()
     {
-        string filePath = Path.Combine("C:/Users/dgall/Desktop/TFG", "sensor_data.json");
+        // Convertir el diccionario datosPorPlaca a una lista de DatosPlaca
+        List<DatosPlaca> datosParaJson = datosPorPlaca.Select(
+            placa => new DatosPlaca { Placa = placa.Key, Datos = placa.Value.Values.ToList() }
+        ).ToList();
 
-        // Crear una instancia de RegistroDatos
-        RegistroDatos registro = new RegistroDatos
+        // Serializar a JSON usando JsonUtility
+        string json = JsonUtility.ToJson(new { Placas = datosParaJson }, true);
+
+        // Ruta completa del archivo en el directorio actual
+        string rutaArchivo = Path.Combine("/Users/Daniil/Documents/GitHub/TFG/", "Datos.json");
+
+        try
         {
-            FechaHora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-        };
-
-        // Iterar sobre las placas y sus datos
-        foreach (var placa in datosPlacas)
-        {
-            PlacaData placaData = new PlacaData
-            {
-                Nombre = placa.Key
-            };
-
-            foreach (var dato in placa.Value)
-            {
-                SensorData sensorData = new SensorData
-                {
-                    Temperatura = (float)dato.Value["Temperatura"],
-                    Puertas = (string)dato.Value["Puertas"],
-                    Luminosidad = (float)dato.Value["Luminosidad"],
-                    Movimiento = (bool)dato.Value["Movimiento"],
-                    Sonido = (float)dato.Value["Sonido"],
-                    Presion = (float)dato.Value["Presion"],
-                    Humedad = (float)dato.Value["Humedad"]
-                };
-                placaData.Datos.Add(sensorData);
-            }
-
-            registro.Placas.Add(placaData);
+            File.WriteAllText(rutaArchivo, json);
+            Debug.Log("Datos guardados en: " + rutaArchivo);
         }
-
-        // Serializar a JSON y guardar en el archivo
-        string jsonString = JsonUtility.ToJson(registro, true); // El segundo parámetro 'true' formatea el JSON para mejor legibilidad
-        File.WriteAllText(filePath, jsonString);
-
-        if (!pathImpreso)
+        catch (Exception e)
         {
-            Debug.Log("Path de almacenamiento de los datos: " + filePath);
-            pathImpreso = true;
+            Debug.LogError("Error al guardar los datos: " + e.Message);
         }
     }
-    catch (Exception ex)
-    {
-        Debug.LogError("Error al guardar datos en el archivo JSON: " + ex.Message);
-    }
 }
-}*/
