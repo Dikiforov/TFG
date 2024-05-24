@@ -73,12 +73,12 @@ public class CicloDN : MonoBehaviour
             // Calcular la intensidad de la luz solar en función de la hora
             float t = Mathf.InverseLerp(0f, 24f, Hora); // Normalizar la hora a un valor entre 0 y 1
             float intensidad = Mathf.Lerp(intensidadMinima, intensidadMaxima, Mathf.Sin(t * Mathf.PI));
+            
+            // Redondear a un decimal y asignar a la luz solar y a la propiedad IntensidadLuminica
+            intensidad = Mathf.Round(intensidad * 10f) / 10f; 
             luzSolar.intensity = intensidad;
-
-            // Actualizar la propiedad IntensidadLuminica
             IntensidadLuminica = intensidad;
         }
-        //Debug.Log("\t\tIntensidad de sol en el script: "+IntensidadLuminica);
     }
     
     void RotacionSol()

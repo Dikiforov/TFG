@@ -58,255 +58,76 @@
      <Compile Include="Assets\Scripts\ReceptorDatos.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\WorldMaterialsFree\Shaders\WorldMatHDRPFree.shader" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\ReferenceUnlit.shader" />
-     <None Include="Library\PackageCache\com.unity.settings-manager@2.0.1\package.json" />
-     <None Include="Library\PackageCache\com.unity.modules.subsystems@1.0.0\package.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
-     <None Include="Library\PackageCache\com.unity.modules.jsonserialize@1.0.0\package.json" />
      <Folder Include="Assets\WorldMaterialsFree\Shaders" />
-     <Folder Include="Library\PackageCache\com.unity.test-framework@1.1.33" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\DryRockyDirt\Materials" />
-     <None Include="Library\PackageCache\com.unity.modules.screencapture@1.0.0\package.json" />
-     <None Include="Library\PackageCache\com.unity.modules.cloth@1.0.0\package.json" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\NormalPreview.shader" />
      <Folder Include="Assets\Scripts" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\WorldMaterialsFree\Shaders\WorldMatLiteFree.shader" />
-     <Folder Include="Library\PackageCache\com.unity.modules.imgui@1.0.0" />
      <Folder Include="Assets\TextMesh Pro\Sprites" />
-     <None Include="Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0\package.json" />
-     <None Include="Library\PackageCache\com.unity.modules.ai@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\WoodenFlooring" />
-     <Folder Include="Library\PackageCache\com.unity.modules.animation@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.ugui@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.modules.xr@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.2d.tilemap@1.0.0\package.json" />
      <Folder Include="Assets\TextMesh Pro\Resources\Sprite Assets" />
-     <Folder Include="Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib\ReportGenerator" />
-     <None Include="Library\PackageCache\com.unity.ext.nunit@1.0.6\package.json" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\DiffuseVertexColor.shader" />
-     <Folder Include="Library\PackageCache\com.unity.ide.rider@3.0.24\Rider" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\CoarseConcrete" />
-     <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Tools\ShapeTool\on" />
-     <None Include="Library\PackageCache\com.unity.modules.assetbundle@1.0.0\package.json" />
      <None Include="Assets\WorldMaterialsFree\Shaders\WorldMatFree.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-     <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\package.json" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\LineBillboard.shader" />
-     <None Include="Library\PackageCache\com.unity.modules.imgui@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Graphics" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\RuinStoneBricks" />
-     <None Include="Library\PackageCache\com.unity.modules.tilemap@1.0.0\package.json" />
      <Folder Include="Assets\ProBuilder Data" />
-     <Folder Include="Library\PackageCache\com.unity.modules.assetbundle@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\VertexPicker.shader" />
      <Folder Include="Assets\Materiales\light-plank-flooring-unity\Materials" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\GrassClumps" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\WavySand" />
-     <None Include="Library\PackageCache\com.unity.timeline@1.7.5\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\DiffuseTextureBlend.shader" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\LineBillboardMetal.shader" />
      <Folder Include="Assets\TextMesh Pro\Resources\Fonts &amp; Materials" />
-     <Folder Include="Library\PackageCache\com.unity.visualscripting@1.8.0" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files" />
-     <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.18\ValidationConfig.json" />
-     <Folder Include="Library\PackageCache\com.unity.ext.nunit@1.0.6\net35" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
-     <None Include="Library\PackageCache\com.unity.modules.terrainphysics@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons" />
-     <Folder Include="Library\PackageCache\com.unity.performance.profile-analyzer@1.2.2" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Resources\Textures" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\ScrollHighlight.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\UnlitSolidColor.shader" />
      <Folder Include="Assets\TextMesh Pro\Resources" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\ClumpMud" />
-     <Folder Include="Library\PackageCache\com.unity.modules.screencapture@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.visualscripting@1.8.0\package.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\AgedDarkWood\Materials" />
-     <None Include="Library\PackageCache\com.unity.editorcoroutines@1.0.0\package.json" />
-     <None Include="Library\PackageCache\com.unity.timeline@1.7.5\ValidationExceptions.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\DryRockyDirt" />
-     <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.5\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.timeline@1.7.5" />
-     <Folder Include="Library\PackageCache\com.unity.modules.cloth@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\PackageConversionData.json" />
      <Folder Include="Assets\Materiales\light-plank-flooring-unity" />
-     <None Include="Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.feature.development@1.0.1" />
-     <Folder Include="Library\PackageCache\com.unity.ext.nunit@1.0.6" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\TransparentOverlay.shader" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\UnlitVertexColor.shader" />
      <Folder Include="Assets\WorldMaterialsFree\URPMaterials" />
-     <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.18\package.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-     <Folder Include="Library\PackageCache\com.unity.modules.imageconversion@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.modules.terrainphysics@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.modules.imageconversion@1.0.0\package.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\CoarseConcrete\Materials" />
      <Folder Include="Assets\WorldMaterialsFree\HDRPMaterials" />
-     <Folder Include="Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\ValidationExceptions.json" />
-     <Folder Include="Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0" />
      <Folder Include="Assets\Materiales" />
-     <None Include="Library\PackageCache\com.unity.feature.development@1.0.1\package.json" />
      <Folder Include="Assets\TextMesh Pro" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Tools\PolyShape" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1" />
-     <None Include="Library\PackageCache\com.unity.modules.unityanalytics@1.0.0\package.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\PebbledGravel" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Cursors" />
-     <Folder Include="Library\PackageCache\com.unity.modules.subsystems@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.ide.rider@3.0.24\package.json" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\EdgePicker.shader" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Resources\Materials" />
      <Folder Include="Assets\WorldMaterialsFree\Built-In_RPMaterials" />
-     <None Include="Library\PackageCache\com.unity.modules.video@1.0.0\package.json" />
-     <None Include="Library\PackageCache\com.unity.test-framework@1.1.33\package.json" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\VertexShader.shader" />
-     <Folder Include="Library\PackageCache\com.unity.modules.unityanalytics@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.modules.physics@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Scripts" />
-     <Folder Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime" />
-     <Folder Include="Library\PackageCache\com.unity.modules.vr@1.0.0" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\SimpleRedBricks\Materials" />
-     <Folder Include="Library\PackageCache\com.unity.testtools.codecoverage@1.2.4" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\UVEditor" />
-     <Folder Include="Library\PackageCache\com.unity.modules.physics2d@1.0.0" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\DesertCliffRock" />
-     <None Include="Library\PackageCache\com.unity.performance.profile-analyzer@1.2.2\package.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\BrushedIron\Materials" />
-     <None Include="Library\PackageCache\com.unity.modules.particlesystem@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.modules.wind@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.modules.physics2d@1.0.0\package.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\BrushedIron" />
-     <None Include="Library\PackageCache\com.unity.modules.vr@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.modules.uielements@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.visualscripting@1.8.0\ValidationExceptions.json" />
-     <Folder Include="Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-     <Folder Include="Library\PackageCache\com.unity.modules.particlesystem@1.0.0" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Upgrade\AssetIdRemap-4_0_0.json" />
-     <Folder Include="Library\PackageCache\com.unity.settings-manager@2.0.1" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Resources" />
-     <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.18\ValidationExceptions.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\SimpleRedBricks" />
-     <None Include="Library\PackageCache\com.unity.modules.wind@1.0.0\package.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\BasketWeaveBricks\Materials" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\FacePicker.shader" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0\Tests" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-     <None Include="Library\PackageCache\com.unity.modules.umbra@1.0.0\package.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\PlainFabric" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\SmoothingPreview.shader" />
-     <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Textures" />
-     <Folder Include="Library\PackageCache\com.unity.modules.tilemap@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.editorcoroutines@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.modules.ui@1.0.0" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.modules.androidjni@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.performance.profile-analyzer@1.2.2\Tests" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <Folder Include="Assets\TextMesh Pro\Shaders" />
-     <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Gizmos" />
-     <None Include="Library\PackageCache\com.unity.modules.audio@1.0.0\package.json" />
-     <None Include="Library\PackageCache\com.unity.modules.physics@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.collab-proxy@2.0.5" />
      <Folder Include="Assets\TextMesh Pro\Resources\Style Sheets" />
      <Folder Include="Assets\TextMesh Pro\Fonts" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\ProBuilderCG.cginc" />
-     <None Include="Library\PackageCache\com.unity.modules.vehicles@1.0.0\package.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\GrassGravel" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Tools\ShapeTool" />
-     <None Include="Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6" />
-     <Folder Include="Library\PackageCache\com.unity.ide.rider@3.0.24" />
-     <None Include="Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0\package.json" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-     <Folder Include="Library\PackageCache\com.unity.2d.tilemap@1.0.0\Tests" />
-     <None Include="Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Modes" />
-     <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_SDF_SSD.cginc" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Toolbar\Background" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Toolbar" />
-     <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.5\ValidationConfig.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\AgedDarkWood" />
-     <Folder Include="Library\PackageCache\com.unity.ide.vscode@1.2.5" />
-     <Folder Include="Library\PackageCache\com.unity.modules.vehicles@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\StandardVertexColor.shader" />
-     <None Include="Library\PackageCache\com.unity.modules.xr@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Tests" />
-     <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_Properties.cginc" />
      <Folder Include="Assets\Scenes" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\PointBillboard.shader" />
-     <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_SDF Internal Editor.shader" />
-     <Folder Include="Library\PackageCache\com.unity.modules.umbra@1.0.0" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\WoodenFlooring\Materials" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-     <Folder Include="Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib" />
-     <None Include="Library\PackageCache\com.unity.modules.director@1.0.0\package.json" />
-     <None Include="Library\PackageCache\com.unity.ide.vscode@1.2.5\ValidationExceptions.json" />
-     <Folder Include="Library\PackageCache\com.unity.modules.jsonserialize@1.0.0" />
-     <None Include="Library\PackageCache\com.unity.visualscripting@1.8.0\ValidationConfig.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\HexBricks" />
-     <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders" />
-     <Folder Include="Library\PackageCache\com.unity.modules.director@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.modules.audio@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.settings-manager@2.0.1\Content" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader" />
      <None Include="Assets\WorldMaterialsFree\Shaders\WorldMatURPFree.shader" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Scripts" />
-     <None Include="Library\PackageCache\com.unity.modules.terrain@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Scene" />
-     <Folder Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.18" />
-     <None Include="Library\PackageCache\com.unity.modules.androidjni@1.0.0\package.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
-     <Folder Include="Library\PackageCache\com.unity.modules.video@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.modules.ai@1.0.0" />
      <Folder Include="Assets\WorldMaterialsFree" />
-     <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\PackageConversionData_Assets.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\External" />
-     <Folder Include="Library\PackageCache\com.unity.2d.tilemap@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Upgrade" />
-     <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Package Resources" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\DesertSandBrick" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-     <Folder Include="Library\PackageCache\com.unity.modules.terrain@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2\Tests" />
-     <None Include="Library\PackageCache\com.unity.modules.animation@1.0.0\package.json" />
-     <None Include="Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2\ValidationExceptions.json" />
      <Folder Include="Assets\TextMesh Pro\Documentation" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\AssetIdRemapUtility" />
-     <Folder Include="Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Icons\Tools" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Material" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\SelectionPicker.shader" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\BathroomTiles" />
-     <None Include="Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0\package.json" />
-     <Folder Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Material\Textures" />
-     <None Include="Library\PackageCache\com.unity.modules.uielements@1.0.0\package.json" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\FaceHighlight.shader" />
-     <Folder Include="Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
-     <Folder Include="Library\PackageCache\com.unity.ugui@1.0.0" />
-     <Folder Include="Library\PackageCache\com.unity.settings-manager@2.0.1\Tests" />
-     <None Include="Library\PackageCache\com.unity.modules.ui@1.0.0\package.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
-     <None Include="Library\PackageCache\com.unity.probuilder@5.1.1\Content\Shader\HideVertices.shader" />
-     <None Include="Library\PackageCache\com.unity.ide.vscode@1.2.5\package.json" />
      <Folder Include="Assets\WorldMaterialsFree\Resource Files\BasketWeaveBricks" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -558,10 +379,10 @@
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
      </Reference>
      <Reference Include="ReportGeneratorMerged">
-     <HintPath>C:\Users\dgall\Desktop\TFG\code\Unity\ProyectoUnity\Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-     <HintPath>C:\Users\dgall\Desktop\TFG\code\Unity\ProyectoUnity\Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="netstandard">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -929,131 +750,101 @@
      <Reference Include="System.Xml.Serialization">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.EditorCoroutines.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.PlasticSCM.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ProBuilder">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Timeline.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Shared.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualStudio.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.UI">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Core">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Tilemap.Extras">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Core.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ProBuilder.AddOns.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Flow">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Flow.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Tilemap.Extras.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Timeline">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ProBuilder.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.State.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TextMeshPro">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TextMeshPro.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.State">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VSCode.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.2D.Tilemap.Editor">
+     <HintPath>C:\Users\Daniil\Documents\GitHub\TFG\code\Unity\ProyectoUnity\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
+     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{cd5165ac-a087-6f39-d958-4c53697bdc0a}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj">
-      <Project>{de38a281-a8ed-ccf2-d386-a3e1693ee0aa}</Project>
-      <Name>Unity.EditorCoroutines.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
-      <Project>{2592052e-150a-5772-50ac-38f489715bbd}</Project>
-      <Name>Unity.PlasticSCM.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.csproj">
-      <Project>{e3341f4a-9789-62c6-47cc-60d780f02401}</Project>
-      <Name>Unity.ProBuilder</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Timeline.Editor.csproj">
-      <Project>{c0f3567c-bb9b-ca4b-dd7a-1561517f0815}</Project>
-      <Name>Unity.Timeline.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj">
-      <Project>{c30ee25a-fd73-539c-2889-5d01edb3b128}</Project>
-      <Name>Unity.VisualScripting.Shared.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
-      <Project>{248616e8-c025-3f19-2a22-c0a2128d565a}</Project>
-      <Name>Unity.VisualStudio.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{23d64cb5-0ce0-ee25-b295-955dc613da55}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.Core.csproj">
-      <Project>{6f0a71fe-f218-4520-bd69-da761a002621}</Project>
-      <Name>Unity.VisualScripting.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.Tilemap.Extras.csproj">
-      <Project>{fc2f9ff2-7032-7fe8-cdfc-0631a42530d0}</Project>
-      <Name>Unity.2D.Tilemap.Extras</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{5b460586-b5d6-28b5-c30c-3fe771819400}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj">
-      <Project>{dcfaa6e9-6a4b-c972-4d16-3b688a2a6196}</Project>
-      <Name>Unity.VisualScripting.Core.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.AddOns.Editor.csproj">
-      <Project>{380540ba-4cb4-488e-6256-05dc439a4c6a}</Project>
-      <Name>Unity.ProBuilder.AddOns.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Rider.Editor.csproj">
-      <Project>{e48a2253-8bb5-ee8a-7566-eb2422bb0bfd}</Project>
-      <Name>Unity.Rider.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
-      <Project>{c3aa4c7b-bc83-cd17-b478-167540075f3f}</Project>
-      <Name>Unity.VisualScripting.Flow</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj">
-      <Project>{33ce1b5c-f3a4-aad3-83be-161397394c18}</Project>
-      <Name>Unity.VisualScripting.Flow.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.Tilemap.Extras.Editor.csproj">
-      <Project>{1a23c18c-8bf5-4a45-9be9-13207c79a800}</Project>
-      <Name>Unity.2D.Tilemap.Extras.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Timeline.csproj">
-      <Project>{0682cf69-ae54-bd28-a53b-6f00ea02286d}</Project>
-      <Name>Unity.Timeline</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.csproj">
-      <Project>{24dd3c4c-fd8b-dc60-573a-23b6fe864e7f}</Project>
-      <Name>Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.Editor.csproj">
-      <Project>{b77a9614-7f6e-a9ca-c8ac-25283e330a27}</Project>
-      <Name>Unity.ProBuilder.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
-      <Project>{5eac1d7c-3866-ea0c-b1a9-8f20e587f290}</Project>
-      <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Performance.Profile-Analyzer.Editor.csproj">
-      <Project>{79968886-c1fc-d319-7b56-6276c3b02877}</Project>
-      <Name>Unity.Performance.Profile-Analyzer.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.csproj">
-      <Project>{1f270a4f-ada1-8c87-b44b-4b24b6649add}</Project>
-      <Name>Unity.TestTools.CodeCoverage.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.csproj">
-      <Project>{309f7855-7f36-6f61-c477-e17e7acf4e43}</Project>
-      <Name>Unity.TestTools.CodeCoverage.Editor.OpenCover.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj">
-      <Project>{b7b2bb1a-1801-ea41-2344-68476bbe6f00}</Project>
-      <Name>Unity.VisualScripting.State.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{13d78ba2-55cf-9fc1-01a0-dd3230d05632}</Project>
-      <Name>Unity.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
-      <Project>{b2e4bc82-698c-b792-38ec-8a9e1d0aad62}</Project>
-      <Name>Unity.TextMeshPro.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.AssetIdRemapUtility.csproj">
-      <Project>{da99361f-7a77-9bfb-a14a-6411629a3e9d}</Project>
-      <Name>Unity.ProBuilder.AssetIdRemapUtility</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.State.csproj">
-      <Project>{5413b430-79ca-fd02-63a7-6a4bee49e55e}</Project>
-      <Name>Unity.VisualScripting.State</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VSCode.Editor.csproj">
-      <Project>{2c186294-7386-8363-6634-50e28d23837b}</Project>
-      <Name>Unity.VSCode.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj">
-      <Project>{25811cf0-2c4f-79f2-bbdd-26fbc12af4bb}</Project>
-      <Name>Unity.2D.Tilemap.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
