@@ -1,0 +1,1 @@
+PlacaCocina[00:00:00]:Temperatura:7.8;Puertas:;Luminosidad:0;Movimiento:False;Humedad:65;

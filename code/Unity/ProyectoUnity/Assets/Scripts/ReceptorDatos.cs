@@ -56,7 +56,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         if (_datosParaEnviar)
         {
             _datosParaEnviar = false;
-            AlmacenarDatos();
+            AlmacenarTxt();
         }
     }
 
@@ -151,6 +151,44 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         try
         {
             File.WriteAllText(rutaArchivo, json);
+            Debug.Log("Datos guardados en: " + rutaArchivo);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error al guardar los datos: " + e.Message);
+        }
+    }
+
+    private void AlmacenarTxt()
+    {
+        string datosTxt = ""; // Variable para acumular los datos en formato TXT
+
+        foreach (var placa in datosPorPlaca)
+        {
+            string nombrePlaca = placa.Key;
+            var datosPlaca = placa.Value;
+
+            foreach (var dato in datosPlaca)
+            {
+                string hora = dato.Key;
+                SensorData sensorData = dato.Value;
+
+                datosTxt += $"{nombrePlaca}[{hora}]:";
+                datosTxt += $"Temperatura:{sensorData.Temperatura};";
+                datosTxt += $"Puertas:{sensorData.Puertas};";
+                datosTxt += $"Luminosidad:{sensorData.Luminosidad};";
+                datosTxt += $"Movimiento:{sensorData.Movimiento};";
+                datosTxt += $"Humedad:{sensorData.Humedad};";
+                datosTxt += "\n"; // Nueva línea para separar los datos de cada hora
+            }
+        }
+
+        // Ruta completa del archivo TXT en el directorio actual
+        string rutaArchivo = Path.Combine("/Users/daniil/Documents/GitHub/TFG/", "DatosSensores.txt");
+
+        try
+        {
+            File.WriteAllText(rutaArchivo, datosTxt);
             Debug.Log("Datos guardados en: " + rutaArchivo);
         }
         catch (Exception e)
