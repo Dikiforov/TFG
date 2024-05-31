@@ -15,6 +15,7 @@ public class CicloDN : MonoBehaviour
     public Estaciones EstacionSeleccionada = Estaciones.Invierno;
     public static float Hora = 0;
     public static TimeSpan horaFormateada;
+    private float horaAmanecer = 6f;
     private float SolX;
     private float IniSolX;
 
@@ -81,21 +82,52 @@ public class CicloDN : MonoBehaviour
         HumedadActual = CalculoHumedad();
         RotacionSol();
     }
+
     void AjustarIntensidadLuzSolar()
     {
         if (luzSolar != null)
         {
-            // Calcular la intensidad de la luz solar en función de la hora
-            float t = Mathf.InverseLerp(0f, 24f, Hora); // Normalizar la hora a un valor entre 0 y 1
-            float intensidad = Mathf.Lerp(intensidadMinima, intensidadMaxima, Mathf.Sin(t * Mathf.PI));
-            
-            // Redondear a un decimal y asignar a la luz solar y a la propiedad IntensidadLuminica
-            intensidad = Mathf.Round(intensidad * 10f) / 10f; 
+            float t = Mathf.InverseLerp(0f, 24f, Hora);
+            float intensidad;
+
+            if (Hora >= horaAmanecer && Hora < 12f) // Amanecer y mañana
+            {
+                intensidad = Mathf.Lerp(intensidadMinima, intensidadMaxima/2,
+                    (Hora - horaAmanecer) / (12f - horaAmanecer));
+            }
+            else if (Hora >= 12f && Hora < 18f) // Mediodía y tarde
+            {
+                intensidad = intensidadMaxima/2;
+            }
+            else // Noche
+            {
+                intensidad = Mathf.Lerp(intensidadMaxima/2, intensidadMinima, (Hora - 18f) / (24f - 18f));
+            }
+
+            intensidad = Mathf.Round(intensidad * 10f) / 10f;
             luzSolar.intensity = intensidad;
             IntensidadLuminica = intensidad;
+
+            // Ajustar color para un amanecer/atardecer más suave
+            if (Hora >= horaAmanecer && Hora < 8f) // Amanecer suave
+            {
+                luzSolar.color = new Color(intensidad, intensidad * 0.8f, intensidad * 0.6f);
+            }
+            else if (Hora >= 18f && Hora < 20f) // Atardecer suave
+            {
+                luzSolar.color = new Color(intensidad, intensidad * 0.7f, intensidad * 0.5f);
+            }
+            else if (Hora >= 8f && Hora < 18f) // Día
+            {
+                luzSolar.color = new Color(intensidad, intensidad * 0.9f, intensidad * 0.8f); // Tono más cálido
+            }
+            else // Noche profunda
+            {
+                luzSolar.color = new Color(intensidad * 0.5f, intensidad * 0.5f, intensidad * 0.6f); // Tono azulado
+            }
         }
     }
-    
+
     void RotacionSol()
     {
         SolX = 15 * Hora;

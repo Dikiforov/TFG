@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -17,6 +18,7 @@ public class SensorLuminosidad : MonoBehaviour
     private float luminosidad;
     private string nombrePlacaPadre; // Variable para almacenar el nombre del padre
 
+    private TimeSpan horaAnterior;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,17 +48,22 @@ public class SensorLuminosidad : MonoBehaviour
         bool hayJugadorDentro = detectionSensor != null && detectionSensor._playerInside;
         foreach (Light luz in luces)
         {
+            if (Input.GetKeyDown(KeyCode.Space) && hayJugadorDentro) 
+            {
+                    luz.enabled = false;
+            }
             if (cicloDN != null && !luz.enabled)
             {
                 luminosidad = cicloDN.IntensidadLuminica;
             }
-            if (hayJugadorDentro && !(CicloDN.Hora >= 8 && CicloDN.Hora <= 20))
+            if (hayJugadorDentro && !(CicloDN.Hora >= 8 && CicloDN.Hora <= 20) && !luz.enabled)
             {
                 // Encender la luz si hay poca luz y el jugador está dentro
                 luz.intensity = luminosidadMinima;
                 luz.enabled = true;
                 luminosidad = luz.intensity;
                 tiempoSinMovimiento = 0f; // Reiniciar el contador si el jugador está dentro
+                horaAnterior = CicloDN.horaFormateada;
             }
             else if (luz.intensity > 0f && !hayJugadorDentro)
             {
@@ -66,6 +73,11 @@ public class SensorLuminosidad : MonoBehaviour
                 {
                     luz.enabled = false;
                 }
+            }
+            Debug.Log($"HoraAnterior: {horaAnterior} HoraActual: {CicloDN.horaFormateada}");
+            if (hayJugadorDentro && (CicloDN.horaFormateada.Hours >= horaAnterior.Hours && CicloDN.horaFormateada.Minutes != horaAnterior.Minutes && (CicloDN.horaFormateada.Seconds - horaAnterior.Seconds) > 30))
+            {
+                luz.enabled = false;
             }
         }
         _dataReciever.RecieveLuminosidadData(luminosidad, true, nombrePlacaPadre);
