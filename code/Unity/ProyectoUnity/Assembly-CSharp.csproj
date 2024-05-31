@@ -46,10 +46,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\SensorMovimiento.cs" />
-     <Compile Include="Assets\Scripts\SensorApertura_2.cs" />
      <Compile Include="Assets\Scripts\UsuarioMovimiento.cs" />
      <Compile Include="Assets\Scripts\SensorHumedad.cs" />
      <Compile Include="Assets\Scripts\InteficieComunicacion.cs" />
+     <Compile Include="Assets\Scripts\MostrarHoraSimulacion.cs" />
+     <Compile Include="Assets\Scripts\SensorAperturaAntiguo.cs" />
      <Compile Include="Assets\Scripts\UsuarioSeguimiento.cs" />
      <Compile Include="Assets\Scripts\SensorLuminosidad.cs" />
      <Compile Include="Assets\Scripts\SensorApertura.cs" />

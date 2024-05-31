@@ -1,14 +1,14 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Sockets;
+using System.Net.NetworkInformation; // Agregar para usar Ping
 using System.Text;
 using UnityEngine.Serialization;
-using System.Collections;
 using System.Linq;
-using System.Xml;
-using static UnityEngine.JsonUtility;
+using System.IO;
+using Object = UnityEngine.Object;
+using Ping = System.Net.NetworkInformation.Ping; // Agregar para escribir en archivos
 
 
 
@@ -24,14 +24,8 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         public bool Movimiento;
         public float Humedad;
     }
-    [Serializable] // Asegúrate de que esta clase sea serializable
-    public class DatosPlaca // Nueva clase para representar los datos de una placa
-    {
-        public string Placa;
-        public List<SensorData> Datos; 
-    }
-    public int _serverPort;
-    public string _serverIp = "192.168.1.";
+    public int _serverPort = 5555;
+    public string _serverIp = "192.168.1.41";
     
     
     [FormerlySerializedAs("CicloDn")] public CicloDN cicloDn;
@@ -56,7 +50,15 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         if (_datosParaEnviar)
         {
             _datosParaEnviar = false;
-            AlmacenarTxt();
+            GuardarDatosEnArchivo(datosPorPlaca);
+            /*if (PingHost(_serverIp))
+            {
+                EnviarDatosAlServidor(datosPorPlaca);
+            }
+            else
+            {
+                GuardarDatosEnArchivo(datosPorPlaca);
+            }*/
         }
     }
 
@@ -109,7 +111,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         }
         bool datosCambiados = ultimosDatos == null ||
                               !SonDatosIguales(ultimosDatos, datosActuales);
-
+        
         // Comprobar si ha pasado el tiempo mínimo desde el último envío
         //bool tiempoTranscurrido = (Time.time - _lastTime) >= intervaloEnvioMinimo;
 
@@ -122,78 +124,111 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
                 datosPorPlaca[nombrePlaca] = new Dictionary<string, SensorData>();
             }
             datosPorPlaca[nombrePlaca][datosActuales.hora] = datosActuales;
-
+            /*
+            Debug.Log("datosPorPlaca.hora "+datosPorPlaca[nombrePlaca][datosActuales.hora].hora);
+            Debug.Log("datosPorPlaca.temperatura "+datosPorPlaca[nombrePlaca][datosActuales.hora].Temperatura);
+            Debug.Log("datosPorPlaca.puertas "+datosPorPlaca[nombrePlaca][datosActuales.hora].Puertas);
+            Debug.Log("datosPorPlaca.luminosidad "+datosPorPlaca[nombrePlaca][datosActuales.hora].Luminosidad);
+            Debug.Log("datosPorPlaca.movimiento "+datosPorPlaca[nombrePlaca][datosActuales.hora].Movimiento);
+            Debug.Log("datosPorPlaca.humedad "+datosPorPlaca[nombrePlaca][datosActuales.hora].Humedad);
+            */
             _datosParaEnviar = true; // Indicar que hay datos para enviar
         }
     }
     private bool SonDatosIguales(SensorData datos1, SensorData datos2)
     {
+        Debug.Log("UltimosDatos.temperatura="+datos1.Temperatura+"--datosActuales.temperatura="+datos2.Temperatura);
+        Debug.Log("UltimosDatos.Puertas="+datos1.Puertas+"--datosActuales.Puertas="+datos2.Puertas);
+        Debug.Log("UltimosDatos.Luminosidad="+datos1.Luminosidad+"--datosActuales.Luminosidad="+datos2.Luminosidad);
+        Debug.Log("UltimosDatos.Movimiento="+datos1.Movimiento+"--datosActuales.Movimiento="+datos2.Movimiento);
+        Debug.Log("UltimosDatos.Humedad="+datos1.Humedad+"--datosActuales.Humedad="+datos2.Humedad);
+        
         return datos1.Temperatura == datos2.Temperatura &&
                datos1.Puertas == datos2.Puertas &&
                datos1.Luminosidad == datos2.Luminosidad &&
                datos1.Movimiento == datos2.Movimiento &&
                datos1.Humedad == datos2.Humedad;
     }
-
-    private void AlmacenarDatos()
+    private void EnviarDatosAlServidor(Dictionary<string, Dictionary<string, SensorData>> datosPorPlaca)
     {
-        // Convertir el diccionario datosPorPlaca a una lista de DatosPlaca
-        List<DatosPlaca> datosParaJson = datosPorPlaca.Select(
-            placa => new DatosPlaca { Placa = placa.Key, Datos = placa.Value.Values.ToList() }
-        ).ToList();
-
-        // Serializar a JSON usando JsonUtility
-        string json = JsonUtility.ToJson(new { Placas = datosParaJson }, true);
-
-        // Ruta completa del archivo en el directorio actual
-        string rutaArchivo = Path.Combine("/Users/Daniil/Documents/GitHub/TFG/", "Datos.json");
-
-        try
-        {
-            File.WriteAllText(rutaArchivo, json);
-            Debug.Log("Datos guardados en: " + rutaArchivo);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Error al guardar los datos: " + e.Message);
-        }
-    }
-
-    private void AlmacenarTxt()
-    {
-        string datosTxt = ""; // Variable para acumular los datos en formato TXT
-
+        // Construir el mensaje en formato "habitacion hora;sensor1:valor1,sensor2:valor2,..."
+        StringBuilder message = new StringBuilder();
         foreach (var placa in datosPorPlaca)
         {
             string nombrePlaca = placa.Key;
             var datosPlaca = placa.Value;
-
             foreach (var dato in datosPlaca)
             {
                 string hora = dato.Key;
                 SensorData sensorData = dato.Value;
 
-                datosTxt += $"{nombrePlaca}[{hora}]:";
-                datosTxt += $"Temperatura:{sensorData.Temperatura};";
-                datosTxt += $"Puertas:{sensorData.Puertas};";
-                datosTxt += $"Luminosidad:{sensorData.Luminosidad};";
-                datosTxt += $"Movimiento:{sensorData.Movimiento};";
-                datosTxt += $"Humedad:{sensorData.Humedad};";
-                datosTxt += "\n"; // Nueva línea para separar los datos de cada hora
+                message.Append($"{nombrePlaca} {hora};");
+                message.Append($"Temperatura:{sensorData.Temperatura},");
+                message.Append($"Puertas:{sensorData.Puertas},");
+                message.Append($"Luminosidad:{sensorData.Luminosidad},");
+                message.Append($"Movimiento:{sensorData.Movimiento.ToString().ToLower()},");
+                message.Append($"Humedad:{sensorData.Humedad},");
+                message.Remove(message.Length - 1, 1); // Eliminar la última coma
+                message.Append("\n");
             }
         }
 
-        // Ruta completa del archivo TXT en el directorio actual
-        string rutaArchivo = Path.Combine("/Users/daniil/Documents/GitHub/TFG/", "DatosSensores.txt");
-
+        // Enviar el mensaje al servidor
         try
         {
-            File.WriteAllText(rutaArchivo, datosTxt);
-            Debug.Log("Datos guardados en: " + rutaArchivo);
+            using (TcpClient client = new TcpClient(_serverIp, _serverPort))
+            using (NetworkStream stream = client.GetStream())
+            {
+                byte[] data = Encoding.UTF8.GetBytes(message.ToString());
+                stream.Write(data, 0, data.Length);
+                Debug.Log("Datos enviados al servidor.");
+            }
+        }
+        catch (SocketException socketEx)
+        {
+            if (socketEx.SocketErrorCode == SocketError.ConnectionRefused)
+            {
+                Debug.LogError("Error: El servidor rechazó la conexión. Verifica la configuración del servidor y del firewall.");
+            }
+            else if (socketEx.SocketErrorCode == SocketError.TimedOut)
+            {
+                Debug.LogError("Error: Tiempo de espera agotado al intentar conectarse al servidor. Verifica la conectividad de red.");
+            }
+            else
+            {
+                Debug.LogError("Error de conexión: " + socketEx.Message);
+            }
+
+            // Guardar datos en archivo si hay un error de conexión
+            GuardarDatosEnArchivo(datosPorPlaca);
         }
         catch (Exception e)
         {
-            Debug.LogError("Error al guardar los datos: " + e.Message);
+            Debug.LogError("Error al enviar datos al servidor: " + e.Message);
+            GuardarDatosEnArchivo(datosPorPlaca);
         }
+        
+    }
+    private bool PingHost(string ipAddress)
+    {
+        Ping ping = new Ping();
+        PingReply reply = ping.Send(ipAddress);
+        return reply.Status == IPStatus.Success;
+    }
+    
+    private void GuardarDatosEnArchivo(Dictionary<string, Dictionary<string, SensorData>> datos)
+    {
+        string filePath = Path.Combine("/users/Daniil/Documents/GitHub/TFG/", "datos_sensor.txt");
+        using (StreamWriter writer = new StreamWriter(filePath, true)) // Append to file
+        {
+            foreach (var placa in datos)
+            {
+                foreach (var dato in placa.Value)
+                {
+                    writer.WriteLine(dato.Value.ToString()); // Or your custom format
+                }
+            }
+        }
+        Debug.Log("Datos guardados en archivo: " + filePath);
     }
 }

@@ -7,7 +7,7 @@ from tabulate import tabulate
 import sqlite3
 import os
 # Puerto para la recepción de datos
-puerto = 1234
+puerto = 5555
 ip_addr = "0.0.0.0"
 # Diccionario para almacenar las colas por tipo de sensor
 
