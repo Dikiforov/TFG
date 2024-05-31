@@ -38,7 +38,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     }
     public int _serverPort = 5555;
     public string _serverIp = "192.168.1.41";
-    
+    public string _identificadorUsuario = "Nikiforov-00";
     
     [FormerlySerializedAs("CicloDn")] public CicloDN cicloDn;
 
@@ -193,7 +193,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     
     private void GuardarDatosActualesEnArchivo(string nombrePlaca)
     {
-        string filePath = Path.Combine("/users/Daniil/Documents/GitHub/TFG/Datos/", "datos_sensor.txt");
+        string filePath = Path.Combine("/users/Daniil/Documents/GitHub/TFG/Datos/", $"datos_{_identificadorUsuario}.txt");
 
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {

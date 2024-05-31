@@ -1,0 +1,8 @@
+# Ignorar archivos de texto
+*.txt
+
+# Ignorar bases de datos
+*.db
+
+# Ignorar ficheros JSON
+*.json
