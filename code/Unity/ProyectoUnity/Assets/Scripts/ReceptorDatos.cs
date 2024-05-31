@@ -62,7 +62,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 
     public void RecieveDoorState(bool isOpen, string doorName, string nombrePlaca)
     {
-        ActualizarDatoPlaca(nombrePlaca, "Puertas", doorName + "=" + isOpen,
+        ActualizarDatoPlaca(nombrePlaca, "Puertas", doorName + "{" + isOpen + "}",
             true); // Siempre enviar cambios de estado de puertas
     }
 
@@ -193,11 +193,11 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
     
     private void GuardarDatosActualesEnArchivo(string nombrePlaca)
     {
-        string filePath = Path.Combine("/users/Daniil/Documents/GitHub/TFG/", "datos_sensor.txt");
+        string filePath = Path.Combine("/users/Daniil/Documents/GitHub/TFG/Datos/", "datos_sensor.txt");
 
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
-            writer.Write($"{nombrePlaca}[{ultimosDatos.hora}]:");
+            writer.Write($"{nombrePlaca} {ultimosDatos.hora}-");
             writer.Write($"Temperatura={ultimosDatos.Temperatura};");
             writer.Write($"Puertas={ultimosDatos.Puertas};");
             writer.Write($"Luminosidad={ultimosDatos.Luminosidad};");
