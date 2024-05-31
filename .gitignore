@@ -2,7 +2,7 @@
 *.txt
 
 # Ignorar bases de datos
-*.db
+InformacionSistema.db
 
 # Ignorar ficheros JSON
-*.json
+placa*.json
