@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,7 +13,6 @@ public class CicloDN : MonoBehaviour
     };
 
     public Estaciones EstacionSeleccionada = Estaciones.Invierno;
-    public static float TempActual;
     public static float Hora = 0;
     public static TimeSpan horaFormateada;
     private float SolX;
@@ -23,6 +20,7 @@ public class CicloDN : MonoBehaviour
 
     private float TempMinima;
     private float TempMaxima;
+    public static float TempActual;
     private float[,] temperaturas = new float[,]
     {
         {12.5f, 7.8f},
@@ -31,6 +29,17 @@ public class CicloDN : MonoBehaviour
         {16.4f, 12.1f},
     };
 
+    private float HumedadMinima;
+    private float HumedadMaxima;
+    public static float HumedadActual;
+    private float[,] humedades = new float[,]
+    {
+        {75f, 65f}, // Invierno (media: 70%)
+        {65f, 55f}, // Primavera (media: 60%)
+        {60f, 50f}, // Verano (media: 55%)
+        {70f, 60f}, // Otoño (media: 65%)
+    };
+    
     public GameObject Sol;
     public Light luzSolar; // Referencia al componente Light del sol
     public float intensidadMaxima; // Intensidad máxima de la luz solar al mediodía
@@ -44,6 +53,11 @@ public class CicloDN : MonoBehaviour
         TempMaxima = temperaturas[(int)EstacionSeleccionada, 0];
         TempMinima = temperaturas[(int)EstacionSeleccionada, 1];
         TempActual = TempMinima;
+        
+        HumedadMaxima = humedades[(int)EstacionSeleccionada, 0];
+        HumedadMinima = humedades[(int)EstacionSeleccionada, 1];
+        HumedadActual = HumedadMinima;
+        
         luzSolar = Sol.GetComponent<Light>();
         if (luzSolar == null)
         {
@@ -59,11 +73,12 @@ public class CicloDN : MonoBehaviour
         horaFormateada = TimeSpan.FromHours(Hora);
         if (Hora >= 24)
         {
-            NuevoDiaTemperaturas();
+            NuevosDatosHumedadTemperatura();
         }
 
         AjustarIntensidadLuzSolar();
         TempActual = CalculoTemperatura();
+        HumedadActual = CalculoHumedad();
         RotacionSol();
     }
     void AjustarIntensidadLuzSolar()
@@ -113,12 +128,39 @@ public class CicloDN : MonoBehaviour
 
         return aux;
     }
+    
+    float CalculoHumedad()
+    {
+        // Lógica similar a CalculoTemperatura, pero ajustada para humedad
+        float aux = 0;
+        if (Hora >= 0 && Hora < 6 && HumedadActual < HumedadMinima + 2)
+        {
+            aux = Mathf.Lerp(HumedadMinima, HumedadMinima + 2, (Hora - 0) / 6);
+        }
+        else if (Hora >= 6 && Hora < 12)
+        {
+            aux = Mathf.Lerp(HumedadMinima + 2, HumedadMaxima, (Hora - 6) / 6);
+        }
+        else if (Hora >= 12 && Hora < 18)
+        {
+            aux = HumedadMaxima;
+        }
+        else if (Hora >= 18 && Hora < 24)
+        {
+            aux = Mathf.Lerp(HumedadMaxima, HumedadMinima, (Hora - 18) / 6);
+        }
 
-    void NuevoDiaTemperaturas()
+        return aux;
+    }
+    
+    void NuevosDatosHumedadTemperatura()
     {
         Hora = 0;
         TempMaxima += 0.2f * (Random.value > 0.5f ? 1 : -1);
         TempMinima += 0.2f * (Random.value> 0.5f ? 1 : -1);
         TempActual = TempMinima;
+        HumedadMaxima += 0.5f * (Random.value > 0.5f ? 1 : -1);
+        HumedadMinima += 0.5f * (Random.value > 0.5f ? 1 : -1);
+        HumedadActual = HumedadMinima;
     }
 }
