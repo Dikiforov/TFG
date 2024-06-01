@@ -364,6 +364,7 @@
 "Assets/Scripts/InteficieComunicacion.cs"
 "Assets/Scripts/MostrarHoraSimulacion.cs"
 "Assets/Scripts/ReceptorDatos.cs"
+"Assets/Scripts/RutinaMovimiento.cs"
 "Assets/Scripts/SensorApertura.cs"
 "Assets/Scripts/SensorAperturaAntiguo.cs"
 "Assets/Scripts/SensorHumedad.cs"

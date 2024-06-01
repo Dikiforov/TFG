@@ -47,10 +47,12 @@ public class CicloDN : MonoBehaviour
     public float intensidadMinima; // Intensidad mínima de la luz solar durante la noche
     public float IntensidadLuminica; // Propiedad pública para acceder a la intensidad
 
-    public float DuracionDiaMin;
-
+    public static float DuracionDiaMin;
+    public float duracionDiaPorMinutos;
     void Start()
     {
+        if (duracionDiaPorMinutos <= 0) duracionDiaPorMinutos = 1;
+        DuracionDiaMin = duracionDiaPorMinutos;
         TempMaxima = temperaturas[(int)EstacionSeleccionada, 0];
         TempMinima = temperaturas[(int)EstacionSeleccionada, 1];
         TempActual = TempMinima;
@@ -105,7 +107,7 @@ public class CicloDN : MonoBehaviour
             }
 
             intensidad = Mathf.Round(intensidad * 10f) / 10f;
-            luzSolar.intensity = intensidad;
+            //luzSolar.intensity = intensidad;
             IntensidadLuminica = intensidad;
 
             // Ajustar color para un amanecer/atardecer más suave

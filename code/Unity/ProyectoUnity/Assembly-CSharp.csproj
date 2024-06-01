@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\SensorMovimiento.cs" />
+     <Compile Include="Assets\Scripts\RutinaMovimiento.cs" />
      <Compile Include="Assets\Scripts\UsuarioMovimiento.cs" />
      <Compile Include="Assets\Scripts\SensorHumedad.cs" />
      <Compile Include="Assets\Scripts\InteficieComunicacion.cs" />

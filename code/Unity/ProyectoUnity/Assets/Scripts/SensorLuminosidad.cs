@@ -74,7 +74,6 @@ public class SensorLuminosidad : MonoBehaviour
                     luz.enabled = false;
                 }
             }
-            Debug.Log($"HoraAnterior: {horaAnterior} HoraActual: {CicloDN.horaFormateada}");
             if (hayJugadorDentro && (CicloDN.horaFormateada.Hours >= horaAnterior.Hours && CicloDN.horaFormateada.Minutes != horaAnterior.Minutes && (CicloDN.horaFormateada.Seconds - horaAnterior.Seconds) > 30))
             {
                 luz.enabled = false;

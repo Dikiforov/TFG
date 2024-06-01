@@ -102,8 +102,8 @@ analyzer = DataAnalyzer(db_path)
 #result = analyzer.sliding_windows('temperature', '1H', '15min')  
 #print(result)
 
-#nomalies = analyzer.anomaly_detection('humidity', 67)
-#print(anomalies)
-
+nomalies = analyzer.anomaly_detection('humidity', 67)
+print(nomalies)
+print("-------------------------------------------------------------")
 clusters = analyzer.clustering(['temperature', 'humidity'])
 print(clusters)
