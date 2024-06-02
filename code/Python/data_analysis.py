@@ -1,109 +1,75 @@
-import sqlite3
 import pandas as pd
 import numpy as np
+import sqlite3
 import matplotlib.pyplot as plt
-from scipy.stats import zscore  # Para detección de anomalías
-from sklearn.cluster import KMeans  # Para clustering
-from datetime import timedelta, datetime
-import seaborn as sns  # Para gráficos más elaborados
-import os
+import seaborn as sns
+from scipy.stats import zscore
+from sklearn.cluster import KMeans
 
-class DataAnalyzer:
-    def __init__(self, db_path):
-        self.db = sqlite3.connect(db_path)
-
-    def close(self):
-        self.db.close()
-
-    def execute_query(self, query):
-        return pd.read_sql_query(query, self.db)
-
-    def sliding_windows(self, sensor_type, window_size, step_size=None, time_window=True):
-        df = self.execute_query(f"SELECT * FROM sensor_readings WHERE sensor_type = '{sensor_type}'")
-
-        # Obtener la fecha de hoy 
-        today = datetime.now().date()
-
-        # Combinar la fecha de hoy con la hora de la base de datos
-        df['hour'] = pd.to_datetime(today.strftime('%Y-%m-%d') + ' ' + df['hour'], format="%Y-%m-%d %H:%M:%S")
-
-        # Convertir 'value' a numérico, ignorando errores de conversión
-        df['value'] = pd.to_numeric(df['value'], errors='coerce')
-
-        # Eliminar filas con valores NaN en 'value'
-        df.dropna(subset=['value'], inplace=True)
-
-        df = df.sort_values('hour')
-        df.set_index('hour', inplace=True)
-
-        if time_window:
-            window = window_size
-        else:
-            window = int(window_size)
-
-        if step_size:
-            return df.rolling(window).agg(['mean', 'std']).resample(step_size).mean()
-        else:
-            return df.rolling(window).agg(['mean', 'std'])
-
-    def anomaly_detection(self, sensor_type, threshold=3):
-        df = self.execute_query(f"SELECT * FROM sensor_readings WHERE sensor_type = '{sensor_type}'")
-
-        # Obtener la fecha de hoy 
-        today = datetime.now().date()
-
-        # Combinar la fecha de hoy con la hora de la base de datos
-        df['hour'] = pd.to_datetime(today.strftime('%Y-%m-%d') + ' ' + df['hour'], format="%Y-%m-%d %H:%M:%S")
-
-        # Convertir 'value' a numérico, ignorando errores de conversión
-        df['value'] = pd.to_numeric(df['value'], errors='coerce')
-
-        # Eliminar filas con valores NaN en 'value'
-        df.dropna(subset=['value'], inplace=True)
-
-        df = df.sort_values('hour')
-        df.set_index('hour', inplace=True)
-
-        df['z_score'] = zscore(df['value'])
-        return df[abs(df['z_score']) > threshold]
-
-
-    def clustering(self, sensor_types):
-        df = self.execute_query(f"SELECT * FROM sensor_readings WHERE sensor_type IN {tuple(sensor_types)}")
-        kmeans = KMeans(n_clusters=3)
-        df['cluster'] = kmeans.fit_predict(df[['value']])
-        return df
-
-    def dynamic_plots(self, sensor_type):
-        df = self.execute_query(f"SELECT * FROM sensor_readings WHERE sensor_type = '{sensor_type}'")
-        plt.plot(df['hour'], df['value'])
-        plt.xlabel('Time')
-        plt.ylabel(sensor_type)
-        plt.title(f'Dynamic Plot of {sensor_type}')
-        plt.show()
-
-    def scatter_plot(self, sensor_type_x, sensor_type_y):
-        df = self.execute_query(f"SELECT * FROM sensor_readings WHERE sensor_type IN ('{sensor_type_x}', '{sensor_type_y}')")
-        sns.scatterplot(data=df, x=sensor_type_x, y=sensor_type_y, hue='room')
-        plt.title(f'Scatter Plot of {sensor_type_x} vs {sensor_type_y}')
-        plt.show()
-
-    def heatmap(self, sensor_type):
-        df = self.execute_query(f"SELECT room, hour, AVG(value) as avg_value FROM sensor_readings WHERE sensor_type = '{sensor_type}' GROUP BY room, hour")
-        df['hour'] = pd.to_datetime(df['hour'])
-        df_pivot = df.pivot_table(index='room', columns='hour', values='avg_value')
-        sns.heatmap(df_pivot)
-        plt.title(f'Heatmap of {sensor_type}')
-        plt.show()
-
+# Conexión a la base de datos
 ruta_datos = "C:\\Users\\Daniil\\Documents\\GitHub\\TFG\\Datos"
 db_path = f"{ruta_datos}\\InformacionSistema.db"
-analyzer = DataAnalyzer(db_path)
-#result = analyzer.sliding_windows('temperature', '1H', '15min')  
-#print(result)
+conn = sqlite3.connect(db_path)
 
-nomalies = analyzer.anomaly_detection('humidity', 67)
-print(nomalies)
-print("-------------------------------------------------------------")
-clusters = analyzer.clustering(['temperature', 'humidity'])
-print(clusters)
+# Consulta SQL para obtener datos de todas las habitaciones
+query = """
+SELECT sensor_readings.hour, sensor_readings.sensor_type, sensor_readings.value, sensor_readings.room 
+FROM sensor_readings
+"""
+
+# Cargar datos en un DataFrame
+df = pd.read_sql_query(query, conn)
+
+# Verificar si hay datos antes de continuar
+if df.empty:
+    print("No hay datos disponibles para los sensores seleccionados.")
+else:
+    # Procesamiento y análisis de datos
+    df['hour'] = pd.to_datetime(df['hour'])
+    df.set_index('hour', inplace=True)
+
+    # Ordenar el DataFrame completo por 'hour'
+    df = df.sort_values(by='hour')  # Ordenar antes de agrupar
+
+    # Agrupar por habitación y realizar análisis para cada una
+    for room, df_room in df.groupby('room'):
+        print(f"\nAnálisis para la habitación: {room}")
+
+        # Ventanas temporales deslizantes (Ejemplo: media móvil de 3 horas)
+        df_rolling = df_room.groupby('sensor_type')['value'].rolling('3h').mean().reset_index()
+
+        # Detección de anomalías (Ejemplo: basado en z-score)
+        df_zscore = df_room.groupby('sensor_type')['value'].transform(lambda x: zscore(x))
+        df_room['anomaly'] = df_zscore.abs() > 2
+
+        # Clustering (Ejemplo: K-means con 3 clusters)
+        cluster_data = df_room.groupby('sensor_type')['value'].mean().values.reshape(-1, 1)
+        if cluster_data.shape[0] > 0:
+            kmeans = KMeans(n_clusters=3, random_state=0).fit(cluster_data)
+            df_room['cluster'] = kmeans.labels_[df_room['sensor_type'].map({'temperature': 0, 'luminosity': 1, 'humidity': 2, 'movement': 3})]
+        else:
+            print("No hay suficientes datos para el clustering en esta habitación.")
+
+        # Visualizaciones
+
+        # Diagramas de dispersión
+        if not df_room.empty:
+            sns.pairplot(df_room, hue='sensor_type')
+            plt.title(f"Diagramas de dispersión para {room}")
+            plt.show()
+        else:
+            print(f"No hay datos para el diagrama de dispersión en {room}.")
+
+        # Mapas de calor (Ejemplo: temperatura a lo largo del tiempo)
+        df_temp = df_room[df_room['sensor_type'] == 'temperature']
+        if not df_temp.empty:
+            df_pivot = df_temp.pivot_table(index=df_temp.index.date, columns=df_temp.index.time, values='value')
+            sns.heatmap(df_pivot)
+            plt.xlabel('Hora')
+            plt.ylabel('Fecha')
+            plt.title(f'Mapa de calor de temperatura en {room}')
+            plt.show()
+        else:
+            print(f"No hay datos de temperatura para el mapa de calor en {room}.")
+
+conn.close()

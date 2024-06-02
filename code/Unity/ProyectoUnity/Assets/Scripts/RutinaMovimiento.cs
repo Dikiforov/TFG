@@ -10,114 +10,99 @@ public class PlayerMovementRoutine : MonoBehaviour
     private int currentWaypointIndex = 8; // Inicio en Habitación 2.1
     private Coroutine routineCoroutine;
     private System.Random random = new System.Random();
-    private int desayunarEn = -1; // Declarar desayunarEn fuera de Update y inicializar a -1
     void Start()
     {
         transform.position = waypoints[8].position;
         speed = 10000000;
+        routineCoroutine = StartCoroutine(SeguirRutina()); // Iniciar la rutina en Start
     }
-    void Update()
-    {
-        // Obtener la hora actual en formato TimeSpan
-        TimeSpan horaActual = CicloDN.horaFormateada;
-        
-    }
-
-    IEnumerator SeguirRutina()
+        IEnumerator SeguirRutina()
     {
         while (true) // Bucle infinito para repetir la rutina cada día
         {
             // Despertarse e ir al baño (6:00 - 8:00)
-            yield return MoverAPunto(11, 6f + random.Next(120) / 60f, new int[] { 6, 5, 11 });
+            yield return MoverAPunto(11, new int[] { 6, 5, 11 });
             yield return EsperarMinutos(5 + random.Next(10)); // 5-15 minutos en el baño
 
             // Recoger la habitación (10-20 minutos)
-            yield return MoverAPunto(8, 0f, new int[] { 5, 6, 8 }); 
+            yield return MoverAPunto(8, new int[] { 5, 6, 8 }); 
             yield return EsperarMinutos(10 + random.Next(10));
 
             // Preparar el desayuno (10-15 minutos)
-            yield return MoverAPunto(2, 0f, new int[] { 6, 5, 4, 3, 1, 2 });
+            yield return MoverAPunto(2, new int[] { 6, 5, 4, 3, 1, 2 });
             yield return EsperarMinutos(10 + random.Next(5));
 
             // Desayunar (20-30 minutos)
             int desayunarEn = random.Next(2); // 0: Cocina, 1: Salón
-            if (desayunarEn == 1)
-            {
-                yield return MoverAPunto(3, 0f, new int[] { 1, 3 });
-            }
+            yield return MoverAPunto(desayunarEn == 0 ? 2 : 3, desayunarEn == 0 ? null : new int[] { 1, 3 });
             yield return EsperarMinutos(20 + random.Next(10));
 
-            // Limpiar los platos (5-10 minutos)
+            // Limpiar los platos (5-10 minutos, solo si desayunó en el salón)
             if (desayunarEn == 1)
             {
-                yield return MoverAPunto(2, 0f, new int[] { 1, 2 });
+                yield return MoverAPunto(2, new int[] { 1, 2 });
                 yield return EsperarMinutos(5 + random.Next(5));
             }
 
             // Descansar y ver la tele en el salón hasta la hora de comer (13:00 - 14:00)
-            yield return MoverAPunto(3, 0f, new int[] { 1, 3 });
+            yield return MoverAPunto(3, new int[] { 1, 3 });
             yield return EsperarHasta(13f + random.Next(60) / 60f);
 
             // Ir al baño (opcional)
             if (random.Next(2) == 0) // 50% de probabilidad de ir al baño
             {
-                yield return MoverAPunto(11, 0f, new int[] { 4, 5, 11 });
+                yield return MoverAPunto(11, new int[] { 4, 5, 11 });
                 yield return EsperarMinutos(5 + random.Next(10));
-                yield return MoverAPunto(3, 0f, new int[] { 5, 4, 3 });
+                yield return MoverAPunto(3, new int[] { 5, 4, 3 });
             }
 
             // Preparar la comida (30-60 minutos)
-            yield return MoverAPunto(2, 0f, new int[] { 1, 2 });
+            yield return MoverAPunto(2, new int[] { 1, 2 });
             yield return EsperarMinutos(30 + random.Next(30));
 
             // Comer en el salón (30-60 minutos)
-            yield return MoverAPunto(3, 0f, new int[] { 1, 3 });
+            yield return MoverAPunto(3, new int[] { 1, 3 });
             yield return EsperarMinutos(30 + random.Next(30));
 
             // Trabajar o estudiar en el salón (4 horas)
-            yield return MoverAPunto(3, 0f, new int[] { 1, 3 });
+            yield return MoverAPunto(3, new int[] { 1, 3 });
             yield return EsperarHasta(17f); 
 
             // Ir al baño (opcional)
             if (random.Next(2) == 0) // 50% de probabilidad de ir al baño
             {
-                yield return MoverAPunto(11, 0f, new int[] { 4, 5, 11 });
+                yield return MoverAPunto(11, new int[] { 4, 5, 11 });
                 yield return EsperarMinutos(5 + random.Next(10));
-                yield return MoverAPunto(3, 0f, new int[] { 5, 4, 3 });
+                yield return MoverAPunto(3, new int[] { 5, 4, 3 });
             }
 
             // Tiempo libre en el salón (1 hora)
             yield return EsperarHasta(18f);
 
             // Preparar la cena (30-60 minutos)
-            yield return MoverAPunto(2, 0f, new int[] { 1, 2 });
+            yield return MoverAPunto(2, new int[] { 1, 2 });
             yield return EsperarMinutos(30 + random.Next(30));
 
             // Cenar en el salón (30-60 minutos)
-            yield return MoverAPunto(3, 0f, new int[] { 1, 3 });
+            yield return MoverAPunto(3, new int[] { 1, 3 });
             yield return EsperarMinutos(30 + random.Next(30));
 
             // Tiempo libre en el salón (2 horas)
             yield return EsperarHasta(22f);
 
             // Ir a dormir (en la habitación 2.1)
-            yield return MoverAPunto(8, 0f, new int[] { 4, 6, 8 });
+            yield return MoverAPunto(8, new int[] { 4, 5, 6, 8 });
 
             // Esperar hasta las 00:00 del día siguiente
-            while (CicloDN.Hora < 24f)
+            while (CicloDN.horaFormateada < TimeSpan.FromHours(24)) 
             {
                 yield return null;
             }
         }
     }
 
-    IEnumerator MoverAPunto(int waypointIndex, float horaDestino ,int[] ruta = null)
+    IEnumerator MoverAPunto(int waypointIndex, int[] ruta = null)
     {
-        if (horaDestino > 0f)
-        {
-            yield return EsperarHasta(horaDestino);
-        }
-        
         // Si no se proporciona una ruta, generar una ruta por defecto al destino
         if (ruta == null)
         {
@@ -137,7 +122,6 @@ public class PlayerMovementRoutine : MonoBehaviour
                 );
                 yield return null; // Esperar al siguiente frame
             }
-            Debug.Log($"CurrentPosition: {waypoints[currentWaypointIndex].name} ---> NextWaypoint: {waypoints[siguienteWaypoint].name}");
             currentWaypointIndex = siguienteWaypoint; // Actualizar el índice actual
         }
     }
