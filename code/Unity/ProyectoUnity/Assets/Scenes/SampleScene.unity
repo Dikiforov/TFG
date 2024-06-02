@@ -3911,7 +3911,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551829931}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69723f2b78890d24085e4cbf5c403441, type: 3}
   m_Name: 
@@ -3987,7 +3987,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551829931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d2373bcf95a2e64294ab7b259957ebd, type: 3}
   m_Name: 
@@ -9701,7 +9701,7 @@ MonoBehaviour:
   intensidadMaxima: 5
   intensidadMinima: 0
   IntensidadLuminica: 0
-  duracionDiaPorMinutos: 5
+  duracionDiaPorMinutos: 0.1
 --- !u!1 &1364987298
 GameObject:
   m_ObjectHideFlags: 0

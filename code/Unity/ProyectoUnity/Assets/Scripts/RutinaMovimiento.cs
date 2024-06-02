@@ -10,12 +10,17 @@ public class PlayerMovementRoutine : MonoBehaviour
     private int currentWaypointIndex = 8; // Inicio en Habitación 2.1
     private Coroutine routineCoroutine;
     private System.Random random = new System.Random();
-    
+    private int desayunarEn = -1; // Declarar desayunarEn fuera de Update y inicializar a -1
     void Start()
     {
         transform.position = waypoints[8].position;
         speed = 10000000;
-        routineCoroutine = StartCoroutine(SeguirRutina());
+    }
+    void Update()
+    {
+        // Obtener la hora actual en formato TimeSpan
+        TimeSpan horaActual = CicloDN.horaFormateada;
+        
     }
 
     IEnumerator SeguirRutina()
@@ -69,7 +74,34 @@ public class PlayerMovementRoutine : MonoBehaviour
             yield return MoverAPunto(3, 0f, new int[] { 1, 3 });
             yield return EsperarMinutos(30 + random.Next(30));
 
-            // ... (resto de la rutina diaria)
+            // Trabajar o estudiar en el salón (4 horas)
+            yield return MoverAPunto(3, 0f, new int[] { 1, 3 });
+            yield return EsperarHasta(17f); 
+
+            // Ir al baño (opcional)
+            if (random.Next(2) == 0) // 50% de probabilidad de ir al baño
+            {
+                yield return MoverAPunto(11, 0f, new int[] { 4, 5, 11 });
+                yield return EsperarMinutos(5 + random.Next(10));
+                yield return MoverAPunto(3, 0f, new int[] { 5, 4, 3 });
+            }
+
+            // Tiempo libre en el salón (1 hora)
+            yield return EsperarHasta(18f);
+
+            // Preparar la cena (30-60 minutos)
+            yield return MoverAPunto(2, 0f, new int[] { 1, 2 });
+            yield return EsperarMinutos(30 + random.Next(30));
+
+            // Cenar en el salón (30-60 minutos)
+            yield return MoverAPunto(3, 0f, new int[] { 1, 3 });
+            yield return EsperarMinutos(30 + random.Next(30));
+
+            // Tiempo libre en el salón (2 horas)
+            yield return EsperarHasta(22f);
+
+            // Ir a dormir (en la habitación 2.1)
+            yield return MoverAPunto(8, 0f, new int[] { 4, 6, 8 });
 
             // Esperar hasta las 00:00 del día siguiente
             while (CicloDN.Hora < 24f)
@@ -79,14 +111,13 @@ public class PlayerMovementRoutine : MonoBehaviour
         }
     }
 
-    IEnumerator MoverAPunto(int waypointIndex, float horaObjetivo = 0f, int[] ruta = null)
+    IEnumerator MoverAPunto(int waypointIndex, float horaDestino ,int[] ruta = null)
     {
-        // Si se especifica una hora objetivo, esperar hasta esa hora
-        if (horaObjetivo > 0f)
+        if (horaDestino > 0f)
         {
-            yield return EsperarHasta(horaObjetivo);
+            yield return EsperarHasta(horaDestino);
         }
-
+        
         // Si no se proporciona una ruta, generar una ruta por defecto al destino
         if (ruta == null)
         {
