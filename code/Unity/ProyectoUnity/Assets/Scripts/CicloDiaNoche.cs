@@ -15,6 +15,7 @@ public class CicloDN : MonoBehaviour
     public Estaciones EstacionSeleccionada = Estaciones.Invierno;
     public static float Hora = 0;
     public static TimeSpan horaFormateada;
+    public static DateTime fechaActual = new DateTime(2024, 1, 1); // Comenzar el 1 de enero de 2024
     private float horaAmanecer = 6f;
     private float SolX;
     private float IniSolX;
@@ -74,6 +75,7 @@ public class CicloDN : MonoBehaviour
     {
         Hora += Time.deltaTime * (24 / (60 * DuracionDiaMin)); // Obtención de la hora en base a la duración del día
         horaFormateada = TimeSpan.FromHours(Hora);
+        fechaActual = fechaActual.Date + horaFormateada;
         if (Hora >= 24)
         {
             NuevosDatosHumedadTemperatura();
@@ -106,8 +108,8 @@ public class CicloDN : MonoBehaviour
                 intensidad = Mathf.Lerp(intensidadMaxima/2, intensidadMinima, (Hora - 18f) / (24f - 18f));
             }
 
-            intensidad = Mathf.Round(intensidad * 10f) / 10f;
-            //luzSolar.intensity = intensidad;
+            intensidad = (Mathf.Round(intensidad * 10f) / 10f)/2f;
+            luzSolar.intensity = intensidad;
             IntensidadLuminica = intensidad;
 
             // Ajustar color para un amanecer/atardecer más suave
@@ -190,6 +192,7 @@ public class CicloDN : MonoBehaviour
     void NuevosDatosHumedadTemperatura()
     {
         Hora = 0;
+        fechaActual = fechaActual.AddDays(1);
         TempMaxima += 0.2f * (Random.value > 0.5f ? 1 : -1);
         TempMinima += 0.2f * (Random.value> 0.5f ? 1 : -1);
         TempActual = TempMinima;

@@ -8,7 +8,7 @@ public class SensorLuminosidad : MonoBehaviour
     public Light[] luces;
     public float luminosidadMinima = 10f;
 
-    public float tiempoApagado = 5f;
+    public float tiempoApagado;
     private ISensorDataReciever _dataReciever;
     
     private float currentLuminosity;
@@ -19,6 +19,9 @@ public class SensorLuminosidad : MonoBehaviour
     private string nombrePlacaPadre; // Variable para almacenar el nombre del padre
 
     private TimeSpan horaAnterior;
+    
+    /*
+     */
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,8 @@ public class SensorLuminosidad : MonoBehaviour
         {
             Debug.LogError("El sensor de luminosidad no tiene un componente DetectionSensor.");
         }
+
+        tiempoApagado = (5f * ((CicloDN.DuracionDiaMin * 60f / 24f) / 3600f));
     }
 
     void Update()
@@ -79,6 +84,6 @@ public class SensorLuminosidad : MonoBehaviour
                 luz.enabled = false;
             }
         }
-        _dataReciever.RecieveLuminosidadData(luminosidad, true, nombrePlacaPadre);
+        _dataReciever.RecieveLuminosidadData(luminosidad, true, nombrePlacaPadre, CicloDN.fechaActual);
     }
 }

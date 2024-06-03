@@ -36,7 +36,7 @@ public class SensorHumedad : MonoBehaviour
         if (enviarData)
         {
             _humedadAnterior = humedadActual;
-            _dataReciever.RecieveHumedadData(hActualRedondeada, enviarData, nombrePlacaPadre);
+            _dataReciever.RecieveHumedadData(hActualRedondeada, enviarData, nombrePlacaPadre, CicloDN.fechaActual);
         }
     }
 }

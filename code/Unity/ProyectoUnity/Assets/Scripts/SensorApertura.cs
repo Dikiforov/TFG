@@ -29,24 +29,17 @@ public class DoorController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        Debug.Log("Usuario SI");
         _isPlayerNearby = true;
         _isDoorOpen = _isPlayerNearby;
-        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre);
+        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre, CicloDN.fechaActual);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        Debug.Log("Usuario NO");
         _isPlayerNearby = false;
         _isDoorOpen = _isPlayerNearby;
-        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre);
-    }
-
-    private void Update()
-    {
-       
+        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre, CicloDN.fechaActual);
     }
 
     private IEnumerator ToggleDoorState()
@@ -128,6 +121,6 @@ public class DoorController : MonoBehaviour
                 break;
             }
         }
-        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre);
+        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre, CicloDN.fechaActual);
     }
 }

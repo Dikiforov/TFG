@@ -14,7 +14,7 @@ public class DisplayTime : MonoBehaviour
     private void Update()
     {
         // Obtener la hora formateada del script CicloDN
-        string horaFormateada = CicloDN.horaFormateada.ToString(@"hh\:mm\:ss");
+        string horaFormateada = CicloDN.fechaActual.ToString();
 
         // Actualizar el texto del TextMeshPro
         textMeshPro.text = "Hora: " + horaFormateada;

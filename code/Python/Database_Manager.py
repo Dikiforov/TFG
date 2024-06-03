@@ -64,17 +64,17 @@ class DatabaseManager:
 
     # --- Método específico para insertar lecturas de sensor ---
 
-    def insert_sensor_reading(self, user_id, sensor_type, value, room, hour):
+    def insert_sensor_reading(self, user_id, sensor_type, value, room, date):
         try:
             self.connect()  # Asegurarse de conectar antes de ejecutar la consulta
             value = float(str(value).replace(',', '.'))
             
             self.cursor.execute(
                 """
-                INSERT INTO sensor_readings (user_id, sensor_type, value, room, hour)
+                INSERT INTO sensor_readings (user_id, sensor_type, value, room, date)
                 VALUES (?, ?, ?, ?, ?)
                 """,
-                (user_id, sensor_type, value, room, hour)
+                (user_id, sensor_type, value, room, date)
             )
             self.connection.commit()
         except sqlite3.IntegrityError:

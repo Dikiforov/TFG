@@ -55,33 +55,33 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         cicloDn = FindObjectOfType<CicloDN>();
     }
 
-    public void RecieveTempData(float temperature, bool enviarData, string nombrePlaca)
+    public void RecieveTempData(float temperature, bool enviarData, string nombrePlaca, DateTime fecha)
     {
-        ActualizarDatoPlaca(nombrePlaca, "Temperatura", temperature, enviarData);
+        ActualizarDatoPlaca(nombrePlaca, "Temperatura", temperature, enviarData, fecha);
     }
 
-    public void RecieveDoorState(bool isOpen, string doorName, string nombrePlaca)
+    public void RecieveDoorState(bool isOpen, string doorName, string nombrePlaca, DateTime fecha)
     {
         ActualizarDatoPlaca(nombrePlaca, "Puertas", doorName + "{" + isOpen + "}",
-            true); // Siempre enviar cambios de estado de puertas
+            true, fecha);
     }
 
-    public void RecieveHumedadData(float humedad, bool enviarData, string nombrePlaca)
+    public void RecieveHumedadData(float humedad, bool enviarData, string nombrePlaca, DateTime fecha)
     {
-        ActualizarDatoPlaca(nombrePlaca, "Humedad", humedad, enviarData);
+        ActualizarDatoPlaca(nombrePlaca, "Humedad", humedad, enviarData, fecha);
     }
 
-    public void RecieveLuminosidadData(float luminosidad, bool enviarData, string nombrePlaca)
+    public void RecieveLuminosidadData(float luminosidad, bool enviarData, string nombrePlaca, DateTime fecha)
     {
-        ActualizarDatoPlaca(nombrePlaca, "Luminosidad", luminosidad, enviarData);
+        ActualizarDatoPlaca(nombrePlaca, "Luminosidad", luminosidad, enviarData, fecha);
     }
 
-    public void RecieveMovimientoData(bool movement, string nombrePlaca)
+    public void RecieveMovimientoData(bool movement, string nombrePlaca, DateTime fecha)
     {
-        ActualizarDatoPlaca(nombrePlaca, "Movimiento", movement, true); // Siempre enviar cambios de movimiento
+        ActualizarDatoPlaca(nombrePlaca, "Movimiento", movement, true, fecha);
     }
 
-    private void ActualizarDatoPlaca(string nombrePlaca, string tipoDato, object valor, bool enviarData)
+    private void ActualizarDatoPlaca(string nombrePlaca, string tipoDato, object valor, bool enviarData, DateTime fechaActual)
     {
         datosActuales.hora = CicloDN.horaFormateada.ToString(@"hh\:mm\:ss");
         switch (tipoDato)
@@ -105,7 +105,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         if (ultimosDatos == null)
         {
             ultimosDatos = (SensorData)datosActuales.Clone();
-            GuardarDatosActualesEnArchivo(nombrePlaca);
+            GuardarDatosActualesEnArchivo(nombrePlaca, fechaActual);
         }
         else
         {
@@ -115,7 +115,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             if (tiempoSuficiente || !SonDatosIguales(ultimosDatos, datosActuales))
             {
                 ultimosDatos = (SensorData)datosActuales.Clone();
-                GuardarDatosActualesEnArchivo(nombrePlaca);
+                GuardarDatosActualesEnArchivo(nombrePlaca, fechaActual);
             }
         }
     }
@@ -175,12 +175,12 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
             {
                 Debug.LogError("Error de conexión: " + socketEx.Message);
             }
-            GuardarDatosActualesEnArchivo(nombrePlaca);
+            //GuardarDatosActualesEnArchivo(nombrePlaca);
         }
         catch (Exception e)
         {
             Debug.LogError("Error al enviar datos al servidor: " + e.Message);
-            GuardarDatosActualesEnArchivo(nombrePlaca);
+            //GuardarDatosActualesEnArchivo(nombrePlaca);
         }
         
     }
@@ -191,13 +191,13 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
         return reply.Status == IPStatus.Success;
     }
     
-    private void GuardarDatosActualesEnArchivo(string nombrePlaca)
+    private void GuardarDatosActualesEnArchivo(string nombrePlaca, DateTime fechaActual)
     {
         string filePath = Path.Combine("/users/Daniil/Documents/GitHub/TFG/Datos/", $"datos_{_identificadorUsuario}.txt");
 
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
-            writer.Write($"{nombrePlaca} {ultimosDatos.hora}-");
+            writer.Write($"{nombrePlaca} {fechaActual}-");
             writer.Write($"Temperatura={ultimosDatos.Temperatura};");
             writer.Write($"Puertas={ultimosDatos.Puertas};");
             writer.Write($"Luminosidad={ultimosDatos.Luminosidad};");

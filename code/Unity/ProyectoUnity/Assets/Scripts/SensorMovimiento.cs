@@ -41,6 +41,6 @@ public class DetectionSensor : MonoBehaviour
             // Actualizar la variable _hayMovimientoCache
             _hayMovimientoCache = _playerInside && _playerMovementTracker.IsMoving;
         }
-        _dataReciever.RecieveMovimientoData(_hayMovimientoCache, nombrePlacaPadre);
+        _dataReciever.RecieveMovimientoData(_hayMovimientoCache, nombrePlacaPadre, CicloDN.fechaActual);
     }
 }

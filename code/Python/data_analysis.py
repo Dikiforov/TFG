@@ -13,7 +13,7 @@ conn = sqlite3.connect(db_path)
 
 # Consulta SQL para obtener datos de todas las habitaciones
 query = """
-SELECT sensor_readings.hour, sensor_readings.sensor_type, sensor_readings.value, sensor_readings.room 
+SELECT sensor_readings.date, sensor_readings.sensor_type, sensor_readings.value, sensor_readings.room 
 FROM sensor_readings
 """
 
@@ -24,19 +24,19 @@ df = pd.read_sql_query(query, conn)
 if df.empty:
     print("No hay datos disponibles para los sensores seleccionados.")
 else:
-    # Procesamiento y análisis de datos
-    df['hour'] = pd.to_datetime(df['hour'])
-    df.set_index('hour', inplace=True)
+    # Procesamiento y análisis de datos (modificaciones aquí)
+    df['date'] = pd.to_datetime(df['date']) 
+    df.set_index('date', inplace=True)
 
-    # Ordenar el DataFrame completo por 'hour'
-    df = df.sort_values(by='hour')  # Ordenar antes de agrupar
+    # Ordenar por fecha
+    df = df.sort_values(by='date') 
 
     # Agrupar por habitación y realizar análisis para cada una
     for room, df_room in df.groupby('room'):
         print(f"\nAnálisis para la habitación: {room}")
 
-        # Ventanas temporales deslizantes (Ejemplo: media móvil de 3 horas)
-        df_rolling = df_room.groupby('sensor_type')['value'].rolling('3h').mean().reset_index()
+        # Ventanas temporales deslizantes (Ejemplo: media móvil de 3 días)
+        df_rolling = df_room.groupby('sensor_type')['value'].rolling('3D').mean().reset_index()
 
         # Detección de anomalías (Ejemplo: basado en z-score)
         df_zscore = df_room.groupby('sensor_type')['value'].transform(lambda x: zscore(x))
@@ -46,19 +46,20 @@ else:
         cluster_data = df_room.groupby('sensor_type')['value'].mean().values.reshape(-1, 1)
         if cluster_data.shape[0] > 0:
             kmeans = KMeans(n_clusters=3, random_state=0).fit(cluster_data)
-            df_room['cluster'] = kmeans.labels_[df_room['sensor_type'].map({'temperature': 0, 'luminosity': 1, 'humidity': 2, 'movement': 3})]
+            df_room['cluster'] = kmeans.labels_[df_room['sensor_type'].map({'temperature': 0, 'luminosity': 1, 'humidity': 2, 'movement': 3, 'doors': 4, 'sound': 5})]  # Agregado 'doors' y 'sound'
         else:
             print("No hay suficientes datos para el clustering en esta habitación.")
 
         # Visualizaciones
 
-        # Diagramas de dispersión
+        # Diagramas de dispersión 
         if not df_room.empty:
             sns.pairplot(df_room, hue='sensor_type')
             plt.title(f"Diagramas de dispersión para {room}")
             plt.show()
         else:
             print(f"No hay datos para el diagrama de dispersión en {room}.")
+
 
         # Mapas de calor (Ejemplo: temperatura a lo largo del tiempo)
         df_temp = df_room[df_room['sensor_type'] == 'temperature']

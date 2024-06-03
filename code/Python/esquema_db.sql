@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS sensor_readings (
     sensor_type VARCHAR(255) CHECK(sensor_type IN ('movement', 'doors', 'humidity', 'temperature', 'luminosity', 'sound')),
     value REAL,
     room VARCHAR(255),
-    hour TIMESTAMP,
-    UNIQUE(user_id, sensor_type, room, hour),
+    date DATETIME,
+    UNIQUE(user_id, sensor_type, room, date),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS supplies (
 
 CREATE TABLE IF NOT EXISTS consumption (
     id INTEGER PRIMARY KEY,
-    date TIMESTAMP,
+    date DATETIME,
     supply_id INTEGER,
     value REAL,
     cost REAL,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS consumption (
 
 CREATE TABLE IF NOT EXISTS daily_consumption (
     id INTEGER PRIMARY KEY,
-    date TIMESTAMP,
+    date DATETIME,
     supply_id INTEGER,
     value REAL,
     cost REAL,
@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS daily_consumption (
 CREATE TABLE IF NOT EXISTS period (
     id INTEGER PRIMARY KEY,
     name VARCHAR(255) CHECK(name IN ('month', 'bimonthly', 'quarter', 'semester', 'annual')),
-    initial_date TIMESTAMP,
-    final_date TIMESTAMP
+    initial_date DATETIME,
+    final_date DATETIME
 );
 
 CREATE TABLE IF NOT EXISTS period_consumption (
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS door_states (
     room VARCHAR(255),
     door_name VARCHAR(255),
     state BOOLEAN,
-    hour TIMESTAMP,
+    date DATETIME,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
