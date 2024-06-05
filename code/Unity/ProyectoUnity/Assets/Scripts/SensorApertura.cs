@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,8 +15,7 @@ public class DoorController : MonoBehaviour
     private ISensorDataReciever _dataReciever;
 
     private string nombrePlacaPadre; // Variable para almacenar el nombre del padre
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         nombrePlacaPadre = transform.parent.name;
@@ -26,20 +26,28 @@ public class DoorController : MonoBehaviour
         _dataReciever = GetComponentInParent<ISensorDataReciever>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && _isPlayerNearby)
+        { 
+            StartCoroutine(ToggleDoorState());
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         _isPlayerNearby = true;
-        _isDoorOpen = _isPlayerNearby;
-        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre, CicloDN.fechaActual);
+        //_isDoorOpen = _isPlayerNearby;
+        //_dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre, CicloDN.fechaActual);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         _isPlayerNearby = false;
-        _isDoorOpen = _isPlayerNearby;
-        _dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre, CicloDN.fechaActual);
+        //_isDoorOpen = _isPlayerNearby;
+        //_dataReciever.RecieveDoorState(_isDoorOpen, nombreComponente, nombrePlacaPadre, CicloDN.fechaActual);
     }
 
     private IEnumerator ToggleDoorState()

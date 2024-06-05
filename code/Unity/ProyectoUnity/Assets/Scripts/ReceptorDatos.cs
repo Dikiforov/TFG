@@ -62,6 +62,7 @@ public class PadreReceiver : MonoBehaviour, ISensorDataReciever
 
     public void RecieveDoorState(bool isOpen, string doorName, string nombrePlaca, DateTime fecha)
     {
+        Debug.Log($"En la habitación {nombrePlaca} ha habido un movimiento en la puerta {doorName}. Estado actual: {isOpen}");
         ActualizarDatoPlaca(nombrePlaca, "Puertas", doorName + "{" + isOpen + "}",
             true, fecha);
     }

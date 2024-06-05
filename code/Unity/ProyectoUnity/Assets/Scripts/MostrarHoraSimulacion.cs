@@ -17,6 +17,6 @@ public class DisplayTime : MonoBehaviour
         string horaFormateada = CicloDN.fechaActual.ToString();
 
         // Actualizar el texto del TextMeshPro
-        textMeshPro.text = "Hora: " + horaFormateada;
+        //textMeshPro.text = "Hora: " + horaFormateada;
     }
 }

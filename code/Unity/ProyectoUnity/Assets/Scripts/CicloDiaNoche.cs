@@ -109,7 +109,7 @@ public class CicloDN : MonoBehaviour
             }
 
             intensidad = (Mathf.Round(intensidad * 10f) / 10f)/2f;
-            luzSolar.intensity = intensidad;
+            //luzSolar.intensity = intensidad;
             IntensidadLuminica = intensidad;
 
             // Ajustar color para un amanecer/atardecer más suave
